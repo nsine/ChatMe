@@ -7,8 +7,8 @@
     <ProjectGuid>{52F32389-81FA-41B6-87E4-B88F5F9060B3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChatMe.Models</RootNamespace>
-    <AssemblyName>ChatMe.Models</AssemblyName>
+    <RootNamespace>ChatMe.DataAccess</RootNamespace>
+    <AssemblyName>ChatMe.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,8 +49,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EF\ChatMeContext.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserInfo.cs" />
+    <Compile Include="Migrations\201608221322415_InitSchema.cs" />
+    <Compile Include="Migrations\201608221322415_InitSchema.Designer.cs">
+      <DependentUpon>201608221322415_InitSchema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608221329005_FixMessages.cs" />
+    <Compile Include="Migrations\201608221329005_FixMessages.Designer.cs">
+      <DependentUpon>201608221329005_FixMessages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,12 +69,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="EF\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608221322415_InitSchema.resx">
+      <DependentUpon>201608221322415_InitSchema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608221329005_FixMessages.resx">
+      <DependentUpon>201608221329005_FixMessages.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
