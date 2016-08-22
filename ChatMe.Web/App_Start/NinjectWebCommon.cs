@@ -61,7 +61,7 @@ namespace ChatMe.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            DependencyResolver.SetResolver(new Infrastructure.NinjectDependencyResolver(kernel));
+            DependencyResolver.SetResolver(new Util.NinjectDependencyResolver(kernel));
         }        
     }
 }

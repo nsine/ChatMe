@@ -73,6 +73,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ChatMe.DataAccess\ChatMe.DataAccess.csproj">
+      <Project>{52f32389-81fa-41b6-87e4-b88f5f9060b3}</Project>
+      <Name>ChatMe.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ChatMe.Web\ChatMe.Web.csproj">
       <Project>{8F89AEEA-2F40-4396-9A49-755F9C7F95BC}</Project>
       <Name>ChatMe.Web</Name>
