@@ -1,0 +1,13 @@
+﻿@model ChatMe.Web.Models.MessagesViewModel
+
+@{
+    ViewBag.Title = "Messages";
+    Layout = "~/Views/User/_Layout.cshtml";
+}
+
+@foreach (var dialog in Model.Dialogs) {
+    <div class="panel">
+        <div class="author"><strong>@dialog.Author</strong></div>
+        <div class="snippet">@dialog.LastMessageSnippet</div>
+    </div>
+}
