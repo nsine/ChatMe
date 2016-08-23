@@ -19,8 +19,7 @@ namespace ChatMe.Web.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var users = unitOfWork.Users.GetAll();
-            return View(users);
+            return RedirectToAction("Index", "User");
         }
     }
 }

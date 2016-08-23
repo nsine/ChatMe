@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF\ChatMeContext.cs" />
+    <Compile Include="Entities\Dialog.cs" />
     <Compile Include="Identity\AppUserManager.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\User.cs" />
@@ -103,6 +104,10 @@
     <Compile Include="Migrations\201608231049216_RemoveRequiredFromFirstName.cs" />
     <Compile Include="Migrations\201608231049216_RemoveRequiredFromFirstName.Designer.cs">
       <DependentUpon>201608231049216_RemoveRequiredFromFirstName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608231318034_AddDialogModel.cs" />
+    <Compile Include="Migrations\201608231318034_AddDialogModel.Designer.cs">
+      <DependentUpon>201608231318034_AddDialogModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608231049216_RemoveRequiredFromFirstName.resx">
       <DependentUpon>201608231049216_RemoveRequiredFromFirstName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608231318034_AddDialogModel.resx">
+      <DependentUpon>201608231318034_AddDialogModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

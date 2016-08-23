@@ -14,15 +14,20 @@ namespace ChatMe.DataAccess.EF
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Message>()
-                .HasRequired(m => m.UserFrom)
-                .WithMany(u => u.SentMessages)
+            modelBuilder.Entity<Dialog>()
+                .HasRequired(d => d.FirstUser)
+                .WithMany()
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Message>()
-                .HasRequired(m => m.UserTo)
-                .WithMany(u => u.ReceivedMessages)
+            modelBuilder.Entity<Dialog>()
+                .HasRequired(m => m.SecondUser)
+                .WithMany()
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Dialog>()
+                .HasMany(d => d.Messages)
+                .WithRequired()
+                .WillCascadeOnDelete(true);
         }
 
         public static ChatMeContext Create()

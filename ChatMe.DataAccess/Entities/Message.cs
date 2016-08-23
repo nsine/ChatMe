@@ -12,11 +12,7 @@ namespace ChatMe.DataAccess.Entities
         public DateTime Time { get; set; }
 
         [Required]
-        public string UserFromId { get; set; }
-        public virtual User UserFrom { get; set; }
-
-        [Required]
-        public string UserToId { get; set; }
-        public virtual User UserTo { get; set; }
+        public int DialogId { get; set; }
+        public virtual Dialog Dialog { get; set; }
     }
 }
