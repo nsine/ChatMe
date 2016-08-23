@@ -11,13 +11,7 @@ namespace ChatMe.DataAccess.Entities
     {
         public int Id { get; set; }
 
-        [Required]
-        public string FirstUserId { get; set; }
-        public virtual User FirstUser { get; set; }
-        [Required]
-        public string SecondUserId { get; set; }
-        public virtual User SecondUser { get; set; }
-
+        public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
     }
 }

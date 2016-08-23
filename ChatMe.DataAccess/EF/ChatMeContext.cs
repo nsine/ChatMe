@@ -1,6 +1,7 @@
 ﻿using ChatMe.DataAccess.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace ChatMe.DataAccess.EF
 {
@@ -15,18 +16,12 @@ namespace ChatMe.DataAccess.EF
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Dialog>()
-                .HasRequired(d => d.FirstUser)
-                .WithMany()
-                .WillCascadeOnDelete(false);
+                .HasMany(d => d.Users)
+                .WithMany();
 
-            modelBuilder.Entity<Dialog>()
-                .HasRequired(m => m.SecondUser)
-                .WithMany()
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Dialog>()
-                .HasMany(d => d.Messages)
-                .WithRequired()
+            modelBuilder.Entity<Message>()
+                .HasRequired(m => m.Dialog)
+                .WithMany(d => d.Messages)
                 .WillCascadeOnDelete(true);
         }
 

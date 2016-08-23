@@ -13,7 +13,7 @@ namespace ChatMe.DataAccess.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201608231318034_AddDialogModel"; }
+            get { return "201608231415540_AddDialogModel"; }
         }
         
         string IMigrationMetadata.Source

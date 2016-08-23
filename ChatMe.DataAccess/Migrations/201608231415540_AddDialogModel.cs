@@ -16,23 +16,27 @@ namespace ChatMe.DataAccess.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        FirstUserId = c.String(nullable: false, maxLength: 128),
-                        SecondUserId = c.String(nullable: false, maxLength: 128),
                         User_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.FirstUserId)
-                .ForeignKey("dbo.AspNetUsers", t => t.SecondUserId)
-                .Index(t => t.FirstUserId)
-                .Index(t => t.SecondUserId)
+                .Index(t => t.User_Id);
+            
+            CreateTable(
+                "dbo.DialogUsers",
+                c => new
+                    {
+                        Dialog_Id = c.Int(nullable: false),
+                        User_Id = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.Dialog_Id, t.User_Id })
+                .ForeignKey("dbo.Dialogs", t => t.Dialog_Id, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.User_Id, cascadeDelete: true)
+                .Index(t => t.Dialog_Id)
                 .Index(t => t.User_Id);
             
             AddColumn("dbo.Messages", "DialogId", c => c.Int(nullable: false));
-            AddColumn("dbo.Messages", "Dialog_Id", c => c.Int(nullable: false));
             CreateIndex("dbo.Messages", "DialogId");
-            CreateIndex("dbo.Messages", "Dialog_Id");
-            AddForeignKey("dbo.Messages", "Dialog_Id", "dbo.Dialogs", "Id", cascadeDelete: true);
             AddForeignKey("dbo.Messages", "DialogId", "dbo.Dialogs", "Id", cascadeDelete: true);
             DropColumn("dbo.Messages", "UserFromId");
             DropColumn("dbo.Messages", "UserToId");
@@ -43,17 +47,15 @@ namespace ChatMe.DataAccess.Migrations
             AddColumn("dbo.Messages", "UserToId", c => c.String(nullable: false, maxLength: 128));
             AddColumn("dbo.Messages", "UserFromId", c => c.String(nullable: false, maxLength: 128));
             DropForeignKey("dbo.Messages", "DialogId", "dbo.Dialogs");
-            DropForeignKey("dbo.Dialogs", "SecondUserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Messages", "Dialog_Id", "dbo.Dialogs");
-            DropForeignKey("dbo.Dialogs", "FirstUserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.DialogUsers", "User_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.DialogUsers", "Dialog_Id", "dbo.Dialogs");
             DropForeignKey("dbo.Dialogs", "User_Id", "dbo.AspNetUsers");
+            DropIndex("dbo.DialogUsers", new[] { "User_Id" });
+            DropIndex("dbo.DialogUsers", new[] { "Dialog_Id" });
             DropIndex("dbo.Dialogs", new[] { "User_Id" });
-            DropIndex("dbo.Dialogs", new[] { "SecondUserId" });
-            DropIndex("dbo.Dialogs", new[] { "FirstUserId" });
-            DropIndex("dbo.Messages", new[] { "Dialog_Id" });
             DropIndex("dbo.Messages", new[] { "DialogId" });
-            DropColumn("dbo.Messages", "Dialog_Id");
             DropColumn("dbo.Messages", "DialogId");
+            DropTable("dbo.DialogUsers");
             DropTable("dbo.Dialogs");
             CreateIndex("dbo.Messages", "UserToId");
             CreateIndex("dbo.Messages", "UserFromId");

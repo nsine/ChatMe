@@ -105,9 +105,9 @@
     <Compile Include="Migrations\201608231049216_RemoveRequiredFromFirstName.Designer.cs">
       <DependentUpon>201608231049216_RemoveRequiredFromFirstName.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201608231318034_AddDialogModel.cs" />
-    <Compile Include="Migrations\201608231318034_AddDialogModel.Designer.cs">
-      <DependentUpon>201608231318034_AddDialogModel.cs</DependentUpon>
+    <Compile Include="Migrations\201608231415540_AddDialogModel.cs" />
+    <Compile Include="Migrations\201608231415540_AddDialogModel.Designer.cs">
+      <DependentUpon>201608231415540_AddDialogModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,8 +126,8 @@
     <EmbeddedResource Include="Migrations\201608231049216_RemoveRequiredFromFirstName.resx">
       <DependentUpon>201608231049216_RemoveRequiredFromFirstName.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608231318034_AddDialogModel.resx">
-      <DependentUpon>201608231318034_AddDialogModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608231415540_AddDialogModel.resx">
+      <DependentUpon>201608231415540_AddDialogModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
