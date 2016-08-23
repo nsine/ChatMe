@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChatMe.DataAccess.Entities
@@ -6,8 +7,7 @@ namespace ChatMe.DataAccess.Entities
     public class UserInfo
     {
         [Key, ForeignKey("User")]
-        public int Id { get; set; }
-        [Required]
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         //TODO add avatar
@@ -15,7 +15,10 @@ namespace ChatMe.DataAccess.Entities
         [DataType(DataType.PhoneNumber)]
         public int Phone { get; set; }
 
-        
+        [Required]
+        public DateTime RegistrationDate { get; set; }
+
+
         public virtual User User { get; set; }
     }
 }

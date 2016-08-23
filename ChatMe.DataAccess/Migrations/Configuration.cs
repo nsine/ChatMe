@@ -9,7 +9,7 @@ namespace ChatMe.DataAccess.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ChatMe.DataAccess.EF.ChatMeContext context)

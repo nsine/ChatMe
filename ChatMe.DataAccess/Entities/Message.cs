@@ -12,11 +12,11 @@ namespace ChatMe.DataAccess.Entities
         public DateTime Time { get; set; }
 
         [Required]
-        public int UserFromId { get; set; }
+        public string UserFromId { get; set; }
         public virtual User UserFrom { get; set; }
 
         [Required]
-        public int UserToId { get; set; }
+        public string UserToId { get; set; }
         public virtual User UserTo { get; set; }
     }
 }

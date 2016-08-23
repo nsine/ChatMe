@@ -7,13 +7,13 @@ namespace ChatMe.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class FixMessages : IMigrationMetadata
+    public sealed partial class RemoveRequiredFromFirstName : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(FixMessages));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RemoveRequiredFromFirstName));
         
         string IMigrationMetadata.Id
         {
-            get { return "201608221329005_FixMessages"; }
+            get { return "201608231049216_RemoveRequiredFromFirstName"; }
         }
         
         string IMigrationMetadata.Source

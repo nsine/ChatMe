@@ -1,13 +1,13 @@
 ﻿using ChatMe.DataAccess.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 
 namespace ChatMe.DataAccess.EF
 {
-    public class ChatMeContext : DbContext
+    public class ChatMeContext : IdentityDbContext<User>
     {
         public ChatMeContext() : base("ChatMe") { }
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -23,6 +23,11 @@ namespace ChatMe.DataAccess.EF
                 .HasRequired(m => m.UserTo)
                 .WithMany(u => u.ReceivedMessages)
                 .WillCascadeOnDelete(false);
+        }
+
+        public static ChatMeContext Create()
+        {
+            return new ChatMeContext();
         }
     }
 }

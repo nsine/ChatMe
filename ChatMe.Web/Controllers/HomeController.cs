@@ -13,9 +13,10 @@ namespace ChatMe.Web.Controllers
 
         public HomeController(IUnitOfWork uow)
         {
-            this.unitOfWork = uow;
+            unitOfWork = uow;
         }
 
+        [Authorize]
         public ActionResult Index()
         {
             var users = unitOfWork.Users.GetAll();

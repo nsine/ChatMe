@@ -32,10 +32,12 @@ namespace ChatMe.Util
             Mock<IUnitOfWork> mock = new Mock<IUnitOfWork>();
             mock.Setup(m => m.Users.GetAll()).Returns(new List<User>()
             {
-                new User { Email = "gh@gmail.com", Password = "fadjs" }
+                new User { Email = "gh@gmail.com", UserName = "fadjs", PasswordHash="iasdifidaj" }
             });
 
             kernel.Bind<IUnitOfWork>().ToConstant(mock.Object);
+
+            User u = new User();
         }
     }
 }

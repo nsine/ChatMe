@@ -22,9 +22,9 @@ namespace ChatMe.DataAccess.Repositories
             db.Messages.Add(item);
         }
 
-        public void Delete(int id)
+        public void Delete(object id)
         {
-            db.Messages.Remove(db.Messages.FirstOrDefault(u => u.Id == id));
+            db.Messages.Remove(db.Messages.FirstOrDefault(u => u.Id == (int)id));
         }
 
         public IEnumerable<Message> Find(Func<Message, bool> predicate)
@@ -32,9 +32,9 @@ namespace ChatMe.DataAccess.Repositories
             return db.Messages.Where(predicate);
         }
 
-        public Message Get(int id)
+        public Message Get(object id)
         {
-            return db.Messages.Find(id);
+            return db.Messages.Find((int)id);
         }
 
         public IEnumerable<Message> GetAll()
