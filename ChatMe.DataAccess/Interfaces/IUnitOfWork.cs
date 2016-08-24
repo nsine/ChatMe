@@ -6,6 +6,8 @@ namespace ChatMe.DataAccess.Interfaces
     {
         IRepository<User> Users { get; }
         IRepository<Message> Messages { get; }
+        IRepository<Dialog> Dialogs { get; }
+
         void Save();
     }
 }

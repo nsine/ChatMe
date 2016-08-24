@@ -34,7 +34,7 @@ namespace ChatMe.DataAccess.Repositories
 
         public User Get(object id)
         {
-            return db.Users.Find((int)id);
+            return db.Users.Find((string)id);
         }
 
         public IEnumerable<User> GetAll()

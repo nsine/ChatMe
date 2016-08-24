@@ -10,7 +10,7 @@ namespace ChatMe.DataAccess.Entities
         public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        //TODO add avatar
+        public string AvatarUrl { get; set; }
         public string AboutMe { get; set; }
         [DataType(DataType.PhoneNumber)]
         public int Phone { get; set; }

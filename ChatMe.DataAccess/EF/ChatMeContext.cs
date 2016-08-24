@@ -10,6 +10,7 @@ namespace ChatMe.DataAccess.EF
         public ChatMeContext() : base("ChatMe") { }
 
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Dialog> Dialogs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

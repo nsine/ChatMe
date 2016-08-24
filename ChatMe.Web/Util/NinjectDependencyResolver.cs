@@ -32,12 +32,50 @@ namespace ChatMe.Util
             Mock<IUnitOfWork> mock = new Mock<IUnitOfWork>();
             mock.Setup(m => m.Users.GetAll()).Returns(new List<User>()
             {
-                new User { Email = "gh@gmail.com", UserName = "fadjs", PasswordHash="iasdifidaj" }
+                new User { Email = "gh@gmail.com", UserName = "fadjs", PasswordHash="iasdifidaj", UserInfo = new UserInfo {
+                    FirstName = "John",
+                    LastName = "Smith"
+                } },
+                new User { Email = "gh@gmail.com", UserName = "fadjs", PasswordHash="iasdifidaj", UserInfo = new UserInfo {
+                    FirstName = "John",
+                    LastName = "Smith"
+                } },
+                new User { Email = "gh@gmail.com", UserName = "fadjs", PasswordHash="iasdifidaj", UserInfo = new UserInfo {
+                    FirstName = "John",
+                    LastName = "Smith"
+                } },
+                new User { Email = "gh@gmail.com", UserName = "fadjs", PasswordHash="iasdifidaj", UserInfo = new UserInfo {
+                    FirstName = "John",
+                    LastName = "Smith"
+                } },
+                new User { Email = "gh@gmail.com", UserName = "fadjs", PasswordHash="iasdifidaj", UserInfo = new UserInfo {
+                    FirstName = "John",
+                    LastName = "Smith"
+                } },
+                new User { Email = "gh@gmail.com", UserName = "fadjs", PasswordHash="iasdifidaj", UserInfo = new UserInfo {
+                    FirstName = "John",
+                    LastName = "Smith"
+                } },
+                new User { Email = "gh@gmail.com", UserName = "fadjs", PasswordHash="iasdifidaj", UserInfo = new UserInfo {
+                    FirstName = "John",
+                    LastName = "Smith"
+                } },
+                new User { Email = "gh@gmail.com", UserName = "fadjs", PasswordHash="iasdifidaj", UserInfo = new UserInfo {
+                    FirstName = "John",
+                    LastName = "Smith"
+                } },
+                new User { Email = "gh@gmail.com", UserName = "fadjs", PasswordHash="iasdifidaj", UserInfo = new UserInfo {
+                    FirstName = "John",
+                    LastName = "Smith"
+                } },
+                new User { Email = "gh@gmail.com", UserName = "fadjs", PasswordHash="iasdifidaj", UserInfo = new UserInfo {
+                    FirstName = "John",
+                    LastName = "Smith"
+                } }
+
             });
 
             kernel.Bind<IUnitOfWork>().ToConstant(mock.Object);
-
-            User u = new User();
         }
     }
 }
