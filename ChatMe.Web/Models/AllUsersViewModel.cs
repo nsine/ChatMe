@@ -7,7 +7,7 @@ namespace ChatMe.Web.Models
 {
     public class AllUsersViewModel
     {
-        public IEnumerable<UserProfileViewModel> Users { get; set; }
+        public IEnumerable<UserPreviewViewModel> Users { get; set; }
         public PageInfo PageInfo { get; set; }
     }
 }

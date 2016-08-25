@@ -243,7 +243,8 @@
     <Compile Include="Models\MessagesViewModel.cs" />
     <Compile Include="Models\PageInfo.cs" />
     <Compile Include="Models\RegisterModel.cs" />
-    <Compile Include="Models\UserProfile.cs" />
+    <Compile Include="Models\UserPreviewViewModel.cs" />
+    <Compile Include="Models\UserProfileViewModel.cs" />
     <Compile Include="Models\UserSettingsViewModel.cs" />
     <Compile Include="Util\NinjectDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -267,6 +268,7 @@
     <Content Include="Views\User\Messages.cshtml" />
     <Content Include="Views\User\AllUsers.cshtml" />
     <Content Include="Views\User\Settings.cshtml" />
+    <Content Include="Views\User\UserProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

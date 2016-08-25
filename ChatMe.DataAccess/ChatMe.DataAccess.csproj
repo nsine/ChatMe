@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="EF\ChatMeContext.cs" />
     <Compile Include="Entities\Dialog.cs" />
+    <Compile Include="Entities\Post.cs" />
     <Compile Include="Identity\AppUserManager.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\User.cs" />
@@ -116,6 +117,10 @@
     <Compile Include="Migrations\201608251208502_UserInfoes.cs" />
     <Compile Include="Migrations\201608251208502_UserInfoes.Designer.cs">
       <DependentUpon>201608251208502_UserInfoes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608251525454_AddPostModel.cs" />
+    <Compile Include="Migrations\201608251525454_AddPostModel.Designer.cs">
+      <DependentUpon>201608251525454_AddPostModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -143,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608251208502_UserInfoes.resx">
       <DependentUpon>201608251208502_UserInfoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608251525454_AddPostModel.resx">
+      <DependentUpon>201608251525454_AddPostModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -30,8 +30,32 @@ namespace ChatMe.Web.Controllers
         }
 
         // GET: User
-        public ActionResult Index() {
-            return View();
+        public async Task<ActionResult> Index() {
+            var me = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            return RedirectToAction("UserProfile", new { userName = me.UserName });
+        }
+
+        public async Task<ActionResult> UserProfile(string userName) {
+            var user = await UserManager.FindByNameAsync(userName);
+
+            if (user == null) {
+                throw new HttpException(404, "User not found");
+            }
+
+            var userProfile = new UserProfileViewModel {
+                Id = user.Id,
+                UserName = user.UserName,
+                FirstName = user.UserInfo.FirstName,
+                LastName = user.UserInfo.LastName,
+                Email = user.Email,
+                Phone = user.UserInfo.Phone,
+                Skype = user.UserInfo.Skype,
+                AboutMe = user.UserInfo.AboutMe,
+                AvatarFilename = user.UserInfo.AvatarFilename,
+                Posts = user.Posts
+            };
+
+            return View(userProfile);
         }
 
         public async Task<ActionResult> Messages() {
@@ -46,7 +70,8 @@ namespace ChatMe.Web.Controllers
             var usersOnPage = allUsers
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
-                .Select(u => new UserProfileViewModel {
+                .Select(u => new UserPreviewViewModel {
+                    Id = u.Id,
                     AvatarFilename = u.UserInfo.AvatarFilename,
                     UserName = u.UserName,
                     FirstName = u.UserInfo.FirstName,

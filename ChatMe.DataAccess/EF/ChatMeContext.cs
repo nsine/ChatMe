@@ -25,6 +25,10 @@ namespace ChatMe.DataAccess.EF
                 .HasRequired(m => m.Dialog)
                 .WithMany(d => d.Messages)
                 .WillCascadeOnDelete(true);
+
+            //modelBuilder.Entity<User>()
+            //    .HasMany(u => u.Posts)
+            //    .WithRequired()
         }
 
         public static ChatMeContext Create()

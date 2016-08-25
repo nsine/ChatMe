@@ -6,16 +6,23 @@
     Layout = "~/Views/User/_Layout.cshtml";
 }
 
-<h2>AllUsers</h2>
+<h2>Find friends here</h2>
 
-@foreach (var user in Model.Users) {
-    <div class="users-list">
-        <div class="panel panel-default">
-            <span>@user.DisplayName</span>
-            <span>@user.FirstName</span>
-            <span>@user.LastName</span>
-        </div>
+<div class="users-list container">
+    <div class="row">
+    @foreach (var user in Model.Users) {
+            <div class="panel panel-default col-sm-4 col-with-margin">
+                <div class="row vertical-center">
+                    <img src="@Url.Action("GetAvatar", "User", new { id = user.Id })" alt="" class="col-xs-4 img-responsive">
+                    <div class="col-xs-8">
+                        <span>@user.DisplayName</span>
+                    </div>
+                </div>
+            </div>
+    }
     </div>
-    
+</div>
+
+@if (Model.PageInfo.TotalPages > 1) {
+    @Html.PageLinks(Model.PageInfo, x => Url.Action("AllUsers", new { page = x }))
 }
-@Html.PageLinks(Model.PageInfo, x => Url.Action("AllUsers", new { page = x }))

@@ -122,3 +122,12 @@
         margin-right: 0;
     }
 }
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+}
+
+.col-with-margin {
+    margin: 10px 10px;
+}
