@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ChatMe.Web.Models
 {
-    public class AllPeopleViewModel
+    public class AllUsersViewModel
     {
         public IEnumerable<UserProfileViewModel> Users { get; set; }
         public PageInfo PageInfo { get; set; }

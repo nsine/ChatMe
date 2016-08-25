@@ -71,7 +71,7 @@ namespace ChatMe.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(LoginModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid) {
                 var user = await UserManager.FindAsync(model.Login, model.Password);

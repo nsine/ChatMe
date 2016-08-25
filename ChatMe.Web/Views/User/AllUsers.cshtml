@@ -1,0 +1,19 @@
+﻿@model ChatMe.Web.Models.AllUsersViewModel
+@using ChatMe.Web.Helpers
+
+@{
+    ViewBag.Title = "AllUsers";
+    Layout = "~/Views/User/_Layout.cshtml";
+}
+
+<h2>AllUsers</h2>
+
+@foreach (var user in Model.Users) {
+    <div class="users-list">
+        <div class="panel panel-default">
+            @user.DisplayName
+        </div>
+    </div>
+    
+}
+@Html.PageLinks(Model.PageInfo, x => Url.Action("AllUsers", new { page = x }))

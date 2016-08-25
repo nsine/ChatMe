@@ -41,7 +41,7 @@ namespace ChatMe.Web.Controllers
             return View(new MessagesViewModel(me));
         }
 
-        public ActionResult AllPeople(int page = 1)
+        public ActionResult AllUsers(int page = 1)
         {
             const int pageSize = 3;
             var allUsers = unitOfWork.Users.GetAll();
@@ -64,13 +64,18 @@ namespace ChatMe.Web.Controllers
                 TotalItems = allUsers.Count()
             };
 
-            var viewModel = new AllPeopleViewModel
+            var viewModel = new AllUsersViewModel
             {
                 Users = usersOnPage,
                 PageInfo = pageInfo
             };
 
             return View(viewModel);
+        }
+
+        public ActionResult Friends()
+        {
+            return View();
         }
     }
 }

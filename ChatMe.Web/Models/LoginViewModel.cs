@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ChatMe.Web.Models
 {
-    public class LoginModel
+    public class LoginViewModel
     {
         [Required]
         public string Login { get; set; }
