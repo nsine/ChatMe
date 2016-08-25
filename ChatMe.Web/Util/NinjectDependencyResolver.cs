@@ -75,7 +75,8 @@ namespace ChatMe.Util
 
             });
 
-            kernel.Bind<IUnitOfWork>().ToConstant(mock.Object);
+            //kernel.Bind<IUnitOfWork>().ToConstant(mock.Object);
+            kernel.Bind<IUnitOfWork>().To<EFUnitOfWork>();
         }
     }
 }

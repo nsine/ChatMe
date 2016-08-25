@@ -16,7 +16,6 @@ namespace ChatMe.Web.Controllers
             unitOfWork = uow;
         }
 
-        [Authorize]
         public ActionResult Index()
         {
             return RedirectToAction("Index", "User");

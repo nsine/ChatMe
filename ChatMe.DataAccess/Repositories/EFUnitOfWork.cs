@@ -2,6 +2,7 @@
 using ChatMe.DataAccess.EF;
 using ChatMe.DataAccess.Entities;
 using ChatMe.DataAccess.Interfaces;
+using System.Threading.Tasks;
 
 namespace ChatMe.DataAccess.Repositories
 {
@@ -43,8 +44,8 @@ namespace ChatMe.DataAccess.Repositories
         {
             get
             {
-                if (userRepo == null) {
-                    userRepo = new UserRepository(db);
+                if (dialogRepo == null) {
+                    dialogRepo = new DialogRepository(db);
                 }
                 return dialogRepo;
             }
@@ -53,6 +54,10 @@ namespace ChatMe.DataAccess.Repositories
         public void Save()
         {
             db.SaveChanges();
+        }
+
+        public async Task SaveAsync() {
+            await db.SaveChangesAsync();
         }
     }
 }

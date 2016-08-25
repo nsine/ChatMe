@@ -1,4 +1,5 @@
 ﻿using ChatMe.DataAccess.Entities;
+using System.Threading.Tasks;
 
 namespace ChatMe.DataAccess.Interfaces
 {
@@ -9,5 +10,6 @@ namespace ChatMe.DataAccess.Interfaces
         IRepository<Dialog> Dialogs { get; }
 
         void Save();
+        Task SaveAsync();
     }
 }

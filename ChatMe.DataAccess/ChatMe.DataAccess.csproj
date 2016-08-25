@@ -109,6 +109,14 @@
     <Compile Include="Migrations\201608231415540_AddDialogModel.Designer.cs">
       <DependentUpon>201608231415540_AddDialogModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608251001472_AddFieldsToUserModel.cs" />
+    <Compile Include="Migrations\201608251001472_AddFieldsToUserModel.Designer.cs">
+      <DependentUpon>201608251001472_AddFieldsToUserModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608251208502_UserInfoes.cs" />
+    <Compile Include="Migrations\201608251208502_UserInfoes.Designer.cs">
+      <DependentUpon>201608251208502_UserInfoes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DialogRepository.cs" />
@@ -129,6 +137,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608231415540_AddDialogModel.resx">
       <DependentUpon>201608231415540_AddDialogModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608251001472_AddFieldsToUserModel.resx">
+      <DependentUpon>201608251001472_AddFieldsToUserModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608251208502_UserInfoes.resx">
+      <DependentUpon>201608251208502_UserInfoes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -11,7 +11,9 @@
 @foreach (var user in Model.Users) {
     <div class="users-list">
         <div class="panel panel-default">
-            @user.DisplayName
+            <span>@user.DisplayName</span>
+            <span>@user.FirstName</span>
+            <span>@user.LastName</span>
         </div>
     </div>
     

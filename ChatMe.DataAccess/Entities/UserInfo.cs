@@ -10,10 +10,13 @@ namespace ChatMe.DataAccess.Entities
         public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string AvatarUrl { get; set; }
         public string AboutMe { get; set; }
         [DataType(DataType.PhoneNumber)]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
+        public string Skype { get; set; }
+
+        public string AvatarFilename { get; set; }
+        public string AvatarMimeType { get; set; }
 
         [Required]
         public DateTime RegistrationDate { get; set; }

@@ -10,7 +10,7 @@ namespace ChatMe.Web.Models
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string AvatarUrl { get; set; }
+        public string AvatarFilename { get; set; }
         public string DisplayName {
             get
             {

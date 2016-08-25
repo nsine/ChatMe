@@ -19,16 +19,22 @@
                     </a>
                 </li>
                 <li>
-                    @Html.ActionLink("My profile", "Index");
+                    @Html.ActionLink("My profile", "Index")
                 </li>
                 <li>
-                    @Html.ActionLink("Messages", "Messages");
+                    @Html.ActionLink("Messages", "Messages")
                 </li>
                 <li>
-                    @Html.ActionLink("Friends", "Friends");
+                    @Html.ActionLink("Friends", "Friends")
                 </li>
                 <li>
-                    @Html.ActionLink("Find people", "AllUsers");
+                    @Html.ActionLink("Find people", "AllUsers")
+                </li>
+                <li>
+                    @Html.ActionLink("Settings", "Settings")
+                </li>
+                <li>
+                    @Html.ActionLink("Logout", "Logout", "Account")
                 </li>
             </ul>
         </div>
@@ -50,5 +56,6 @@
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("Scripts", false)
 </body>
 </html>
