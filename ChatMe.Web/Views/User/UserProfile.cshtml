@@ -1,0 +1,44 @@
+﻿@model ChatMe.Web.Models.UserProfileViewModel
+
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/User/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="@Url.Action("GetAvatar", "User", new { id = Model.Id })" class="col-xs-12 img-responsive">
+
+        @if (Model.DisplayName != null) {
+            <h2>@Model.DisplayName</h2>
+        }
+        <div>@Model.UserName</div>
+
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            @if (Model.Phone != null) {
+                <dt>@Html.DisplayNameFor(model => model.Phone)</dt>
+                    <dd>@Html.DisplayFor(model => model.Phone)</dd>
+            }
+            @if (Model.Skype != null) {
+                <dt>@Html.DisplayNameFor(model => model.Skype)</dt>
+                    <dd>@Html.DisplayFor(model => model.Skype)</dd>
+            }
+            @if (Model.AboutMe != null) {
+                <dt>@Html.DisplayNameFor(model => model.AboutMe)</dt>
+                    <dd>@Html.DisplayFor(model => model.AboutMe)</dd>
+            }
+        </dl>
+    </div>
+    <div class="col-md-8">
+        @if (Model.Posts == null || Model.Posts.Count() == 0) {
+            <h2>No posts yet.</h2>
+        } else {
+            <h2>Posts are here!</h2>
+        }
+    </div>
+</div>
