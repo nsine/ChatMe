@@ -12,6 +12,7 @@ namespace ChatMe.DataAccess.Repositories
         private MessageRepository messageRepo;
         private UserRepository userRepo;
         private DialogRepository dialogRepo;
+        private PostRepository postRepo;
 
         public EFUnitOfWork()
         {
@@ -48,6 +49,15 @@ namespace ChatMe.DataAccess.Repositories
                     dialogRepo = new DialogRepository(db);
                 }
                 return dialogRepo;
+            }
+        }
+
+        IRepository<Post> IUnitOfWork.Posts {
+            get {
+                if (postRepo == null) {
+                    postRepo = new PostRepository(db);
+                }
+                return postRepo;
             }
         }
 

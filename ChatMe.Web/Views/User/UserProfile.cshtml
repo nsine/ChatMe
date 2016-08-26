@@ -5,6 +5,23 @@
     Layout = "~/Views/User/_Layout.cshtml";
 }
 
+@section Scripts {
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/posts-app/app.module.js"></script>
+    <script>
+        angular.module("postsApp")
+            .value('userInfo', {
+                id: '@Model.Id',
+                isOwner: @Model.IsOwner.ToString().ToLower(),
+            });
+    </script>
+    <script src="~/Scripts/posts-app/app.directive.js"></script>
+    <script src="~/Scripts/posts-app/posts-service/posts.service.js"></script>
+    <script src="~/Scripts/posts-app/posts-service/posts-api.service.js"></script>
+    <script src="~/Scripts/posts-app/posts-list/posts-list.controller.js"></script>
+    <script src="~/Scripts/posts-app/new-post/new-post.controller.js"></script>
+}
+
 <div class="row">
     <div class="col-md-4">
         <img src="@Url.Action("GetAvatar", "User", new { id = Model.Id })" class="col-xs-12 img-responsive">
@@ -32,13 +49,13 @@
                 <dt>@Html.DisplayNameFor(model => model.AboutMe)</dt>
                     <dd>@Html.DisplayFor(model => model.AboutMe)</dd>
             }
+
+            @Model.Id
         </dl>
     </div>
     <div class="col-md-8">
-        @if (Model.Posts == null || Model.Posts.Count() == 0) {
-            <h2>No posts yet.</h2>
-        } else {
-            <h2>Posts are here!</h2>
-        }
+        <div ng-app="postsApp" id="postsApp">
+            <app></app>
+        </div>
     </div>
 </div>

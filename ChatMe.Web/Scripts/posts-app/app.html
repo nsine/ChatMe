@@ -1,0 +1,17 @@
+<div ng-controller="PostsListController as ctrl">
+    <div ng-repeat="post in ctrl.postsService.posts">
+        <span>{{ post.body }}</span>
+        <span>{{ post.date }}</span>
+    </div>
+</div>
+<div ng-controller="NewPostController as ctrl">
+
+    <form role="form">
+        <legend>Form title</legend>
+
+        <div class="form-group">
+            <textarea ng-model="ctrl.postBody" class="form-control" placeholder="What's new?"></textarea>
+        </div>
+        <button ng-click="ctrl.sendPost()" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

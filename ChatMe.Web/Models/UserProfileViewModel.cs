@@ -24,6 +24,7 @@ namespace ChatMe.Web.Models
         public string Skype { get; set; }
         [DisplayName("About me")]
         public string AboutMe { get; set; }
+        public bool IsOwner { get; set; }
 
         public string DisplayName {
             get {
