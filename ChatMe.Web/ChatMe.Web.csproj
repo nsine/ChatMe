@@ -212,6 +212,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\NewPostViewModel.cs" />
+    <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -258,6 +259,10 @@
     <Folder Include="App_Data\Avatars\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ChatMe.BussinessLogic\ChatMe.BussinessLogic.csproj">
+      <Project>{33347271-5bb4-469b-90b1-5f2e26f7c659}</Project>
+      <Name>ChatMe.BussinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ChatMe.DataAccess\ChatMe.DataAccess.csproj">
       <Project>{52f32389-81fa-41b6-87e4-b88f5f9060b3}</Project>
       <Name>ChatMe.DataAccess</Name>

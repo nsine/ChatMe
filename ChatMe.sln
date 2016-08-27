@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatMe.Web", "ChatMe.Web\ChatMe.Web.csproj", "{8F89AEEA-2F40-4396-9A49-755F9C7F95BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatMe.Tests", "ChatMe.Tests\ChatMe.Tests.csproj", "{5ECB5D1B-E6CD-4B8D-8C89-61495393D4AC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatMe.DataAccess", "ChatMe.DataAccess\ChatMe.DataAccess.csproj", "{52F32389-81FA-41B6-87E4-B88F5F9060B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatMe.BussinessLogic", "ChatMe.BussinessLogic\ChatMe.BussinessLogic.csproj", "{33347271-5BB4-469B-90B1-5F2E26F7C659}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{52F32389-81FA-41B6-87E4-B88F5F9060B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52F32389-81FA-41B6-87E4-B88F5F9060B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52F32389-81FA-41B6-87E4-B88F5F9060B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33347271-5BB4-469B-90B1-5F2E26F7C659}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33347271-5BB4-469B-90B1-5F2E26F7C659}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33347271-5BB4-469B-90B1-5F2E26F7C659}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33347271-5BB4-469B-90B1-5F2E26F7C659}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

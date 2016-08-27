@@ -5,8 +5,8 @@
         .module('postsApp')
         .service('postsService', postsService);
 
-    postsService.$inject = ['$http', 'postsApi'];
-    function postsService($http, postsApi) {
+    postsService.$inject = ['$http', 'postsApi', '$rootScope'];
+    function postsService($http, postsApi, $rootScope) {
         var self = this;
         var loadSize = 10;
         var loadedPosts = 0;
@@ -18,16 +18,22 @@
 
         ////////////////
         function loadPosts() {
-            postsApi.getPosts(self.loadedPosts, loadSize)
-                .then(function (response) {
-                    self.posts.concat(response.data);
-                    self.loadedPosts += response.data.length
+            postsApi
+                .getPosts(self.loadedPosts, loadSize)
+                .then(function (data) {
+                    self.posts = self.posts.concat(data);
+                    loadedPosts += data.length
                 });
         }
 
         function newPost(post) {
-            return postsApi.newPost(post)
-                .then(self.loadPosts());
+            return postsApi
+                .newPost(post)
+                .then(function () {
+                    self.posts = [];
+                    loadPosts();
+                    $rootScope.$apply();
+                })
         }
     }
 })();

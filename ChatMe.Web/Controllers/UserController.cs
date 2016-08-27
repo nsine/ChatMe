@@ -11,6 +11,7 @@ using ChatMe.Web.Models;
 using ChatMe.DataAccess.Interfaces;
 using System.IO;
 using System.Configuration;
+using ChatMe.BussinessLogic;
 
 namespace ChatMe.Web.Controllers
 {
@@ -37,6 +38,7 @@ namespace ChatMe.Web.Controllers
 
         public async Task<ActionResult> UserProfile(string userName) {
             var user = await UserManager.FindByNameAsync(userName);
+            var me = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (user == null) {
                 throw new HttpException(404, "User not found");
@@ -47,12 +49,14 @@ namespace ChatMe.Web.Controllers
                 UserName = user.UserName,
                 FirstName = user.UserInfo.FirstName,
                 LastName = user.UserInfo.LastName,
+                DisplayName = user.DisplayName,
                 Email = user.Email,
                 Phone = user.UserInfo.Phone,
                 Skype = user.UserInfo.Skype,
                 AboutMe = user.UserInfo.AboutMe,
                 AvatarFilename = user.UserInfo.AvatarFilename,
-                Posts = user.Posts
+                Posts = user.Posts,
+                IsOwner = user.Id == me.Id
             };
 
             return View(userProfile);
@@ -107,7 +111,7 @@ namespace ChatMe.Web.Controllers
                 AboutMe = me.UserInfo.AboutMe,
                 AvatarFilename = me.UserInfo.AvatarFilename,
                 Phone = me.UserInfo.Phone,
-                Skype = me.UserInfo.Skype
+                Skype = me.UserInfo.Skype               
             };
 
             return View(viewModel);
@@ -179,23 +183,9 @@ namespace ChatMe.Web.Controllers
 
         public ActionResult GetAvatar(string id) {
             var user = unitOfWork.Users.Get(id);
-            var fileName = "default";
-            var mimeType = "image/png";
+            var avatarInfo = AvatarManager.GetPath(user, Server.MapPath);
 
-            if (user != null) {
-                if (!string.IsNullOrEmpty(user.UserInfo.AvatarFilename)) {
-                    fileName = user.UserInfo.AvatarFilename;
-                    mimeType = user.UserInfo.AvatarMimeType;
-                }
-            }
-            var dir = Server.MapPath("/App_Data/Avatars");
-            var dirInfo = new DirectoryInfo(dir);
-            var file = dirInfo.GetFiles($"{fileName}.*")
-                .FirstOrDefault()?.Name;
-
-            var path = Path.Combine(dir, file);
-
-            return File(path, mimeType);
+            return File(avatarInfo.Path, avatarInfo.Type);
         }
     }
 }

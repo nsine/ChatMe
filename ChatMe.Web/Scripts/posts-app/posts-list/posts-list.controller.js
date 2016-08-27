@@ -13,6 +13,11 @@
 
         self.postsService = postsService;
 
+        self.prettyTime = function (post) {
+            return moment(post.time).fromNow();
+            // return post.date;
+        };
+
         activate();
 
         ////////////////

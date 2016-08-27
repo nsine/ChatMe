@@ -1,17 +1,43 @@
-<div ng-controller="PostsListController as ctrl">
-    <div ng-repeat="post in ctrl.postsService.posts">
-        <span>{{ post.body }}</span>
-        <span>{{ post.date }}</span>
-    </div>
-</div>
 <div ng-controller="NewPostController as ctrl">
 
     <form role="form">
-        <legend>Form title</legend>
-
         <div class="form-group">
-            <textarea ng-model="ctrl.postBody" class="form-control" placeholder="What's new?"></textarea>
+            <textarea ng-model="ctrl.postBody" ng-attr-rows="{{ ctrl.textRows }}"
+                ng-focus="ctrl.activateForm()" ng-blur="ctrl.deactivateForm($event)"
+                class="form-control" placeholder="What's new?"></textarea>
         </div>
-        <button ng-click="ctrl.sendPost()" type="submit" class="btn btn-primary">Submit</button>
+        <button ng-if="ctrl.isSendBtnVisible" ng-click="ctrl.sendPost()"
+            id="send-post-btn" type="submit" class="btn btn-primary">Submit</button>
     </form>
+</div>
+
+<div ng-controller="PostsListController as ctrl">
+    <div ng-repeat="post in ctrl.postsService.posts">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title row">
+                    <div >
+                        <img src="{{post.avatarUrl}}" alt="" class="col-xs-2 img-responsive">
+                    </div>
+                    <div class="col-xs-8">
+                        <h4>
+                            <a href="{{post.authorLink}}">
+                                {{ post.author }}
+                            </a>
+                        </h4>
+                        <div>
+                            <em>{{ ctrl.prettyTime(post) }}</em>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <span>{{ post.likes }} likes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                {{ post.body }}
+
+            </div>
+            </div>
+        </div>
 </div>

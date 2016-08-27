@@ -25,21 +25,8 @@ namespace ChatMe.Web.Models
         [DisplayName("About me")]
         public string AboutMe { get; set; }
         public bool IsOwner { get; set; }
+        public string DisplayName { get; set; }
 
-        public string DisplayName {
-            get {
-                if (FirstName != null) {
-                    var myName = "";
-                    myName += FirstName;
-                    if (LastName != null) {
-                        myName += " " + LastName;
-                    }
-                    return myName;
-                } else {
-                    return null;
-                }
-            }
-        }
 
         public IEnumerable<Post> Posts;
 
