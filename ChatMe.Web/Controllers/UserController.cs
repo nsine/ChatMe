@@ -20,17 +20,17 @@ namespace ChatMe.Web.Controllers
     {
         private IUnitOfWork unitOfWork;
 
-        public UserController(IUnitOfWork uow) {
-            unitOfWork = uow;
-        }
-
         private AppUserManager UserManager {
             get {
                 return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
             }
         }
 
-        // GET: User
+        public UserController(IUnitOfWork uow) {
+            unitOfWork = uow;
+
+        }
+
         public async Task<ActionResult> Index() {
             var me = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             return RedirectToAction("UserProfile", new { userName = me.UserName });
@@ -64,7 +64,8 @@ namespace ChatMe.Web.Controllers
 
         public async Task<ActionResult> Messages() {
             var me = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            return View(new MessagesViewModel(me));
+            //return View(new MessagesViewModel(me));
+            return View();
         }
 
         public ActionResult AllUsers(int page = 1) {

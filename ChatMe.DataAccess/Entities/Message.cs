@@ -14,5 +14,9 @@ namespace ChatMe.DataAccess.Entities
         [Required]
         public int DialogId { get; set; }
         public virtual Dialog Dialog { get; set; }
+
+        [Required]
+        public string UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }

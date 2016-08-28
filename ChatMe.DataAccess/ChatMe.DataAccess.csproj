@@ -122,6 +122,18 @@
     <Compile Include="Migrations\201608251525454_AddPostModel.Designer.cs">
       <DependentUpon>201608251525454_AddPostModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608281841084_AddTimestampToDialog.cs" />
+    <Compile Include="Migrations\201608281841084_AddTimestampToDialog.Designer.cs">
+      <DependentUpon>201608281841084_AddTimestampToDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608281938589_ContextChange.cs" />
+    <Compile Include="Migrations\201608281938589_ContextChange.Designer.cs">
+      <DependentUpon>201608281938589_ContextChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608281957435_AddUsersMessagesTie.cs" />
+    <Compile Include="Migrations\201608281957435_AddUsersMessagesTie.Designer.cs">
+      <DependentUpon>201608281957435_AddUsersMessagesTie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DialogRepository.cs" />
@@ -152,6 +164,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608251525454_AddPostModel.resx">
       <DependentUpon>201608251525454_AddPostModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608281841084_AddTimestampToDialog.resx">
+      <DependentUpon>201608281841084_AddTimestampToDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608281938589_ContextChange.resx">
+      <DependentUpon>201608281938589_ContextChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608281957435_AddUsersMessagesTie.resx">
+      <DependentUpon>201608281957435_AddUsersMessagesTie.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

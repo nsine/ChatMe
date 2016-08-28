@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-xs-3">
+        <div ng-controller="DialogsListController as ctrl" class="dialogs-list">
+            <div ng-repeat="dialog in ctrl.dialogsService.dialogs">
+                <div ng-click="ctrl.openDialog(dialog)" class="panel">
+                    <div>
+                        {{ dialog.author }}
+                    </div>
+                    <div>
+                        {{ dialog.lastMessageSnippet }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-9">
+        <div class="dialog-window">
+            <div class="vertical-align">
+                Select dialog
+            </div>
+        </div>
+    </div>
+</div>

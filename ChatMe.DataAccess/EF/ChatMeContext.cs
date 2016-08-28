@@ -18,14 +18,18 @@ namespace ChatMe.DataAccess.EF
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Dialog>()
-                .HasMany(d => d.Users)
-                .WithMany();
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Dialogs)
+                .WithMany(d => d.Users);
 
             modelBuilder.Entity<Message>()
                 .HasRequired(m => m.Dialog)
                 .WithMany(d => d.Messages)
                 .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Message>()
+                .HasRequired(m => m.User)
+                .WithMany(u => u.Messages);
 
             //modelBuilder.Entity<User>()
             //    .HasMany(u => u.Posts)

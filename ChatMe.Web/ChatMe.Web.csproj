@@ -184,6 +184,12 @@
     <Content Include="connectionStrings.config" />
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
+    <Content Include="Scripts\dialogs-app\app.directive.js" />
+    <Content Include="Scripts\dialogs-app\app.module.js" />
+    <Content Include="Scripts\dialogs-app\app.html" />
+    <Content Include="Scripts\dialogs-app\dialogs-list\dialogs-list.controller.js" />
+    <Content Include="Scripts\dialogs-app\dialogs-service\dialogs-api.service.js" />
+    <Content Include="Scripts\dialogs-app\dialogs-service\dialogs.service.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -210,7 +216,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DialogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Models\NewDialogViewModel.cs" />
     <Compile Include="Models\NewPostViewModel.cs" />
     <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Controllers\PostController.cs" />
@@ -222,7 +231,6 @@
     <Compile Include="Models\AllUsersViewModel.cs" />
     <Compile Include="Models\DialogViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\MessagesViewModel.cs" />
     <Compile Include="Models\PageInfo.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\UserPreviewViewModel.cs" />
@@ -257,6 +265,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Avatars\" />
+    <Folder Include="Views\Dialog\" />
+    <Folder Include="Views\Message\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChatMe.BussinessLogic\ChatMe.BussinessLogic.csproj">

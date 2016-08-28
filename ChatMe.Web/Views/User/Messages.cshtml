@@ -1,13 +1,18 @@
-﻿@model ChatMe.Web.Models.MessagesViewModel
-
-@{
+﻿@{
     ViewBag.Title = "Messages";
     Layout = "~/Views/User/_Layout.cshtml";
 }
 
-@foreach (var dialog in Model.Dialogs) {
-    <div class="panel">
-        <div class="author"><strong>@dialog.Author</strong></div>
-        <div class="snippet">@dialog.LastMessageSnippet</div>
-    </div>
+@section Scripts {
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/dialogs-app/app.module.js"></script>
+    <script src="~/Scripts/dialogs-app/app.directive.js"></script>
+    <script src="~/Scripts/dialogs-app/dialogs-service/dialogs.service.js"></script>
+    <script src="~/Scripts/dialogs-app/dialogs-service/dialogs-api.service.js"></script>
+    <script src="~/Scripts/dialogs-app/dialogs-list/dialogs-list.controller.js"></script>
+    @*<script src="~/Scripts/dialogs-app/new-post/new-dialogs.controller.js"></script>*@
 }
+
+<div ng-app="dialogsApp">
+    <app></app>
+</div>

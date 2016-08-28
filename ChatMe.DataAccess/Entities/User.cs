@@ -22,6 +22,7 @@ namespace ChatMe.DataAccess.Entities
         [Required]
         public virtual UserInfo UserInfo { get; set; }
         public virtual ICollection<Dialog> Dialogs { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
     }
 }

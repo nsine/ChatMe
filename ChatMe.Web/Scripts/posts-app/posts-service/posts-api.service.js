@@ -3,12 +3,11 @@
 
     angular
         .module('postsApp')
-        .service('postsApi', postsService);
+        .service('postsApi', postsApi);
 
-    postsService.$inject = ['$http', 'userInfo', 'apiPath'];
-    function postsService($http, userInfo, apiPath) {
+    postsApi.$inject = ['$http', 'userInfo', 'apiPath'];
+    function postsApi($http, userInfo, apiPath) {
         var self = this;
-        var loadSize = 10;
 
         self.getPosts = getPosts;
         self.newPost = newPost;
