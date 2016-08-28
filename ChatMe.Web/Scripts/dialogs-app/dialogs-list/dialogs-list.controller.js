@@ -5,8 +5,8 @@
         .module('dialogsApp')
         .controller('DialogsListController', DialogsListController);
 
-    DialogsListController.$inject = ['dialogsService'];
-    function DialogsListController(dialogsService) {
+    DialogsListController.$inject = ['dialogsService', 'dialogId'];
+    function DialogsListController(dialogsService, dialogId) {
         var self = this;
 
         self.dialogsService = dialogsService;

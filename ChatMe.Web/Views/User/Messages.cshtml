@@ -1,4 +1,7 @@
-﻿@{
+﻿@* Dialog id that must be opened *@
+@model int?
+
+@{
     ViewBag.Title = "Messages";
     Layout = "~/Views/User/_Layout.cshtml";
 }
@@ -6,6 +9,10 @@
 @section Scripts {
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/dialogs-app/app.module.js"></script>
+    <script>
+        angular.module("dialogsApp")
+            .value("dialogId", Model)
+    </script>
     <script src="~/Scripts/dialogs-app/app.directive.js"></script>
     <script src="~/Scripts/dialogs-app/dialogs-service/dialogs.service.js"></script>
     <script src="~/Scripts/dialogs-app/dialogs-service/dialogs-api.service.js"></script>
