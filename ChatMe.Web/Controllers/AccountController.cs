@@ -8,29 +8,17 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
 using ChatMe.Models;
 using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
+
 using ChatMe.Web.Models;
+using ChatMe.Web.Controllers.Abstract;
+using ChatMe.BussinessLogic.Services;
+using AutoMapper;
+using ChatMe.BussinessLogic.DTO;
 
 namespace ChatMe.Web.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : IdentityController
     {
-        private AppUserManager UserManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
-            }
-        }
-
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
         [HttpGet]
         public ActionResult Register()
         {
@@ -38,18 +26,12 @@ namespace ChatMe.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Register(RegisterModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid) {
-                var user = new User {
-                    UserName = model.UserName,
-                    Email = model.Email,
-                    UserInfo = new UserInfo
-                    {
-                        RegistrationDate = DateTime.Now
-                    }
-                };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                Mapper.Initialize(cfg => cfg.CreateMap<RegisterViewModel, RegistrationInfoDTO>());
+                var regInfo = Mapper.Map<RegistrationInfoDTO>(model);
+                var result = await AccountService.CreateUser(regInfo, UserManager);
 
                 if (result.Succeeded) {
                     return RedirectToAction("Login", "Account");
@@ -73,26 +55,23 @@ namespace ChatMe.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+
             if (ModelState.IsValid) {
-                var user = await UserManager.FindAsync(model.Login, model.Password);
+                var authManager = HttpContext.GetOwinContext().Authentication;
 
-                if (user == null) {
-                    ModelState.AddModelError("", "Invalid login or password");
-                } else {
-                    var claim = await UserManager
-                        .CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+                Mapper.Initialize(cfg => cfg.CreateMap<LoginViewModel, LoginDTO>());
+                var loginData = Mapper.Map<LoginDTO>(model);
 
-                    AuthenticationManager.SignOut();
-                    AuthenticationManager.SignIn(new AuthenticationProperties
-                    {
-                        IsPersistent = !model.RememberMe.GetValueOrDefault()
-                    }, claim);
+                var isSuccessLogin = await AccountService.Login(loginData, UserManager, authManager);
 
+                if (isSuccessLogin) {
                     if (string.IsNullOrEmpty(returnUrl)) {
                         return RedirectToAction("Index", "Home");
                     } else {
                         return Redirect(returnUrl);
                     }
+                } else {
+                    ModelState.AddModelError("", "Invalid login or password");                    
                 }
             }
 
@@ -102,7 +81,8 @@ namespace ChatMe.Web.Controllers
 
         public ActionResult Logout()
         {
-            AuthenticationManager.SignOut();
+            var authManager = HttpContext.GetOwinContext().Authentication;
+            AccountService.Logout(authManager);
             return RedirectToAction("Login");
         }
     }

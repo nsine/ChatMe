@@ -1,6 +1,7 @@
 ﻿using ChatMe.BussinessLogic;
 using ChatMe.DataAccess.Entities;
 using ChatMe.DataAccess.Interfaces;
+using ChatMe.Web.Controllers.Abstract;
 using ChatMe.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -13,20 +14,13 @@ using System.Web.Mvc;
 namespace ChatMe.Web.Controllers
 {
     [RoutePrefix("api/dialogs")]
-    public class DialogController : Controller
+    public class DialogController : IdentityController
     {
         private IUnitOfWork unitOfWork;
-
-        private AppUserManager UserManager {
-            get {
-                return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
-            }
-        }
 
         public DialogController(IUnitOfWork uow) {
             unitOfWork = uow;
         }
-
 
         [HttpGet]
         [Route("")]

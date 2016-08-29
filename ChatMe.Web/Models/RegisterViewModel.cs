@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ChatMe.Models
 {
-    public class RegisterModel
+    public class RegisterViewModel
     {
         [Required]
         public string UserName { get; set; }
