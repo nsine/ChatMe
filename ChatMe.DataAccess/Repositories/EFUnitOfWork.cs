@@ -9,53 +9,54 @@ namespace ChatMe.DataAccess.Repositories
     public class EFUnitOfWork : IUnitOfWork
     {
         private ChatMeContext db;
-        private MessageRepository messageRepo;
-        private UserRepository userRepo;
-        private DialogRepository dialogRepo;
-        private PostRepository postRepo;
+
+        private EFRepository<Message> messageRepo;
+        private EFRepository<User> userRepo;
+        private EFRepository<Dialog> dialogRepo;
+        private EFRepository<Post> postRepo;
 
         public EFUnitOfWork()
         {
             db = new ChatMeContext();
         }
 
-        IRepository<Message> IUnitOfWork.Messages
+        public IRepository<Message> Messages
         {
             get
             {
                 if (messageRepo == null) {
-                    messageRepo = new MessageRepository(db);
+                    messageRepo = new EFRepository<Message>(db);
                 }
                 return messageRepo;
             }
         }
 
-        IRepository<User> IUnitOfWork.Users
+        public IRepository<User> Users
         {
             get
             {
                 if (userRepo == null) {
-                    userRepo = new UserRepository(db);
+                    userRepo = new EFRepository<User>(db);
                 }
                 return userRepo;
             }
         }
 
-        IRepository<Dialog> IUnitOfWork.Dialogs
+        public IRepository<Dialog> Dialogs
         {
             get
             {
                 if (dialogRepo == null) {
-                    dialogRepo = new DialogRepository(db);
+                    dialogRepo = new EFRepository<Dialog>(db);
                 }
                 return dialogRepo;
             }
         }
 
-        IRepository<Post> IUnitOfWork.Posts {
+        public IRepository<Post> Posts {
             get {
                 if (postRepo == null) {
-                    postRepo = new PostRepository(db);
+                    postRepo = new EFRepository<Post>(db);
                 }
                 return postRepo;
             }

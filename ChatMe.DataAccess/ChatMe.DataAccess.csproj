@@ -136,11 +136,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\DialogRepository.cs" />
+    <Compile Include="Repositories\EFRepository.cs" />
     <Compile Include="Repositories\EFUnitOfWork.cs" />
-    <Compile Include="Repositories\MessageRepository.cs" />
-    <Compile Include="Repositories\PostRepository.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
