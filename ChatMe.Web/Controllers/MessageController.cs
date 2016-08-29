@@ -32,20 +32,19 @@ namespace ChatMe.Web.Controllers
             var messages = dialog.Messages
                 .OrderByDescending(m => m.Time)
                 .Skip(startIndex)
-                .Select(p => new MessageViewModel {
-                    Id = p.Id,
-                    Body = p.Body,
-                    Time = p.Time,
-                    AuthorAvatarUrl = Url.Action("GetAvatar", "User", new { id = p.User.Id }),
-                    Author = p.User.DisplayName,
+                .Select(m => new MessageViewModel {
+                    Id = m.Id,
+                    Body = m.Body,
+                    Time = m.Time,
+                    AuthorAvatarUrl = Url.Action("GetAvatar", "User", new { id = m.User.Id }),
+                    Author = m.User.DisplayName,
+                    IsMy = m.User.Id == User.Identity.GetUserId()
                 });
 
             if (count != 0) {
                 messages = messages.Take(count);
             }
-
-            var a = messages.ToList();
-
+            
             return Json(messages.ToList(), JsonRequestBehavior.AllowGet);
         }
 
@@ -53,6 +52,7 @@ namespace ChatMe.Web.Controllers
         [Route("{dialogId}")]
         public void New(int dialogId, NewMessageViewModel messageModel) {
             var db = HttpContext.GetOwinContext().Get<ChatMeContext>();
+            var id = User.Identity.GetUserId();
 
             var me = UserManager.FindById(User.Identity.GetUserId());
             var newMessage = new Message {

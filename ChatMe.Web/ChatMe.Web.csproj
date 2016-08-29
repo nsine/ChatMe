@@ -165,6 +165,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\messages.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -190,10 +191,12 @@
     <Content Include="Scripts\dialogs-app\dialogs-list\dialogs-list.controller.js" />
     <Content Include="Scripts\dialogs-app\dialogs-service\dialogs-api.service.js" />
     <Content Include="Scripts\dialogs-app\dialogs-service\dialogs.service.js" />
+    <Content Include="Scripts\dialogs-app\dialogs-service\opened-dialog.service.js" />
     <Content Include="Scripts\dialogs-app\messages\messages-api.service.js" />
     <Content Include="Scripts\dialogs-app\messages\messages-list.controller.js" />
     <Content Include="Scripts\dialogs-app\messages\messages.service.js" />
     <Content Include="Scripts\dialogs-app\messages\new-message.controller.js" />
+    <Content Include="Scripts\dialogs-app\messages\reverse.filter.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />

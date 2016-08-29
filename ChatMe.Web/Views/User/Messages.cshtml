@@ -6,6 +6,10 @@
     Layout = "~/Views/User/_Layout.cshtml";
 }
 
+@section Styles {
+    <link href="~/Content/messages.css" rel="stylesheet" />
+}
+
 @section Scripts {
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/dialogs-app/app.module.js"></script>
@@ -13,12 +17,14 @@
         angular.module("dialogsApp")
             .value("dialogId", '@Model');
     </script>
+    <script src="~/Scripts/dialogs-app/dialogs-service/opened-dialog.service.js"></script>
     <script src="~/Scripts/dialogs-app/dialogs-service/dialogs.service.js"></script>
     <script src="~/Scripts/dialogs-app/dialogs-service/dialogs-api.service.js"></script>
     <script src="~/Scripts/dialogs-app/dialogs-list/dialogs-list.controller.js"></script>
 
     <script src="~/Scripts/dialogs-app/messages/messages-api.service.js"></script>
     <script src="~/Scripts/dialogs-app/messages/messages.service.js"></script>
+    <script src="~/Scripts/dialogs-app/messages/reverse.filter.js"></script>
     <script src="~/Scripts/dialogs-app/app.directive.js"></script>
     <script src="~/Scripts/dialogs-app/messages/messages-list.controller.js"></script>
     <script src="~/Scripts/dialogs-app/messages/new-message.controller.js"></script>

@@ -8,11 +8,7 @@ namespace ChatMe.DataAccess.EF
 {
     public class ChatMeContext : IdentityDbContext<User>
     {
-        public ChatMeContext() : base("ChatMe") {
-            Debug.Print("Context create");
-            StackTrace trace = new StackTrace();
-            Debug.Print(trace.ToString());
-        }
+        public ChatMeContext() : base("ChatMe") { }
 
         public DbSet<Message> Messages { get; set; }
         public DbSet<Dialog> Dialogs { get; set; }
@@ -34,7 +30,7 @@ namespace ChatMe.DataAccess.EF
 
             modelBuilder.Entity<Message>()
                 .HasRequired(m => m.User)
-                .WithMany(u => u.Messages);
+                .WithMany(u => u.Messages);             
 
             //modelBuilder.Entity<User>()
             //    .HasMany(u => u.Posts)
@@ -46,9 +42,6 @@ namespace ChatMe.DataAccess.EF
             return new ChatMeContext();
         }
 
-        protected override void Dispose(bool disposing) {
-            base.Dispose(disposing);
-            Debug.Print("Context dispose");
-        }
+        protected override void Dispose(bool disposing) { }
     }
 }

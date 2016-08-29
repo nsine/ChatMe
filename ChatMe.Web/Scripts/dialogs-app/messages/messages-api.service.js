@@ -23,7 +23,8 @@
                             body: rawMessage.Body,
                             time: new Date(parseInt(rawMessage.Time.replace("/Date(", "").replace(")/",""), 10)),
                             avatarUrl: rawMessage.AuthorAvatarUrl,
-                            author: rawMessage.Author
+                            author: rawMessage.Author,
+                            isMy: rawMessage.IsMy
                         };
 
                         return message;

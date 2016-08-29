@@ -36,14 +36,12 @@ namespace ChatMe.Web.Controllers
                 .OrderByDescending(d => (d.LastMessageTime.HasValue ? d.LastMessageTime : d.CreateTime))
                 .Skip(startIndex)
                 .Select(d => new DialogViewModel(d, me) {
-                    AvatarUrl = AvatarManager.GetPath(me, Server.MapPath).Path
+                    AvatarUrl = Url.Action("GetAvatar", "User", new { id = "todo" })
                 });
 
             if (count != 0) {
                 dialogs = dialogs.Take(count);
             }
-
-            var a = dialogs.ToList();
 
             return Json(dialogs.ToList(), JsonRequestBehavior.AllowGet);
         }

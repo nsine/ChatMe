@@ -7,25 +7,8 @@
 
     function app() {
         var directive = {
-            templateUrl: '/Scripts/dialogs-app/app.html',
-            controller: AppController,
-            controllerAs: 'appCtrl'
+            templateUrl: '/Scripts/dialogs-app/app.html'
         };
         return directive;
-    }
-
-    AppController.$inject = ['messagesService'];
-    function AppController (messagesService) {
-        var self = this;
-
-        self.openedDialogId = null;
-        self.isDialogOpened = function () {
-            return self.openedDialogId !== null;
-        }
-
-        self.openDialog = function (dialog) {
-            messagesService.dialogId = dialog.id;
-            self.openedDialogId = dialog.id;
-        }
     }
 })();

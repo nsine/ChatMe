@@ -42,8 +42,6 @@ namespace ChatMe.Web.Controllers
                 posts = posts.Take(count);
             }
 
-            var a = posts.ToList();
-
             return Json(posts.ToList(), JsonRequestBehavior.AllowGet);
         }
 
