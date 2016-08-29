@@ -190,6 +190,10 @@
     <Content Include="Scripts\dialogs-app\dialogs-list\dialogs-list.controller.js" />
     <Content Include="Scripts\dialogs-app\dialogs-service\dialogs-api.service.js" />
     <Content Include="Scripts\dialogs-app\dialogs-service\dialogs.service.js" />
+    <Content Include="Scripts\dialogs-app\messages\messages-api.service.js" />
+    <Content Include="Scripts\dialogs-app\messages\messages-list.controller.js" />
+    <Content Include="Scripts\dialogs-app\messages\messages.service.js" />
+    <Content Include="Scripts\dialogs-app\messages\new-message.controller.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -207,7 +211,10 @@
     <Content Include="Scripts\posts-app\app.directive.js" />
     <Content Include="Scripts\posts-app\app.html" />
     <Content Include="Scripts\posts-app\app.module.js" />
+    <Content Include="Scripts\posts-app\new-post\new-post.controller.js" />
     <Content Include="Scripts\posts-app\posts-list\posts-list.controller.js" />
+    <Content Include="Scripts\posts-app\posts-service\posts-api.service.js" />
+    <Content Include="Scripts\posts-app\posts-service\posts.service.js" />
     <Content Include="Scripts\User\settings.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -219,7 +226,9 @@
     <Compile Include="Controllers\DialogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\NewDialogViewModel.cs" />
+    <Compile Include="Models\NewMessageViewModel.cs" />
     <Compile Include="Models\NewPostViewModel.cs" />
     <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Controllers\PostController.cs" />

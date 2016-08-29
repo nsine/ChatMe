@@ -1,4 +1,4 @@
-﻿function displatPreview(input) {
+﻿function displayPreview(input) {
 
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -12,5 +12,5 @@
 }
 
 $("#avatar-input").change(function () {
-    displatPreview(this);
+    displayPreview(this);
 });

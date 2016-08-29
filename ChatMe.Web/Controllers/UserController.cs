@@ -62,10 +62,10 @@ namespace ChatMe.Web.Controllers
             return View(userProfile);
         }
 
-        public async Task<ActionResult> Messages() {
+        public async Task<ActionResult> Messages(int? dialogId) {
             var me = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             //return View(new MessagesViewModel(me));
-            return View();
+            return View(dialogId);
         }
 
         public ActionResult AllUsers(int page = 1) {

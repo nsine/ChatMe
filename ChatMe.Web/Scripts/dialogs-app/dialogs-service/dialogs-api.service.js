@@ -5,8 +5,8 @@
         .module('dialogsApp')
         .service('dialogsApi', dialogsApi);
 
-    dialogsApi.$inject = ['$http', 'apiPath'];
-    function dialogsApi($http, apiPath) {
+    dialogsApi.$inject = ['$http', 'dialogsApiPath'];
+    function dialogsApi($http, dialogsApiPath) {
         var self = this;
 
         self.getDialogs = getDialogs;
@@ -15,7 +15,7 @@
 
         ////////////////
         function getDialogs(startIndex, count) {
-            var path = apiPath + '?startIndex=' +
+            var path = dialogsApiPath + '?startIndex=' +
                 startIndex + '&count=' + count;
             return $http.get(path)
                 .then(function (response) {
@@ -33,7 +33,7 @@
         }
 
         function newDialog(dialog) {
-            var path = apiPath + userInfo.id;
+            var path = dialogsApiPath + userInfo.id;
             var dialogDto = {
                 UserIds: dialog.userIds
             }
@@ -41,7 +41,7 @@
         }
 
         function deleteDialog(id) {
-            var path = apiPath + id;
+            var path = dialogsApiPath + id;
             return $http.delete(path);
         }
     }

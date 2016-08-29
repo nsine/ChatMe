@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-xs-3">
-        <div ng-controller="DialogsListController as ctrl" class="dialogs-list">
-            <div ng-repeat="dialog in ctrl.dialogsService.dialogs">
-                <div ng-click="ctrl.openDialog(dialog)" class="panel">
+        <div ng-controller="DialogsListController as listCtrl" class="dialogs-list">
+            <div ng-repeat="dialog in listCtrl.dialogsService.dialogs">
+                <div ng-click="appCtrl.openDialog(dialog)" class="panel">
                     <div>
                         {{ dialog.author }}
                     </div>
@@ -14,9 +14,29 @@
         </div>
     </div>
     <div class="col-xs-9">
-        <div class="dialog-window">
+        <div ng-if="!appCtrl.isDialogOpened()" class="dialog-window">
             <div class="vertical-align">
                 Select dialog
+            </div>
+        </div>
+
+        <div ng-if="appCtrl.isDialogOpened()" class="dialog-window">
+            <div  ng-controller="MessagesListController as msgCtrl"
+                ng-init="msgCtrl.dialogId=appCtrl.openedDialogId" >
+                <div ng-repeat="msg in msgCtrl.messagesService.messages">
+                    <div>
+                        {{ msg.body }}
+                    </div>
+                    <div>
+                        {{ msg.author }}
+                    </div>
+                </div>
+            </div>
+            <div ng-controller="NewMessageController as newCtrl">
+                <textarea ng-model="newCtrl.body" rows="5"></textarea>
+
+                <button ng-click="newCtrl.send()" ng-disabled="!newCtrl.isSendBtnActive"
+                    class="btn btn-default">Send</button>
             </div>
         </div>
     </div>

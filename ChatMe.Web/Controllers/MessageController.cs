@@ -8,15 +8,14 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using ChatMe.DataAccess.Interfaces;
 using ChatMe.Web.Models;
+using ChatMe.DataAccess.EF;
+using ChatMe.DataAccess.Repositories;
 
 namespace ChatMe.Web.Controllers
 {
     [RoutePrefix("api/messages")]
     public class MessageController : Controller
     {
-        private User me;
-        private IUnitOfWork unitOfWork;
-
         private AppUserManager UserManager {
             get {
                 return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
@@ -24,74 +23,49 @@ namespace ChatMe.Web.Controllers
         }
 
 
-        public MessageController(IUnitOfWork uow) {
-            unitOfWork = uow;
-            me = UserManager.FindById(User.Identity.GetUserId());
-        }
-
-
         [HttpGet]
-        public ActionResult GetAll(int userId, int startIndex = 0, int count = 0) {
-            var user = unitOfWork.Users.Get(userId);
-            var posts = user.Posts
-                .OrderByDescending(p => p.Time)
+        [Route("{dialogId}")]
+        public ActionResult GetList(int dialogId, int startIndex = 0, int count = 0) {
+            IUnitOfWork unitOfWork = new EFUnitOfWork();
+            var me = UserManager.FindById(User.Identity.GetUserId());
+            var dialog = unitOfWork.Dialogs.Get(dialogId);
+            var messages = dialog.Messages
+                .OrderByDescending(m => m.Time)
                 .Skip(startIndex)
-                .Select(p => new PostViewModel {
+                .Select(p => new MessageViewModel {
                     Id = p.Id,
                     Body = p.Body,
                     Time = p.Time,
-                    Likes = 0,
-                    AvatarUrl = Url.Action("GetAvatar", "User", new { id = p.User.Id }),
+                    AuthorAvatarUrl = Url.Action("GetAvatar", "User", new { id = p.User.Id }),
                     Author = p.User.DisplayName,
-                    AuthorLink = Url.RouteUrl("UserProfile", new { id = p.User.Id })
                 });
 
             if (count != 0) {
-                posts = posts.Take(count);
+                messages = messages.Take(count);
             }
 
-            var a = posts.ToList();
+            var a = messages.ToList();
 
-            return Json(posts.ToList(), JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        [Route("{userId}/{postId}")]
-        public Post Get(string userId, int postId) {
-            return unitOfWork.Users
-                .Get(userId).Posts
-                .Where(p => p.Id == postId)
-                .FirstOrDefault();
+            return Json(messages.ToList(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        [Route("{userId}")]
-        public void Post(string userId, NewPostViewModel postModel) {
-            var user = unitOfWork.Users.Get(userId);
-            var newPost = new Post {
-                Body = postModel.Body,
-                User = user,
-                Time = DateTime.Now
+        [Route("{dialogId}")]
+        public void New(int dialogId, NewMessageViewModel messageModel) {
+            var db = HttpContext.GetOwinContext().Get<ChatMeContext>();
+
+            var me = UserManager.FindById(User.Identity.GetUserId());
+            var newMessage = new Message {
+                Body = messageModel.Body,
+                User = me,
+                Time = DateTime.Now,
+                Dialog = db.Dialogs.Find(dialogId)
             };
 
-            unitOfWork.Posts.Create(newPost);
-            unitOfWork.Save();
-        }
+            // Fix this shit
 
-        [HttpPut]
-        [Route("{postId}")]
-        public void Put(int postId, NewPostViewModel postModel) {
-            var post = unitOfWork.Posts.Get(postId);
-            post.Body = postModel.Body;
-            unitOfWork.Posts.Update(post);
-            unitOfWork.Save();
-        }
-
-        [HttpDelete]
-        [Route("{postId}")]
-        public void Delete(int postId) {
-            unitOfWork.Posts.Delete(postId);
-            unitOfWork.Save();
+            db.Messages.Add(newMessage);
+            db.SaveChanges();
         }
     }
 }

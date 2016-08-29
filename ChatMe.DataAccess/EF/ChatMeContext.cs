@@ -2,12 +2,17 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Diagnostics;
 
 namespace ChatMe.DataAccess.EF
 {
     public class ChatMeContext : IdentityDbContext<User>
     {
-        public ChatMeContext() : base("ChatMe") { }
+        public ChatMeContext() : base("ChatMe") {
+            Debug.Print("Context create");
+            StackTrace trace = new StackTrace();
+            Debug.Print(trace.ToString());
+        }
 
         public DbSet<Message> Messages { get; set; }
         public DbSet<Dialog> Dialogs { get; set; }
@@ -39,6 +44,11 @@ namespace ChatMe.DataAccess.EF
         public static ChatMeContext Create()
         {
             return new ChatMeContext();
+        }
+
+        protected override void Dispose(bool disposing) {
+            base.Dispose(disposing);
+            Debug.Print("Context dispose");
         }
     }
 }

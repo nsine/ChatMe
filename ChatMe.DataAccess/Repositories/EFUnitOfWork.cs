@@ -69,5 +69,9 @@ namespace ChatMe.DataAccess.Repositories
         public async Task SaveAsync() {
             await db.SaveChangesAsync();
         }
+
+        public void Dispose() {
+            db.Dispose();
+        }
     }
 }

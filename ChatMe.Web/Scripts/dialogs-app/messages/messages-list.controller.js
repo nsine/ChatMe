@@ -15,6 +15,9 @@
 
         ////////////////
 
-        function activate() { }
+        function activate() {
+            console.log(self.dialogId);
+            messagesService.openDialog();
+        }
     }
 })();
