@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChatMe.BussinessLogic
+namespace ChatMe.BussinessLogic.DTO
 {
     public class AvatarInfo
     {

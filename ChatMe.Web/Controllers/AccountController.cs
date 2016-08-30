@@ -14,11 +14,18 @@ using ChatMe.Web.Controllers.Abstract;
 using ChatMe.BussinessLogic.Services;
 using AutoMapper;
 using ChatMe.BussinessLogic.DTO;
+using ChatMe.BussinessLogic.Services.Abstract;
 
 namespace ChatMe.Web.Controllers
 {
     public class AccountController : IdentityController
     {
+        private IAccountService accountService;
+
+        public AccountController(IAccountService accountService) {
+            this.accountService = accountService;
+        }
+
         [HttpGet]
         public ActionResult Register()
         {
@@ -31,7 +38,7 @@ namespace ChatMe.Web.Controllers
             if (ModelState.IsValid) {
                 Mapper.Initialize(cfg => cfg.CreateMap<RegisterViewModel, RegistrationInfoDTO>());
                 var regInfo = Mapper.Map<RegistrationInfoDTO>(model);
-                var result = await AccountService.CreateUser(regInfo, UserManager);
+                var result = await accountService.CreateUser(regInfo, UserManager);
 
                 if (result.Succeeded) {
                     return RedirectToAction("Login", "Account");
@@ -62,7 +69,7 @@ namespace ChatMe.Web.Controllers
                 Mapper.Initialize(cfg => cfg.CreateMap<LoginViewModel, LoginDTO>());
                 var loginData = Mapper.Map<LoginDTO>(model);
 
-                var isSuccessLogin = await AccountService.Login(loginData, UserManager, authManager);
+                var isSuccessLogin = await accountService.Login(loginData, UserManager, authManager);
 
                 if (isSuccessLogin) {
                     if (string.IsNullOrEmpty(returnUrl)) {
@@ -82,7 +89,7 @@ namespace ChatMe.Web.Controllers
         public ActionResult Logout()
         {
             var authManager = HttpContext.GetOwinContext().Authentication;
-            AccountService.Logout(authManager);
+            accountService.Logout(authManager);
             return RedirectToAction("Login");
         }
     }

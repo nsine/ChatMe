@@ -1,4 +1,7 @@
-﻿using ChatMe.BussinessLogic;
+﻿using AutoMapper;
+using ChatMe.BussinessLogic;
+using ChatMe.BussinessLogic.DTO;
+using ChatMe.BussinessLogic.Services.Abstract;
 using ChatMe.DataAccess.Entities;
 using ChatMe.DataAccess.Interfaces;
 using ChatMe.Web.Controllers.Abstract;
@@ -16,26 +19,21 @@ namespace ChatMe.Web.Controllers
     [RoutePrefix("api/dialogs")]
     public class DialogController : IdentityController
     {
-        private IUnitOfWork unitOfWork;
+        private IDialogService dialogService;
 
-        public DialogController(IUnitOfWork uow) {
-            unitOfWork = uow;
+        public DialogController(IDialogService dialogService) {
+            this.dialogService = dialogService;
         }
 
         [HttpGet]
         [Route("")]
         public ActionResult GetAll(int startIndex = 0, int count = 0) {
-            var me = UserManager.FindById(User.Identity.GetUserId());
-            var dialogs = me.Dialogs
-                .OrderByDescending(d => (d.LastMessageTime.HasValue ? d.LastMessageTime : d.CreateTime))
-                .Skip(startIndex)
-                .Select(d => new DialogViewModel(d, me) {
+            var userId = User.Identity.GetUserId();
+            var dialogsData = dialogService.GetChunk(UserManager, userId, startIndex, count);
+            var dialogs = dialogsData
+                .Select(d => new DialogViewModel(d) {
                     AvatarUrl = Url.Action("GetAvatar", "User", new { id = "todo" })
                 });
-
-            if (count != 0) {
-                dialogs = dialogs.Take(count);
-            }
 
             return Json(dialogs.ToList(), JsonRequestBehavior.AllowGet);
         }
@@ -43,24 +41,16 @@ namespace ChatMe.Web.Controllers
         [HttpPost]
         [Route("")]
         public void Post(NewDialogViewModel dialogModel) {
-            var users = dialogModel.UserIds
-                .Select(id => unitOfWork.Users.Get(id))
-                .ToList();
+            Mapper.Initialize(cfg => cfg.CreateMap<NewDialogViewModel, NewDialogDTO>());
+            var newDialogData = Mapper.Map<NewDialogDTO>(dialogModel);
 
-            var newDialog = new Dialog {
-                Users = users,
-                CreateTime = DateTime.Now
-            };
-
-            unitOfWork.Dialogs.Create(newDialog);
-            unitOfWork.Save();
+            dialogService.Create(newDialogData);
         }
 
         [HttpDelete]
         [Route("")]
         public void Delete(int dialogId) {
-            unitOfWork.Dialogs.Delete(dialogId);
-            unitOfWork.Save();
+            dialogService.Delete(dialogId);
         }
     }
 }

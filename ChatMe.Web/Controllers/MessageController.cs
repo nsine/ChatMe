@@ -10,62 +10,50 @@ using ChatMe.DataAccess.Interfaces;
 using ChatMe.Web.Models;
 using ChatMe.DataAccess.EF;
 using ChatMe.DataAccess.Repositories;
+using ChatMe.Web.Controllers.Abstract;
+using ChatMe.BussinessLogic.DTO;
+using ChatMe.BussinessLogic.Services.Abstract;
+using System.Threading.Tasks;
+using AutoMapper;
 
 namespace ChatMe.Web.Controllers
 {
     [RoutePrefix("api/messages")]
-    public class MessageController : Controller
+    public class MessageController : IdentityController
     {
-        private AppUserManager UserManager {
-            get {
-                return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
-            }
-        }
+        private IMessageService messageService;
 
+        public MessageController(IMessageService messageService) {
+            this.messageService = messageService;
+        }
 
         [HttpGet]
         [Route("{dialogId}")]
         public ActionResult GetList(int dialogId, int startIndex = 0, int count = 0) {
-            IUnitOfWork unitOfWork = new EFUnitOfWork();
-            var me = UserManager.FindById(User.Identity.GetUserId());
-            var dialog = unitOfWork.Dialogs.Get(dialogId);
-            var messages = dialog.Messages
-                .OrderByDescending(m => m.Time)
-                .Skip(startIndex)
-                .Select(m => new MessageViewModel {
-                    Id = m.Id,
-                    Body = m.Body,
-                    Time = m.Time,
-                    AuthorAvatarUrl = Url.Action("GetAvatar", "User", new { id = m.User.Id }),
-                    Author = m.User.DisplayName,
-                    IsMy = m.User.Id == User.Identity.GetUserId()
-                });
+            var userId = User.Identity.GetUserId();
+            var messagesData = messageService.GetChunk(userId, dialogId, startIndex, count);
 
-            if (count != 0) {
-                messages = messages.Take(count);
-            }
+            Mapper.Initialize(cfg => cfg.CreateMap<MessageDTO, MessageViewModel>()
+                .ForMember("AuthorAvatarUrl", opt => opt.MapFrom(m =>
+                    Url.Action("GetAvatar", "User", new { id = m.AuthorId }))
+                )
+            );
+
+            var messages = Mapper.Map<IEnumerable<MessageViewModel>>(messagesData);
             
             return Json(messages.ToList(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         [Route("{dialogId}")]
-        public void New(int dialogId, NewMessageViewModel messageModel) {
-            var db = HttpContext.GetOwinContext().Get<ChatMeContext>();
-            var id = User.Identity.GetUserId();
-
-            var me = UserManager.FindById(User.Identity.GetUserId());
-            var newMessage = new Message {
-                Body = messageModel.Body,
-                User = me,
-                Time = DateTime.Now,
-                Dialog = db.Dialogs.Find(dialogId)
+        public async Task New(int dialogId, NewMessageViewModel newMessageModel) {
+            var newMessageData = new NewMessageDTO {
+                UserId = User.Identity.GetUserId(),
+                DialogId = dialogId,
+                Body = newMessageModel.Body
             };
 
-            // Fix this shit
-
-            db.Messages.Add(newMessage);
-            db.SaveChanges();
+            await messageService.Create(newMessageData);
         }
     }
 }

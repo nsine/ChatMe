@@ -10,6 +10,7 @@ namespace ChatMe.BussinessLogic.DTO
     {
         public int Id { get; set; }
         public string LastMessage { get; set; }
-        public UserInfoDTO UserInfo { get; set; }
+        public string LastMessageAuthor { get; set; }
+        public IEnumerable<UserInfoDTO> Users { get; set; }
     }
 }

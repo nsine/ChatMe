@@ -1,4 +1,6 @@
-﻿using ChatMe.BussinessLogic;
+﻿using AutoMapper;
+using ChatMe.BussinessLogic;
+using ChatMe.BussinessLogic.DTO;
 using ChatMe.DataAccess.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,15 +14,13 @@ namespace ChatMe.Web.Models
     {
         const int SNIPPET_LENGTH = 97;
 
-        public DialogViewModel(Dialog rowDialog, User me) {
-            var authors = rowDialog.Users
-                    .Where(u => u.Id != me.Id)
+        public DialogViewModel(DialogPreviewDTO dialogData) {
+            var authors = dialogData.Users
                     .Select(u => u.UserName);
             var authorString = string.Join(", ", authors);
-            var lastMessage = rowDialog.Messages
-                .OrderByDescending(m => m.Time)
-                .FirstOrDefault();
-            var lastAuthor = lastMessage?.User.DisplayName;
+            var lastAuthor = dialogData.LastMessageAuthor;
+            var lastMessage = dialogData.LastMessage;
+
             var msgSnippet = new StringBuilder();
 
             if (lastMessage == null) {
@@ -28,15 +28,15 @@ namespace ChatMe.Web.Models
             } else {
                 msgSnippet.Append($"{lastAuthor}: ");
                 if (msgSnippet.Length > 100) {
-                    msgSnippet.Append(lastMessage.Body.Substring(0, SNIPPET_LENGTH) + "...");
+                    msgSnippet.Append(lastMessage.Substring(0, SNIPPET_LENGTH) + "...");
                 } else {
-                    msgSnippet.Append(lastMessage.Body);
+                    msgSnippet.Append(lastMessage);
                 }
             }
 
             Author = authorString;
             LastMessageSnippet = msgSnippet.ToString();
-            Id = rowDialog.Id;
+            Id = dialogData.Id;
         }
 
         public int Id { get; set; }

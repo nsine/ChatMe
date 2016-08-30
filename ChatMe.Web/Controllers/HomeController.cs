@@ -9,13 +9,6 @@ namespace ChatMe.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IUnitOfWork unitOfWork;
-
-        public HomeController(IUnitOfWork uow)
-        {
-            unitOfWork = uow;
-        }
-
         public ActionResult Index()
         {
             return RedirectToAction("Index", "User");

@@ -6,8 +6,10 @@
                 ng-focus="ctrl.activateForm()" ng-blur="ctrl.deactivateForm($event)"
                 class="form-control" placeholder="What's new?"></textarea>
         </div>
-        <button ng-if="ctrl.isSendBtnVisible" ng-click="ctrl.sendPost()"
-            id="send-post-btn" type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-group">
+            <button ng-if="ctrl.isSendBtnVisible" ng-click="ctrl.sendPost()"
+                id="send-post-btn" type="submit" class="btn btn-primary">Submit</button>
+        </div>
     </form>
 </div>
 

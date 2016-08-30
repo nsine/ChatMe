@@ -1,4 +1,5 @@
-﻿using ChatMe.DataAccess.Entities;
+﻿using ChatMe.BussinessLogic.DTO;
+using ChatMe.DataAccess.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace ChatMe.BussinessLogic
+namespace ChatMe.BussinessLogic.Services
 {
-    public static class AvatarManager
+    public class AvatarService
     {
-        public static AvatarInfo GetPath(User user, Func<string, string> pathResolver) {
+        public AvatarInfo GetPath(User user, Func<string, string> pathResolver) {
             var fileName = "default";
             var mimeType = "image/png";
 

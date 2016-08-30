@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace ChatMe.BussinessLogic.Services.Abstract
 {
-    public interface IDialogService
+    public interface IPostService
     {
-        IEnumerable<DialogPreviewDTO> GetChunk(AppUserManager userManager, string userId, int startIndex, int chunkSize);
-        Task<bool> Create(NewDialogDTO data);
+        IEnumerable<PostDTO> GetChunk(string userId, int startIndex, int chunkSize);
+        PostDTO Get(string userId, int postId);
+        Task<bool> Create(NewPostDTO data);
         Task<bool> Delete(int dialogId);
+        Task<bool> Update(NewPostDTO data, int postId);
     }
 }
