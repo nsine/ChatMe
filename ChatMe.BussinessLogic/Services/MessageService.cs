@@ -18,7 +18,7 @@ namespace ChatMe.BussinessLogic.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> Create(NewMessageDTO newMessageData) {
+        public async Task<MessageDTO> Create(NewMessageDTO newMessageData) {
             var newMessage = new Message {
                 Body = newMessageData.Body,
                 UserId = newMessageData.UserId,
@@ -26,9 +26,15 @@ namespace ChatMe.BussinessLogic.Services
                 DialogId = newMessageData.DialogId
             };
 
-            unitOfWork.Messages.Create(newMessage);
+            var message = unitOfWork.Messages.Create(newMessage);
             await unitOfWork.SaveAsync();
-            return true;
+            return new MessageDTO {
+                Id = message.Id,
+                Body = message.Body,
+                Time = message.Time,
+                AuthorId = message.User.Id,
+                Author = message.User.DisplayName
+            };
         }
 
         public IEnumerable<MessageDTO> GetChunk(string userId, int dialogId, int startIndex, int chunkSize) {

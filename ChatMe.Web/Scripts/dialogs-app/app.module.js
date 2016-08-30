@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('dialogsApp', []);
+    angular.module('dialogsApp', ['SignalR']);
 
     angular.module('dialogsApp')
         .constant('dialogsApiPath', '/api/dialogs')

@@ -5,8 +5,8 @@
         .module('dialogsApp')
         .service('messagesService', messagesService);
 
-    messagesService.$inject = ['messagesApi', 'dialogsService', 'openedDialogService', '$rootScope'];
-    function messagesService(messagesApi, dialogsService, openedDialogService, $rootScope) {
+    messagesService.$inject = ['messagesApi', 'dialogsService', 'openedDialogService', '$rootScope', 'Hub'];
+    function messagesService(messagesApi, dialogsService, openedDialogService, $rootScope, Hub) {
         var self = this;
 
         var loadedMessagesCount = 0;
@@ -23,6 +23,17 @@
         }, function () {
             openDialog();
         });
+
+        var hub = new Hub('ChatHub', {
+            listeners: {
+                addMessage: function (messageData) {
+                    console.log(messageData);
+                    self.messages.unshift(messageData);
+                }
+            },
+
+            methods: ['Send']
+        })
 
         ////////////////
 
@@ -42,15 +53,7 @@
         }
 
         function sendMessage(message) {
-            messagesApi.create(openedDialogService.id, message)
-                .then(function (response) {
-                    console.log(response);
-                    var newMessage = messagesApi.get(openedDialogService.id, 0, 1);
-                    if (newMessage !== null && newMessage.length == 1) {
-                        messages.unshift(newMessage);
-                        self.loadedMessagesCount++;
-                    }
-                });
+            hub.Send(openedDialogService.id, message);
         }
     }
 })();

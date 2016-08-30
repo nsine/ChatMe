@@ -22,6 +22,8 @@ namespace ChatMe
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
             });
+
+            app.MapSignalR();
         }
     }
 }

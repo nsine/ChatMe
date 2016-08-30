@@ -11,6 +11,6 @@ namespace ChatMe.BussinessLogic.Services.Abstract
     public interface IMessageService
     {
         IEnumerable<MessageDTO> GetChunk(string userId, int dialogId, int startIndex, int chunkSize);
-        Task<bool> Create(NewMessageDTO newMessageData);
+        Task<MessageDTO> Create(NewMessageDTO newMessageData);
     }
 }
