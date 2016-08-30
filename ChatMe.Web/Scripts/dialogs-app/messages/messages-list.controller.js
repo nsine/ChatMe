@@ -15,9 +15,17 @@
 
         self.getMessageClass = function (msg) {
             if (msg.isMy) {
-                return 'self';
+                return 'right';
             } else {
-                return 'other';
+                return 'left';
+            }
+        }
+
+        self.getAvatarClass = function (msg) {
+            if (msg.isMy) {
+                return 'pull-right';
+            } else {
+                return 'pull-left';
             }
         }
 
@@ -34,8 +42,8 @@
         ////////////////
 
         function activate() {
-            var chat = $('.messages-list');
-            chat.scrollTop(chat[0].scrollHeight);
+            // var chat = $('.messages-list');
+            // chat.scrollTop(chat[0].scrollHeight);
         }
 
         function isToday(time) {

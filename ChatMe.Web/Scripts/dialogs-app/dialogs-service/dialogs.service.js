@@ -8,7 +8,7 @@
     dialogsService.$inject = ['dialogsApi', '$rootScope'];
     function dialogsService(dialogsApi, $rootScope) {
         var self = this;
-        var loadSize = 50;
+        var loadSize = 0;
         var loadedDialogs = 0;
 
         self.dialogs = [];

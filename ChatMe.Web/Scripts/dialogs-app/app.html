@@ -1,52 +1,62 @@
-<div class="row" ng-controller="DialogsListController as listCtrl">
-    <div class="col-sm-3">
-        <div class="dialogs-list">
-            <div ng-repeat="dialog in listCtrl.dialogsService.dialogs"
-                ng-click="listCtrl.openDialog(dialog)" class="dialog-preview">
-                <div class="row" ng-class="{ 'panel-primary': dialog.selected}">
-                    <div>
-                        <img src="{{dialog.avatarUrl}}" alt="" class="col-xs-3 img-responsive">
-                    </div>
-                    <div>
-                        <strong><em>{{ dialog.author }}</em></strong>
-                    </div>
-                    <div>
-                        {{ dialog.lastMessageSnippet }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-offset-1 col-sm-6">
-        <div ng-if="!listCtrl.isDialogOpened()" class="dialog-window">
-            <div class="vertical-align">
-                Select dialog
-            </div>
-        </div>
+<div class="container bootstrap snippet">
+    <div ng-controller="DialogsListController as listCtrl" class="row">
+		<div class="col-md-4 bg-white dialog-window">
+            <!-- =============================================================== -->
+            <!-- member list -->
+            <ul class="friend-list">
+                <li ng-repeat="dialog in listCtrl.dialogsService.dialogs"
+                    ng-click="listCtrl.openDialog(dialog)" ng-class="{ active: dialog.selected }"
+                    class=" bounceInDown">
+                	<a href="#" class="clearfix">
+                		<img src="{{dialog.avatarUrl}}" alt="" class="img-circle">
+                		<div class="friend-name">
+                			<strong>{{ dialog.author }}</strong>
+                		</div>
+                		<div class="last-message text-muted">{{ dialog.lastMessageSnippet }}</div>
+                		<!--<small class="time text-muted">Just now</small>
+                		<small class="chat-alert label label-danger">1</small>-->
+                	</a>
+                </li>
+            </ul>
+		</div>
 
-        <div ng-if="listCtrl.isDialogOpened()" class="dialog-window">
-            <div ng-controller="MessagesListController as msgCtrl" class="messages-list">
-                <ol class="discussion">
-                    <li ng-repeat="msg in msgCtrl.messagesService.messages | reverse" ng-class="msgCtrl.getMessageClass(msg)">
-                        <div class="avatar">
-                            <img src="{{msg.avatarUrl}}" />
-                        </div>
-                        <div class="messages">
-                            <p>{{ msg.body }}</p>
-                            <time>{{ msgCtrl.prettyTime(msg.time) }}</time>
-                        </div>
-                    </li>
-                    <li id="bottom"></li>
-                </ol>
+        <!--=========================================================-->
+        <!-- selected chat -->
+    	<div class="col-md-6">
+            <div ng-if="!listCtrl.isDialogOpened()">
+                lalka
             </div>
-            <div ng-controller="NewMessageController as newCtrl" class="new-message-form">
-                <div class="form-group">
-                    <textarea ng-model="newCtrl.body" rows="5" class="form-control"></textarea>
+            <div ng-if="listCtrl.isDialogOpened()">
+                <div ng-controller="MessagesListController as msgCtrl" class="chat-message">
+                    <ul class="chat">
+                        <li ng-repeat="msg in msgCtrl.messagesService.messages | reverse"
+                            ng-class="msgCtrl.getMessageClass(msg)" class="clearfix">
+                        	<span ng-class="msgCtrl.getAvatarClass(msg)" class="chat-img">
+                        		<img src="{{msg.avatarUrl}}" alt="User Avatar">
+                        	</span>
+                        	<div class="chat-body clearfix">
+                        		<div class="header">
+                        			<strong class="primary-font">{{ msg.author }}</strong>
+                        			<small class="pull-right text-muted"><i class="fa fa-clock-o"></i> {{ msgCtrl.prettyTime(msg.time) }}</small>
+                        		</div>
+                        		<p>
+                        			{{ msg.body }}
+                        		</p>
+                        	</div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="form-group">
-                    <button ng-click="newCtrl.send()" ng-disabled="!newCtrl.isSendBtnActive" class="btn btn-primary">Send</button>
+                <div ng-controller="NewMessageController as newCtrl" class="chat-box bg-white col-md-6">
+                	<div class="input-group">
+                		<input ng-model="newCtrl.body" class="form-control border no-shadow no-rounded"
+                            placeholder="Type your message here">
+                		<span class="input-group-btn">
+                			<button ng-click="newCtrl.send()" ng-disabled="!newCtrl.isSendBtnActive()"
+                                class="btn btn-success no-rounded" type="button">Send</button>
+                		</span>
+                	</div><!-- /input-group -->
                 </div>
             </div>
-        </div>
-    </div>
+		</div>
+	</div>
 </div>

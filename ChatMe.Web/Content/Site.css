@@ -1,5 +1,10 @@
 ﻿ body {
     overflow-x: hidden;
+    
+ }
+
+ html {
+     background: #f9f9f9;
  }
 
 /* Toggle Styles */
@@ -39,6 +44,7 @@
     width: 100%;
     position: absolute;
     padding: 15px;
+    background: #f9f9f9;
 }
 
 #wrapper.toggled #page-content-wrapper {

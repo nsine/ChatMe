@@ -10,7 +10,7 @@
         var self = this;
 
         var loadedMessagesCount = 0;
-        var chunkSize = 50;
+        var chunkSize = 0;
 
         self.messages = [];
 

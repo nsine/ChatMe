@@ -8,7 +8,7 @@
     postsService.$inject = ['$http', 'postsApi', '$rootScope'];
     function postsService($http, postsApi, $rootScope) {
         var self = this;
-        var loadSize = 10;
+        var loadSize = 0;
         var loadedPosts = 0;
 
         self.posts = [];
