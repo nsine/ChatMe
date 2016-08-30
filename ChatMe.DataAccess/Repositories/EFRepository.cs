@@ -18,8 +18,8 @@ namespace ChatMe.DataAccess.Repositories
             this.db = db;
         }
 
-        public void Create(T item) {
-            db.Set<T>().Add(item);
+        public T Create(T item) {
+            return db.Set<T>().Add(item);
         }
 
         public void Delete(object id) {

@@ -34,9 +34,6 @@
         ////////////////
 
         function activate() {
-            console.log(self.dialogId);
-            messagesService.openDialog();
-
             var chat = $('.messages-list');
             chat.scrollTop(chat[0].scrollHeight);
         }

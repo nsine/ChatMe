@@ -14,8 +14,13 @@
             <div class="panel panel-default col-sm-4 col-with-margin">
                 <div class="row vertical-center">
                     <img src="@Url.Action("GetAvatar", "User", new { id = user.Id })" alt="" class="col-xs-4 img-responsive">
-                    <div class="col-xs-8">
+                    <div class="col-xs-6">
                         <span>@user.DisplayName</span>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="@Url.Action("NewDialog", "Dialog", new { userId = user.Id })" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-comment"></span>
+                        </a>
                     </div>
                 </div>
             </div>

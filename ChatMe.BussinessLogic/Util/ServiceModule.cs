@@ -1,4 +1,5 @@
-﻿using ChatMe.DataAccess.Interfaces;
+﻿using ChatMe.BussinessLogic.Services.Abstract;
+using ChatMe.DataAccess.Interfaces;
 using ChatMe.DataAccess.Repositories;
 using Ninject.Modules;
 using System;
@@ -14,6 +15,7 @@ namespace ChatMe.BussinessLogic.Util
         public override void Load()
         {
             Bind<IUnitOfWork>().To<EFUnitOfWork>();
+            Bind<IUserService>().To<IUserService>();
         }
     }
 }

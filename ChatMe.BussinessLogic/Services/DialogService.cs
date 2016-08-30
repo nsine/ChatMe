@@ -21,7 +21,7 @@ namespace ChatMe.BussinessLogic.Services
             this.userService = userService;
         }
 
-        public async Task<bool> Create(NewDialogDTO data) {
+        public async Task<int> Create(NewDialogDTO data) {
             var users = data.UserIds
                 .Select(id => unitOfWork.Users.Get(id))
                 .ToList();
@@ -31,9 +31,9 @@ namespace ChatMe.BussinessLogic.Services
                 CreateTime = DateTime.Now
             };
 
-            unitOfWork.Dialogs.Create(newDialog);
+            var dialog = unitOfWork.Dialogs.Create(newDialog);
             await unitOfWork.SaveAsync();
-            return true;
+            return dialog.Id;
         }
 
         public async Task<bool> Delete(int dialogId) {
@@ -52,11 +52,11 @@ namespace ChatMe.BussinessLogic.Services
                     LastMessage = d.Messages
                         .OrderByDescending(m => m.Time)
                         .FirstOrDefault()
-                        .Body,
+                        ?.Body,
                     LastMessageAuthor = userService.GetUserDisplayName(d.Messages
                         .OrderByDescending(m => m.Time)
                         .FirstOrDefault()
-                        .User),
+                        ?.User),
                     Users = d.Users
                         .Where(u => u.Id != userId)
                         .Select(u => new UserInfoDTO {
@@ -73,6 +73,17 @@ namespace ChatMe.BussinessLogic.Services
             }
 
             return dialogs;
+        }
+
+        public int GetIdByMembers(IEnumerable<string> userIds) {
+            var matchedDialogs = unitOfWork.Dialogs.Find(d => d.Users
+                .Select(u => u.Id)
+                .SequenceEqual(userIds));
+            if (matchedDialogs.Count() == 0) {
+                return -1;
+            } else {
+                return matchedDialogs.First().Id;
+            }
         }
     }
 }

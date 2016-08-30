@@ -9,7 +9,7 @@ namespace ChatMe.DataAccess.Interfaces
         IQueryable<T> GetAll();
         T Get(object id);
         IQueryable<T> Find(Func<T, Boolean> predicate);
-        void Create(T item);
+        T Create(T item);
         void Update(T item);
         void Delete(object id);
     }

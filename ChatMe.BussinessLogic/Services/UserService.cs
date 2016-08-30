@@ -35,6 +35,10 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public string GetUserDisplayName(User user) {
+            if (user == null) {
+                return "Empty";
+            }
+
             if (user.UserInfo.FirstName != null && user.UserInfo.LastName != null) {
                 return $"{user.UserInfo.FirstName} {user.UserInfo.LastName}";
             } else {

@@ -18,10 +18,17 @@
         self.loadNextMessages = loadNextMessages;
         self.sendMessage = sendMessage;
 
+        $rootScope.$watch(function () {
+            return openedDialogService.id;
+        }, function () {
+            openDialog();
+        });
+
         ////////////////
 
         function openDialog() {
             self.messages = [];
+            loadedMessagesCount = 0;
             loadNextMessages();
         }
 
