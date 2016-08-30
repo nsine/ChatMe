@@ -47,7 +47,7 @@ namespace ChatMe.BussinessLogic.Services
                 AuthorId = rawPost.UserId,
                 Body = rawPost.Body,
                 Id = rawPost.Id,
-                Likes = 0,
+                Likes = rawPost.Likes.Count,
                 Time = rawPost.Time
             };
         }
@@ -61,7 +61,7 @@ namespace ChatMe.BussinessLogic.Services
                     Id = p.Id,
                     Body = p.Body,
                     Time = p.Time,
-                    Likes = 0,
+                    Likes = p.Likes.Count,
                     Author = userService.GetUserDisplayName(p.User),
                     AuthorId = p.UserId
                 });

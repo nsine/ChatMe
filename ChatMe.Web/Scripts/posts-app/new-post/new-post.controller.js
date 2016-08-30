@@ -5,10 +5,11 @@
         .module('postsApp')
         .controller('NewPostController', NewPostController);
 
-    NewPostController.$inject = ['postsService', '$timeout'];
-    function NewPostController(postsService, $timeout) {
+    NewPostController.$inject = ['postsService', '$timeout', 'userInfo'];
+    function NewPostController(postsService, $timeout, userInfo) {
         var self = this;
 
+        self.isMyPage = userInfo.isOwner;
         self.postBody = "";
         self.isSendBtnVisible = false;
         self.textRows = 1;

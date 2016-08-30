@@ -15,6 +15,7 @@
 
         self.loadPosts = loadPosts;
         self.newPost = newPost;
+        self.changeLike = changeLike;
 
         ////////////////
         function loadPosts() {
@@ -34,6 +35,16 @@
                     loadPosts();
                     $rootScope.$apply();
                 })
+        }
+
+        function changeLike(post) {
+            postsApi.likePost(post.id)
+                .then(function () {
+                    postsApi.getPost(post.id)
+                        .then(function (data) {
+                            post.likes = data.likes;
+                        });
+                });
         }
     }
 })();

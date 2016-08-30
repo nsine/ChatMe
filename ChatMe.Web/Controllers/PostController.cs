@@ -45,7 +45,7 @@ namespace ChatMe.Web.Controllers
 
         [HttpGet]
         [Route("{userId}/{postId}")]
-        public PostViewModel Get(string userId, int postId) {
+        public ActionResult Get(string userId, int postId) {
             var postData = postService.Get(userId, postId);
 
             Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, PostViewModel>()
@@ -57,7 +57,7 @@ namespace ChatMe.Web.Controllers
                 )
             );
 
-            return Mapper.Map<PostViewModel>(postData);
+            return Json(Mapper.Map<PostViewModel>(postData), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

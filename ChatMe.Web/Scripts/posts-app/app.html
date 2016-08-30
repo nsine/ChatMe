@@ -1,6 +1,6 @@
 <div ng-controller="NewPostController as ctrl">
 
-    <form role="form">
+    <form ng-if="ctrl.isMyPage" role="form">
         <div class="form-group">
             <textarea ng-model="ctrl.postBody" ng-attr-rows="{{ ctrl.textRows }}"
                 ng-focus="ctrl.activateForm()" ng-blur="ctrl.deactivateForm($event)"
@@ -34,6 +34,7 @@
                     <div class="col-xs-2">
                         <span>{{ post.likes }} likes</span>
                     </div>
+                    <button ng-click="ctrl.changeLike(post)">Like</button>
                 </div>
             </div>
             <div class="panel-body">

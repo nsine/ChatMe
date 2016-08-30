@@ -70,7 +70,7 @@ namespace ChatMe.BussinessLogic.Services
                     AuthorId = p.UserId,
                     Body = p.Body,
                     Id = p.Id,
-                    Likes = 0,
+                    Likes = p.Likes.Count,
                     Time = p.Time
                 }),
                 IsOwner = user.Id == me.Id

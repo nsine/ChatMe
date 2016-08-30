@@ -92,6 +92,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\AvatarInfo.cs" />
+    <Compile Include="DTO\LikedPostDTO.cs" />
+    <Compile Include="Services\Abstract\IActivityService.cs" />
     <Compile Include="Services\AvatarService.cs" />
     <Compile Include="DTO\DialogPreviewDTO.cs" />
     <Compile Include="DTO\LoginDTO.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="DTO\RegistrationInfoDTO.cs" />
     <Compile Include="DTO\ChangingSettingsResult.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\ActivityService.cs" />
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\PostService.cs" />
     <Compile Include="Services\UserService.cs" />

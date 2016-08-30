@@ -10,6 +10,7 @@ namespace ChatMe.DataAccess.Interfaces
         IRepository<Message> Messages { get; }
         IRepository<Dialog> Dialogs { get; }
         IRepository<Post> Posts { get; }
+        IRepository<Like> Likes { get; }
 
         void Save();
         Task SaveAsync();

@@ -18,6 +18,10 @@
             // return post.date;
         };
 
+        self.changeLike = function (post) {
+            postsService.changeLike(post);
+        }
+
         activate();
 
         ////////////////
