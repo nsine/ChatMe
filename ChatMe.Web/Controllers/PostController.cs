@@ -28,7 +28,7 @@ namespace ChatMe.Web.Controllers
         [HttpGet]
         [Route("{userId}")]
         public ActionResult GetAll(string userId, int startIndex = 0, int count = 0) {
-            var postsData = postService.GetChunk(userId, startIndex, count);
+            var postsData = postService.GetChunk(userId, User.Identity.GetUserId(), startIndex, count);
             Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, PostViewModel>()
                 .ForMember("AvatarUrl", opt => opt.MapFrom(p =>
                     Url.Action("GetAvatar", "User", new { id = p.AuthorId }))
@@ -46,7 +46,7 @@ namespace ChatMe.Web.Controllers
         [HttpGet]
         [Route("{userId}/{postId}")]
         public ActionResult Get(string userId, int postId) {
-            var postData = postService.Get(userId, postId);
+            var postData = postService.Get(userId, User.Identity.GetUserId(), postId);
 
             Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, PostViewModel>()
                 .ForMember("AvatarUrl", opt => opt.MapFrom(p =>

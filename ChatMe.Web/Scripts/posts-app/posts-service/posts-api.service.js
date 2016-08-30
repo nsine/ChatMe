@@ -30,7 +30,8 @@
                             likes: rawPost.Likes,
                             avatarUrl: rawPost.AvatarUrl,
                             author: rawPost.Author,
-                            authorLink: rawPost.AuthorLink
+                            authorLink: rawPost.AuthorLink,
+                            isLikedByMe: rawPost.IsLikedByMe
                         };
 
                         return post;
@@ -50,7 +51,8 @@
                         likes: rawPost.Likes,
                         avatarUrl: rawPost.AvatarUrl,
                         author: rawPost.Author,
-                        authorLink: rawPost.AuthorLink
+                        authorLink: rawPost.AuthorLink,
+                        isLikedByMe: rawPost.IsLikedByMe
                     };
 
                     return post;

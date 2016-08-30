@@ -65,14 +65,6 @@ namespace ChatMe.BussinessLogic.Services
                 Skype = user.UserInfo.Skype,
                 AboutMe = user.UserInfo.AboutMe,
                 AvatarFilename = user.UserInfo.AvatarFilename,
-                Posts = user.Posts.Select(p => new PostDTO {
-                    Author = GetUserDisplayName(p.User),
-                    AuthorId = p.UserId,
-                    Body = p.Body,
-                    Id = p.Id,
-                    Likes = p.Likes.Count,
-                    Time = p.Time
-                }),
                 IsOwner = user.Id == me.Id
             };
 

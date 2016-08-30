@@ -15,10 +15,12 @@ namespace ChatMe.BussinessLogic.Services
 
         private IUnitOfWork unitOfWork;
         private IUserService userService;
+        private IActivityService activityService;
 
-        public PostService(IUnitOfWork unitOfWork, IUserService userService) {
+        public PostService(IUnitOfWork unitOfWork, IUserService userService, IActivityService activityService) {
             this.unitOfWork = unitOfWork;
             this.userService = userService;
+            this.activityService = activityService;
         }
 
         public async Task<bool> Create(NewPostDTO data) {
@@ -37,7 +39,7 @@ namespace ChatMe.BussinessLogic.Services
             throw new NotImplementedException();
         }
 
-        public PostDTO Get(string userId, int postId) {
+        public PostDTO Get(string userId, string currentUserId, int postId) {
             var rawPost = unitOfWork.Users
                 .Get(userId).Posts
                 .Where(p => p.Id == postId)
@@ -48,11 +50,15 @@ namespace ChatMe.BussinessLogic.Services
                 Body = rawPost.Body,
                 Id = rawPost.Id,
                 Likes = rawPost.Likes.Count,
-                Time = rawPost.Time
+                Time = rawPost.Time,
+                IsLikedByMe = activityService.IsLiked(new LikedPostDTO {
+                    PostId = rawPost.Id,
+                    UserId = currentUserId
+                })
             };
         }
 
-        public IEnumerable<PostDTO> GetChunk(string userId, int startIndex, int chunkSize) {
+        public IEnumerable<PostDTO> GetChunk(string userId, string currentUserId, int startIndex, int chunkSize) {
             var user = unitOfWork.Users.Get(userId);
             var posts = user.Posts
                 .OrderByDescending(p => p.Time)
@@ -63,7 +69,11 @@ namespace ChatMe.BussinessLogic.Services
                     Time = p.Time,
                     Likes = p.Likes.Count,
                     Author = userService.GetUserDisplayName(p.User),
-                    AuthorId = p.UserId
+                    AuthorId = p.UserId,
+                    IsLikedByMe = activityService.IsLiked(new LikedPostDTO {
+                        PostId = p.Id,
+                        UserId = currentUserId
+                    })
                 });
 
             if (chunkSize != 0) {

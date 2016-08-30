@@ -32,9 +32,12 @@
                         </div>
                     </div>
                     <div class="col-xs-2">
-                        <span>{{ post.likes }} likes</span>
+                        <button ng-click="ctrl.changeLike(post)" class="btn btn-danger">
+                            <span ng-if="!post.isLikedByMe" class="glyphicon glyphicon-heart-empty"></span>
+                            <span ng-if="post.isLikedByMe" class="glyphicon glyphicon-heart"></span>
+                            {{ post.likes }}
+                        </button>
                     </div>
-                    <button ng-click="ctrl.changeLike(post)">Like</button>
                 </div>
             </div>
             <div class="panel-body">

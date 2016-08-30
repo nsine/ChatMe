@@ -43,6 +43,7 @@
                     postsApi.getPost(post.id)
                         .then(function (data) {
                             post.likes = data.likes;
+                            post.isLikedByMe = data.isLikedByMe
                         });
                 });
         }

@@ -1,4 +1,5 @@
-﻿using ChatMe.BussinessLogic.Services.Abstract;
+﻿using ChatMe.BussinessLogic.Services;
+using ChatMe.BussinessLogic.Services.Abstract;
 using ChatMe.DataAccess.Interfaces;
 using ChatMe.DataAccess.Repositories;
 using Ninject.Modules;
@@ -16,6 +17,7 @@ namespace ChatMe.BussinessLogic.Util
         {
             Bind<IUnitOfWork>().To<EFUnitOfWork>();
             Bind<IUserService>().To<IUserService>();
+            Bind<IActivityService>().To<ActivityService>();
         }
     }
 }
