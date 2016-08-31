@@ -231,6 +231,7 @@
     <Content Include="Scripts\posts-app\posts-list\posts-list.controller.js" />
     <Content Include="Scripts\posts-app\posts-service\posts-api.service.js" />
     <Content Include="Scripts\posts-app\posts-service\posts.service.js" />
+    <Content Include="Scripts\scrollglue.js" />
     <Content Include="Scripts\signalr-hub.js" />
     <Content Include="Scripts\User\settings.js" />
     <Content Include="Web.config" />

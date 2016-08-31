@@ -32,15 +32,22 @@
         }
 
         function parseRawData(rawData) {
-            return {
+            var result = {
                 id: rawData.Id,
                 body: rawData.Body,
-                time: new Date(parseInt(rawData.Time.replace("/Date(", "").replace(")/",""), 10)),
                 avatarUrl: rawData.AuthorAvatarUrl,
                 author: rawData.Author,
                 authorId: rawData.AuthorId,
                 isMy: rawData.AuthorId == initInfo.userId
             };
+
+            if (isNaN(Date.parse(rawData.Time))) {
+                result.time =new Date(parseInt(rawData.Time.replace("/Date(", "").replace(")/",""), 10));
+            } else {
+                result.time = new Date(Date.parse(rawData.Time));
+            }
+
+            return result;
         }
     }
 })();

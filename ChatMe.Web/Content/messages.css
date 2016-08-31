@@ -1,12 +1,6 @@
-﻿.htmls {
-    background-color: #fff;
-}
-
-.friend-list {
+﻿.friend-list {
     list-style: none;
     margin-left: -40px;
-    position: fixed;
-    width: 30%;
 }
 
 .friend-list li {
@@ -64,9 +58,6 @@ small, .small {
     padding: 3px 5px;
 }
 
-.chat-message {
-    padding: 60px 20px 115px;
-}
 
 .chat {
     list-style: none;
@@ -75,6 +66,8 @@ small, .small {
 
 .chat-message {
     background: #f9f9f9;
+    padding-right: 50px;
+    padding-bottom: 15px;
 }
 
 .chat li img {
@@ -164,7 +157,8 @@ img {
 .chat-box {
     position: fixed;
     bottom: 0;
-    right: 0;
+    right: 13%;
+    width: 39%;
     padding: 15px;
     border-top: 1px solid #eee;
     transition: all .5s ease;
@@ -181,4 +175,13 @@ img {
 a:hover, a:active, a:focus {
     text-decoration: none;
     outline: 0;
+}
+
+.dialog-app-window {
+    position: relative;
+}
+
+[scroll-glue], [scroll-glue-bottom]{
+    height: 90vh;
+    overflow-y: scroll;
 }

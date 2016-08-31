@@ -22,12 +22,12 @@
 
         <!--=========================================================-->
         <!-- selected chat -->
-    	<div class="col-md-6">
+    	<div  class="col-md-8">
             <div ng-if="!listCtrl.isDialogOpened()">
                 lalka
             </div>
             <div ng-if="listCtrl.isDialogOpened()">
-                <div ng-controller="MessagesListController as msgCtrl" class="chat-message">
+                <div scroll-glue ng-controller="MessagesListController as msgCtrl" class="chat-message">
                     <ul class="chat">
                         <li ng-repeat="msg in msgCtrl.messagesService.messages | reverse"
                             ng-class="msgCtrl.getMessageClass(msg)" class="clearfix">

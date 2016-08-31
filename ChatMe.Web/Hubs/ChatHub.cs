@@ -14,6 +14,7 @@ using System.Web.Mvc;
 using System.IO;
 using System.Web.Routing;
 using ChatMe.BussinessLogic.Services;
+using System.Web.Helpers;
 
 namespace ChatMe.Web.Hubs
 {

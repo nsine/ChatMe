@@ -65,7 +65,7 @@ namespace ChatMe.Web.Controllers
         }
 
         public ActionResult AllUsers(int page = 1) {
-            const int pageSize = 3;
+            const int pageSize = 20;
             var allUsersData = userService.GetAll();
 
             var usersOnPageData = allUsersData

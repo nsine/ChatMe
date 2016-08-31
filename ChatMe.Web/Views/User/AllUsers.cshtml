@@ -28,6 +28,8 @@
     </div>
 </div>
 
-@if (Model.PageInfo.TotalPages > 1) {
-    @Html.PageLinks(Model.PageInfo, x => Url.Action("AllUsers", new { page = x }))
-}
+<div class="text-center">
+    @if (Model.PageInfo.TotalPages > 1) {
+        @Html.PageLinks(Model.PageInfo, x => Url.Action("AllUsers", new { page = x }))
+    }
+</div>
