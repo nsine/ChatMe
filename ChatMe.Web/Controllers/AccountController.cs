@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
-using ChatMe.Models;
 using Microsoft.AspNet.Identity;
 
 using ChatMe.Web.Models;

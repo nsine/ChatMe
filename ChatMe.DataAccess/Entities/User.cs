@@ -8,6 +8,9 @@ namespace ChatMe.DataAccess.Entities
 {
     public class User : IdentityUser
     {
+        [RegularExpression("^[a-z0-9_-]{3,16}$")]
+        public override string UserName { get; set; }
+
         [NotMapped]
         public string DisplayName {
             get {

@@ -24,15 +24,16 @@
             openDialog();
         });
 
-        var hub = new Hub('ChatHub', {
+        var hub = new Hub('chatHub', {
             listeners: {
                 addMessage: function (messageData) {
-                    console.log(messageData);
-                    self.messages.unshift(messageData);
+                    var message = messagesApi.parseRawData(messageData);
+                    self.messages.unshift(message);
+                    $rootScope.$apply();
                 }
             },
 
-            methods: ['Send']
+            methods: ['send']
         })
 
         ////////////////
@@ -53,7 +54,7 @@
         }
 
         function sendMessage(message) {
-            hub.Send(openedDialogService.id, message);
+            hub.send(openedDialogService.id, message);
         }
     }
 })();

@@ -1,5 +1,6 @@
 ﻿using ChatMe.DataAccess.Entities;
 using System;
+using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace ChatMe.DataAccess.Interfaces
@@ -11,6 +12,8 @@ namespace ChatMe.DataAccess.Interfaces
         IRepository<Dialog> Dialogs { get; }
         IRepository<Post> Posts { get; }
         IRepository<Like> Likes { get; }
+
+        DbContext GetDb();
 
         void Save();
         Task SaveAsync();

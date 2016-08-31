@@ -25,12 +25,12 @@ namespace ChatMe.Web.Controllers
     {
         private IUnitOfWork unitOfWork;
         private IUserService userService;
-        private AvatarService avatarService;
+        private IAvatarService avatarService;
 
-        public UserController(IUnitOfWork uow, IUserService userService) {
+        public UserController(IUnitOfWork uow, IUserService userService, IAvatarService avatarService) {
             unitOfWork = uow;
             this.userService = userService;
-            avatarService = new AvatarService();
+            this.avatarService = avatarService;
         }
 
         public ActionResult Index() {
@@ -56,7 +56,12 @@ namespace ChatMe.Web.Controllers
         }
 
         public ActionResult Messages(int? dialogId) {
-            return View(dialogId);
+            var viewModel = new DialogInitViewModel {
+                DialogId = dialogId,
+                UserId = User.Identity.GetUserId()
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult AllUsers(int page = 1) {
@@ -122,6 +127,7 @@ namespace ChatMe.Web.Controllers
             }
         }
 
+        [Route("avatar/{id}")]
         public ActionResult GetAvatar(string id) {
             var user = unitOfWork.Users.Get(id);
             var avatarInfo = avatarService.GetPath(user, Server.MapPath);

@@ -247,6 +247,7 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Models\ChatUser.cs" />
+    <Compile Include="Models\DialogInitViewModel.cs" />
     <Compile Include="Models\LikedPostViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\NewDialogViewModel.cs" />

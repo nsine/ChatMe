@@ -23,17 +23,20 @@ namespace ChatMe.BussinessLogic.Services
                 Body = newMessageData.Body,
                 UserId = newMessageData.UserId,
                 Time = DateTime.Now,
-                DialogId = newMessageData.DialogId
+                DialogId = newMessageData.DialogId,
+                User = unitOfWork.Users.Get(newMessageData.UserId)
             };
 
-            var message = unitOfWork.Messages.Create(newMessage);
+            unitOfWork.Messages.Create(newMessage);
             await unitOfWork.SaveAsync();
+
+            newMessage = unitOfWork.Messages.Get(newMessage.Id);
             return new MessageDTO {
-                Id = message.Id,
-                Body = message.Body,
-                Time = message.Time,
-                AuthorId = message.User.Id,
-                Author = message.User.DisplayName
+                Id = newMessage.Id,
+                Body = newMessage.Body,
+                Time = newMessage.Time,
+                AuthorId = newMessage.User.Id,
+                Author = newMessage.User.DisplayName
             };
         }
 
@@ -47,8 +50,7 @@ namespace ChatMe.BussinessLogic.Services
                     Body = m.Body,
                     Time = m.Time,
                     AuthorId = m.User.Id,
-                    Author = m.User.DisplayName,
-                    IsMy = m.User.Id == userId
+                    Author = m.User.DisplayName
                 });
 
             if (chunkSize != 0) {

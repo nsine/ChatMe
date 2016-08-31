@@ -39,6 +39,7 @@ namespace ChatMe.Util
             kernel.Bind<IMessageService>().To<MessageService>();
             kernel.Bind<IPostService>().To<PostService>();
             kernel.Bind<IActivityService>().To<ActivityService>();
+            kernel.Bind<IAvatarService>().To<AvatarService>();
         }
     }
 }

@@ -31,9 +31,9 @@ namespace ChatMe.BussinessLogic.Services
                 CreateTime = DateTime.Now
             };
 
-            var dialog = unitOfWork.Dialogs.Create(newDialog);
+            unitOfWork.Dialogs.Create(newDialog);
             await unitOfWork.SaveAsync();
-            return dialog.Id;
+            return newDialog.Id;
         }
 
         public async Task<bool> Delete(int dialogId) {

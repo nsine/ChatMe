@@ -5,8 +5,8 @@
         .module('dialogsApp')
         .controller('DialogsListController', DialogsListController);
 
-    DialogsListController.$inject = ['dialogsService', 'openedDialogService', 'dialogId'];
-    function DialogsListController(dialogsService, openedDialogService, dialogId) {
+    DialogsListController.$inject = ['dialogsService', 'openedDialogService', 'initInfo'];
+    function DialogsListController(dialogsService, openedDialogService, initInfo) {
         var self = this;
 
         self.dialogsService = dialogsService;
@@ -31,10 +31,10 @@
 
         function activate() {
             console.log(openedDialogService.id);
-            if (dialogId.toString() === '') {
+            if (initInfo.dialogId.toString() === '') {
                 openedDialogService.id = null;
             } else {
-                openedDialogService.id = +dialogId;
+                openedDialogService.id = +initInfo.dialogId;
             }
 
             dialogsService.loadDialogs();

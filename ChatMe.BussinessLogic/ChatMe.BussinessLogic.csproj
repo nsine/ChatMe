@@ -116,6 +116,7 @@
     <Compile Include="DTO\ChangingSettingsResult.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\ActivityService.cs" />
+    <Compile Include="Services\Abstract\IAvatarService.cs" />
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\PostService.cs" />
     <Compile Include="Services\UserService.cs" />

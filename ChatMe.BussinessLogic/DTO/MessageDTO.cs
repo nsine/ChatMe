@@ -13,6 +13,5 @@ namespace ChatMe.BussinessLogic.DTO
         public string Author { get; set; }
         public string AuthorId { get; set; }
         public DateTime Time { get; set; }
-        public bool IsMy { get; set; }
     }
 }

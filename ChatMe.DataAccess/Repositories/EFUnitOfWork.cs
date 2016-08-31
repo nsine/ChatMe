@@ -3,6 +3,7 @@ using ChatMe.DataAccess.EF;
 using ChatMe.DataAccess.Entities;
 using ChatMe.DataAccess.Interfaces;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace ChatMe.DataAccess.Repositories
 {
@@ -83,6 +84,10 @@ namespace ChatMe.DataAccess.Repositories
 
         public void Dispose() {
             db.Dispose();
+        }
+
+        public DbContext GetDb() {
+            return db;
         }
     }
 }

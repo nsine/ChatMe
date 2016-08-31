@@ -10,6 +10,10 @@ using ChatMe.BussinessLogic.Services.Abstract;
 using ChatMe.BussinessLogic.DTO;
 using Microsoft.AspNet.Identity;
 using AutoMapper;
+using System.Web.Mvc;
+using System.IO;
+using System.Web.Routing;
+using ChatMe.BussinessLogic.Services;
 
 namespace ChatMe.Web.Hubs
 {
@@ -18,7 +22,7 @@ namespace ChatMe.Web.Hubs
         private IUnitOfWork unitOfWork;
         private IMessageService messageService;
 
-        public ChatHub(IUnitOfWork unitOfWork, IMessageService messageService) {
+        public ChatHub(IUnitOfWork unitOfWork, IMessageService messageService) : base() {
             this.unitOfWork = unitOfWork;
             this.messageService = messageService;
         }
@@ -40,15 +44,18 @@ namespace ChatMe.Web.Hubs
             return base.OnConnected();
         }
 
-        public void Send(int dialogId, NewMessageViewModel message) {
+        public async Task Send(int dialogId, NewMessageViewModel message) {
             var newMessageData = new NewMessageDTO {
                 UserId = Context.User.Identity.GetUserId(),
                 DialogId = dialogId,
                 Body = message.Body
             };
 
-            var createdMessageData = messageService.Create(newMessageData);
-            Mapper.Initialize(cfg => cfg.CreateMap<MessageDTO, MessageViewModel>());
+            var createdMessageData = await messageService.Create(newMessageData);
+            Mapper.Initialize(cfg => cfg.CreateMap<MessageDTO, MessageViewModel>()
+                .ForMember("AuthorAvatarUrl", opt => opt.MapFrom(m => $"/avatar/{m.AuthorId}"))
+            );
+
             var createdMessage = Mapper.Map<MessageViewModel>(createdMessageData);
 
             Clients.Group(dialogId.ToString()).addMessage(createdMessage);
