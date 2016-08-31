@@ -33,6 +33,8 @@
             <h2>@Model.UserName</h2>
         }
 
+        
+
         @if (!Model.IsOwner) {
             <a href="@Url.Action("NewDialog", "Dialog", new { userId = Model.Id })" class="btn btn-primary">
                 Send message <span class="glyphicon glyphicon-comment"></span>

@@ -43,7 +43,9 @@ namespace ChatMe.Web.Controllers
 
             await activityService.ChangeFollow(followerData);
 
-            return PartialView();
+            viewModel.IsFollowing = !viewModel.IsFollowing;
+
+            return PartialView(viewModel);
         }
     }
 }
