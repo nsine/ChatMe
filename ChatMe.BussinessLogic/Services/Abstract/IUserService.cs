@@ -13,6 +13,7 @@ namespace ChatMe.BussinessLogic.Services.Abstract
         string GetUserDisplayName(User user);
         UserProfileDTO GetUserProfile(string userName, string currectUserId);
         IEnumerable<UserInfoDTO> GetAll();
+        IEnumerable<UserInfoDTO> GetAllExceptMe(string userId);
         UserSettingsDTO GetUserSettings(string userId);
         Task<ChangingSettingsResult> ChangeUserSettings(UserSettingsDTO settingsData, AppUserManager userManager, Func<string, string> pathResolver);
     }

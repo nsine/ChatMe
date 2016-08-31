@@ -138,5 +138,10 @@ namespace ChatMe.BussinessLogic.Services
             result.Succeeded = true;
             return result;
         }
+
+        public IEnumerable<UserInfoDTO> GetAllExceptMe(string userId) {
+            var allUsers = GetAll();
+            return allUsers.Where(u => u.Id != userId);
+        }
     }
 }

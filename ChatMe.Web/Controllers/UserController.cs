@@ -66,7 +66,7 @@ namespace ChatMe.Web.Controllers
 
         public ActionResult AllUsers(int page = 1) {
             const int pageSize = 20;
-            var allUsersData = userService.GetAll();
+            var allUsersData = userService.GetAllExceptMe(User.Identity.GetUserId());
 
             var usersOnPageData = allUsersData
                 .Skip((page - 1) * pageSize)

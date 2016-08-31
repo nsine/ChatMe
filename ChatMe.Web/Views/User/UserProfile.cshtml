@@ -26,10 +26,18 @@
     <div class="col-md-4">
         <img src="@Url.Action("GetAvatar", "User", new { id = Model.Id })" class="col-xs-12 img-responsive">
 
-        @if (Model.DisplayName != null) {
+        @if (Model.DisplayName != Model.UserName) {
             <h2>@Model.DisplayName</h2>
+            <div>@Model.UserName</div>
+        } else {
+            <h2>@Model.UserName</h2>
         }
-        <div>@Model.UserName</div>
+
+        @if (!Model.IsOwner) {
+            <a href="@Url.Action("NewDialog", "Dialog", new { userId = Model.Id })" class="btn btn-primary">
+                Send message <span class="glyphicon glyphicon-comment"></span>
+            </a>
+        }
 
         <dl class="dl-horizontal">
             <dt>@Html.DisplayNameFor(model => model.Email)</dt>
@@ -49,8 +57,6 @@
                 <dt>@Html.DisplayNameFor(model => model.AboutMe)</dt>
                     <dd>@Html.DisplayFor(model => model.AboutMe)</dd>
             }
-
-            @Model.Id
         </dl>
     </div>
     <div class="col-md-8">
