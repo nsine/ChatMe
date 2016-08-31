@@ -13,7 +13,6 @@ using System.Web.Mvc;
 
 namespace ChatMe.Web.Controllers
 {
-    [RoutePrefix("api/activity")]
     public class ActivityController : IdentityController
     {
         private IActivityService activityService;
@@ -23,7 +22,7 @@ namespace ChatMe.Web.Controllers
         }
 
         [HttpPost]
-        [Route("like")]
+        [Route("api/activity/like")]
         public async Task LikeAction(int postId) {
             var likeData = new LikedPostDTO {
                 PostId = postId,
@@ -31,6 +30,20 @@ namespace ChatMe.Web.Controllers
             };
 
             await activityService.ChangeLike(likeData);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> FollowAction(FollowingLinkViewModel viewModel) {
+            var followerId = User.Identity.GetUserId();
+
+            var followerData = new FollowerLinkDTO {
+                UserId = User.Identity.GetUserId(),
+                FollowingUserId = viewModel.UserId
+            };
+
+            await activityService.ChangeFollow(followerData);
+
+            return PartialView();
         }
     }
 }

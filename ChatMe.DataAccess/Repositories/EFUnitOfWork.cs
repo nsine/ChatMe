@@ -16,6 +16,7 @@ namespace ChatMe.DataAccess.Repositories
         private EFRepository<Dialog> dialogRepo;
         private EFRepository<Post> postRepo;
         private EFRepository<Like> likeRepo;
+        private EFRepository<FollowerLink> followersRepo;
 
         public EFUnitOfWork()
         {
@@ -70,6 +71,15 @@ namespace ChatMe.DataAccess.Repositories
                     likeRepo = new EFRepository<Like>(db);
                 }
                 return likeRepo;
+            }
+        }
+
+        public IRepository<FollowerLink> FollowerLinks {
+            get {
+                if (followersRepo == null) {
+                    followersRepo = new EFRepository<FollowerLink>(db);
+                }
+                return followersRepo;
             }
         }
 

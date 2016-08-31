@@ -195,6 +195,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
+    <None Include="Properties\PublishProfiles\ChatMe.pubxml" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\dialogs-app\app.directive.js" />
     <Content Include="Scripts\dialogs-app\app.module.js" />
@@ -219,6 +220,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -249,6 +252,7 @@
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Models\ChatUser.cs" />
     <Compile Include="Models\DialogInitViewModel.cs" />
+    <Compile Include="Models\FollowingLinkViewModel.cs" />
     <Compile Include="Models\LikedPostViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\NewDialogViewModel.cs" />
@@ -289,6 +293,7 @@
     <Content Include="Views\User\AllUsers.cshtml" />
     <Content Include="Views\User\Settings.cshtml" />
     <Content Include="Views\User\UserProfile.cshtml" />
+    <Content Include="Views\Activity\FollowAction.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -298,7 +303,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Avatars\" />
-    <Folder Include="Views\Activity\" />
     <Folder Include="Views\Dialog\" />
     <Folder Include="Views\Identity\" />
     <Folder Include="Views\Message\" />
@@ -324,11 +328,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50322</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50322/</IISUrl>
+          <IISUrl>http://192.168.13.247:8080/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -65,7 +65,8 @@ namespace ChatMe.BussinessLogic.Services
                 Skype = user.UserInfo.Skype,
                 AboutMe = user.UserInfo.AboutMe,
                 AvatarFilename = user.UserInfo.AvatarFilename,
-                IsOwner = user.Id == me.Id
+                IsOwner = user.Id == me.Id,
+                IsFollowing = user.Followers.Any(u => u.Id == currectUserId)
             };
 
             return userProfile;

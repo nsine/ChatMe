@@ -13,5 +13,10 @@ namespace ChatMe.BussinessLogic.Services.Abstract
         Task Like(LikedPostDTO likeData);
         Task UndoLike(LikedPostDTO likeData);
         bool IsLiked(LikedPostDTO likeData);
+
+        Task ChangeFollow(FollowerLinkDTO followData);
+        bool IsFollowing(FollowerLinkDTO followData);
+        Task Follow(FollowerLinkDTO followData);
+        Task Unfollow(FollowerLinkDTO followData);
     }
 }

@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="EF\ChatMeContext.cs" />
     <Compile Include="Entities\Dialog.cs" />
+    <Compile Include="Entities\FollowerLink.cs" />
     <Compile Include="Entities\Like.cs" />
     <Compile Include="Entities\Post.cs" />
     <Compile Include="Identity\AppUserManager.cs" />
@@ -139,6 +140,10 @@
     <Compile Include="Migrations\201608301338326_AddLikeModel.Designer.cs">
       <DependentUpon>201608301338326_AddLikeModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608311412072_AddFollowerLinkModel.cs" />
+    <Compile Include="Migrations\201608311412072_AddFollowerLinkModel.Designer.cs">
+      <DependentUpon>201608311412072_AddFollowerLinkModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EFRepository.cs" />
@@ -178,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608301338326_AddLikeModel.resx">
       <DependentUpon>201608301338326_AddLikeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608311412072_AddFollowerLinkModel.resx">
+      <DependentUpon>201608311412072_AddFollowerLinkModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

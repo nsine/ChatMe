@@ -26,6 +26,7 @@ namespace ChatMe.Web.Models
         [DisplayName("About me")]
         public string AboutMe { get; set; }
         public bool IsOwner { get; set; }
+        public bool IsFollowing { get; set; }
         public string DisplayName { get; set; }
 
 

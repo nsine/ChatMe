@@ -28,5 +28,8 @@ namespace ChatMe.DataAccess.Entities
         public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
+
+        public virtual ICollection<User> Followers { get; set; }
+        public virtual ICollection<User> FollowingUsers { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace ChatMe.BussinessLogic.DTO
         public string Skype { get; set; }
         public string AboutMe { get; set; }
         public bool IsOwner { get; set; }
+        public bool IsFollowing { get; set; }
         public string DisplayName { get; set; }
 
         public IEnumerable<PostDTO> Posts;

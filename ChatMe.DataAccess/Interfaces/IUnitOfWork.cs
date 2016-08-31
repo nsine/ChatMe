@@ -12,6 +12,7 @@ namespace ChatMe.DataAccess.Interfaces
         IRepository<Dialog> Dialogs { get; }
         IRepository<Post> Posts { get; }
         IRepository<Like> Likes { get; }
+        IRepository<FollowerLink> FollowerLinks { get; }
 
         DbContext GetDb();
 

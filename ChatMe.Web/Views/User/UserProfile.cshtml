@@ -37,6 +37,13 @@
             <a href="@Url.Action("NewDialog", "Dialog", new { userId = Model.Id })" class="btn btn-primary">
                 Send message <span class="glyphicon glyphicon-comment"></span>
             </a>
+
+            <span id="follow-button-form">
+                @Html.Partial("~/Views/Activity/FollowAction.cshtml", new ChatMe.Web.Models.FollowingLinkViewModel {
+                    UserId = Model.Id,
+                    IsFollowing = Model.IsFollowing
+                })
+            </span>
         }
 
         <dl class="dl-horizontal">

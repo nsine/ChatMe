@@ -30,7 +30,16 @@ namespace ChatMe.DataAccess.EF
 
             modelBuilder.Entity<Message>()
                 .HasRequired(m => m.User)
-                .WithMany(u => u.Messages);             
+                .WithMany(u => u.Messages);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.FollowingUsers)
+                .WithMany(u => u.Followers)
+                .Map(m => {
+                    m.MapLeftKey("UserId");
+                    m.MapRightKey("FollowingUserId");
+                    m.ToTable("FollowerLinks");
+                });
 
             //modelBuilder.Entity<User>()
             //    .HasMany(u => u.Posts)
