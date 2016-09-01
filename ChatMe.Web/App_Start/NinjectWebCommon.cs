@@ -14,6 +14,7 @@ namespace ChatMe.App_Start
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
+        private static IKernel kernel;
 
         /// <summary>
         /// Starts the application
@@ -37,22 +38,24 @@ namespace ChatMe.App_Start
         /// Creates the kernel that will manage your application.
         /// </summary>
         /// <returns>The created kernel.</returns>
-        private static IKernel CreateKernel()
+        public static IKernel CreateKernel()
         {
-            var kernel = new StandardKernel();
-            try
-            {
-                kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
-                kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
+            if (kernel == null) {
+                kernel = new StandardKernel();
+                try {
+                    kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
+                    kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
-                RegisterServices(kernel);
-                return kernel;
+                    RegisterServices(kernel);
+                    return kernel;
+                } catch {
+                    kernel.Dispose();
+                    throw;
+                }
             }
-            catch
-            {
-                kernel.Dispose();
-                throw;
-            }
+
+            return kernel;
+            
         }
 
         /// <summary>

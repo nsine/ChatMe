@@ -15,6 +15,6 @@ namespace ChatMe.BussinessLogic.Services.Abstract
         IEnumerable<UserInfoDTO> GetAll();
         IEnumerable<UserInfoDTO> GetAllExceptMe(string userId);
         UserSettingsDTO GetUserSettings(string userId);
-        Task<ChangingSettingsResult> ChangeUserSettings(UserSettingsDTO settingsData, AppUserManager userManager, Func<string, string> pathResolver);
+        Task<ChangingSettingsResult> ChangeUserSettings(UserSettingsDTO settingsData, Func<string, string> pathResolver);
     }
 }

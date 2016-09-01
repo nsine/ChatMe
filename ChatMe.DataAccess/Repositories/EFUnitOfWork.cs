@@ -4,6 +4,8 @@ using ChatMe.DataAccess.Entities;
 using ChatMe.DataAccess.Interfaces;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ChatMe.DataAccess.Repositories
 {
@@ -12,11 +14,10 @@ namespace ChatMe.DataAccess.Repositories
         private ChatMeContext db;
 
         private EFRepository<Message> messageRepo;
-        private EFRepository<User> userRepo;
+        private UserManager<User> userRepo;
         private EFRepository<Dialog> dialogRepo;
         private EFRepository<Post> postRepo;
         private EFRepository<Like> likeRepo;
-        private EFRepository<FollowerLink> followersRepo;
 
         public EFUnitOfWork()
         {
@@ -34,13 +35,12 @@ namespace ChatMe.DataAccess.Repositories
             }
         }
 
-        public IRepository<User> Users
-        {
-            get
-            {
+        UserManager<User> IUnitOfWork.Users {
+            get {
                 if (userRepo == null) {
-                    userRepo = new EFRepository<User>(db);
+                    userRepo = new AppUserManager(new UserStore<User>(db));
                 }
+
                 return userRepo;
             }
         }
@@ -74,18 +74,10 @@ namespace ChatMe.DataAccess.Repositories
             }
         }
 
-        public IRepository<FollowerLink> FollowerLinks {
-            get {
-                if (followersRepo == null) {
-                    followersRepo = new EFRepository<FollowerLink>(db);
-                }
-                return followersRepo;
-            }
-        }
-
         public void Save()
         {
-            db.SaveChanges();
+            var a = db.SaveChanges();
+            a = 5;
         }
 
         public async Task SaveAsync() {

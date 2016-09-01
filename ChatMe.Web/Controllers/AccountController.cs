@@ -37,7 +37,7 @@ namespace ChatMe.Web.Controllers
             if (ModelState.IsValid) {
                 Mapper.Initialize(cfg => cfg.CreateMap<RegisterViewModel, RegistrationInfoDTO>());
                 var regInfo = Mapper.Map<RegistrationInfoDTO>(model);
-                var result = await accountService.CreateUser(regInfo, UserManager);
+                var result = await accountService.CreateUser(regInfo);
 
                 if (result.Succeeded) {
                     return RedirectToAction("Login", "Account");
@@ -63,12 +63,10 @@ namespace ChatMe.Web.Controllers
         {
 
             if (ModelState.IsValid) {
-                var authManager = HttpContext.GetOwinContext().Authentication;
-
                 Mapper.Initialize(cfg => cfg.CreateMap<LoginViewModel, LoginDTO>());
                 var loginData = Mapper.Map<LoginDTO>(model);
 
-                var isSuccessLogin = await accountService.Login(loginData, UserManager, authManager);
+                var isSuccessLogin = await accountService.Login(loginData);
 
                 if (isSuccessLogin) {
                     if (string.IsNullOrEmpty(returnUrl)) {
@@ -87,8 +85,8 @@ namespace ChatMe.Web.Controllers
 
         public ActionResult Logout()
         {
-            var authManager = HttpContext.GetOwinContext().Authentication;
-            accountService.Logout(authManager);
+            HttpContext.GetOwinContext();
+            accountService.Logout();
             return RedirectToAction("Login");
         }
     }

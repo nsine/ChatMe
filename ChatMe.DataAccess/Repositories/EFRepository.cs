@@ -20,7 +20,6 @@ namespace ChatMe.DataAccess.Repositories
 
         public void Create(T item) {
             db.Set<T>().Add(item);
-            db.Entry(item).State = EntityState.Added;
         }
 
         public void Delete(object id) {

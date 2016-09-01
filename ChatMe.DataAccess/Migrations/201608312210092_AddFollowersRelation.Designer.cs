@@ -7,13 +7,13 @@ namespace ChatMe.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddFollowerLinkModel : IMigrationMetadata
+    public sealed partial class AddFollowersRelation : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddFollowerLinkModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddFollowersRelation));
         
         string IMigrationMetadata.Id
         {
-            get { return "201608311412072_AddFollowerLinkModel"; }
+            get { return "201608312210092_AddFollowersRelation"; }
         }
         
         string IMigrationMetadata.Source

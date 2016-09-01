@@ -23,7 +23,7 @@ namespace ChatMe.BussinessLogic.Services
 
         public async Task<int> Create(NewDialogDTO data) {
             var users = data.UserIds
-                .Select(id => unitOfWork.Users.Get(id))
+                .Select(id => unitOfWork.Users.FindById(id))
                 .ToList();
 
             var newDialog = new Dialog {
@@ -42,8 +42,8 @@ namespace ChatMe.BussinessLogic.Services
             return true;
         }
 
-        public IEnumerable<DialogPreviewDTO> GetChunk(AppUserManager userManager, string userId, int startIndex, int chunkSize) {
-            var me = userManager.FindById(userId);
+        public IEnumerable<DialogPreviewDTO> GetChunk(string userId, int startIndex, int chunkSize) {
+            var me = unitOfWork.Users.FindById(userId);
             var dialogs = me.Dialogs
                 .OrderByDescending(d => (d.LastMessageTime.HasValue ? d.LastMessageTime : d.CreateTime))
                 .Skip(startIndex)

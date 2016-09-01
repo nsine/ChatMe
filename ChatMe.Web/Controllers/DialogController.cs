@@ -30,7 +30,7 @@ namespace ChatMe.Web.Controllers
         [Route("")]
         public ActionResult GetAll(int startIndex = 0, int count = 0) {
             var userId = User.Identity.GetUserId();
-            var dialogsData = dialogService.GetChunk(UserManager, userId, startIndex, count);
+            var dialogsData = dialogService.GetChunk(userId, startIndex, count);
             var dialogs = dialogsData
                 .Select(d => new DialogViewModel(d) {
                     AvatarUrl = Url.Action("GetAvatar", "User", new { id = "todo" })

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ninject;
 
 namespace ChatMe.DataAccess.Entities
 {
@@ -18,6 +19,9 @@ namespace ChatMe.DataAccess.Entities
         public static AppUserManager Create(IdentityFactoryOptions<AppUserManager> options,
                                                 IOwinContext context)
         {
+            var kernel = context.Get<StandardKernel>();
+
+
             ChatMeContext db = context.Get<ChatMeContext>();
             AppUserManager manager = new AppUserManager(new UserStore<User>(db));
             return manager;

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ChatMe.BussinessLogic.DTO;
 using ChatMe.DataAccess.Entities;
 using ChatMe.DataAccess.Interfaces;
+using Microsoft.AspNet.Identity;
 
 namespace ChatMe.BussinessLogic.Services
 {
@@ -24,7 +25,7 @@ namespace ChatMe.BussinessLogic.Services
                 UserId = newMessageData.UserId,
                 Time = DateTime.Now,
                 DialogId = newMessageData.DialogId,
-                User = unitOfWork.Users.Get(newMessageData.UserId)
+                User = unitOfWork.Users.FindById(newMessageData.UserId)
             };
 
             unitOfWork.Messages.Create(newMessage);

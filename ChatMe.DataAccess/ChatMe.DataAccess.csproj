@@ -74,6 +74,10 @@
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
@@ -91,7 +95,6 @@
   <ItemGroup>
     <Compile Include="EF\ChatMeContext.cs" />
     <Compile Include="Entities\Dialog.cs" />
-    <Compile Include="Entities\FollowerLink.cs" />
     <Compile Include="Entities\Like.cs" />
     <Compile Include="Entities\Post.cs" />
     <Compile Include="Identity\AppUserManager.cs" />
@@ -140,9 +143,9 @@
     <Compile Include="Migrations\201608301338326_AddLikeModel.Designer.cs">
       <DependentUpon>201608301338326_AddLikeModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201608311412072_AddFollowerLinkModel.cs" />
-    <Compile Include="Migrations\201608311412072_AddFollowerLinkModel.Designer.cs">
-      <DependentUpon>201608311412072_AddFollowerLinkModel.cs</DependentUpon>
+    <Compile Include="Migrations\201608312210092_AddFollowersRelation.cs" />
+    <Compile Include="Migrations\201608312210092_AddFollowersRelation.Designer.cs">
+      <DependentUpon>201608312210092_AddFollowersRelation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,8 +187,8 @@
     <EmbeddedResource Include="Migrations\201608301338326_AddLikeModel.resx">
       <DependentUpon>201608301338326_AddLikeModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608311412072_AddFollowerLinkModel.resx">
-      <DependentUpon>201608311412072_AddFollowerLinkModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608312210092_AddFollowersRelation.resx">
+      <DependentUpon>201608312210092_AddFollowersRelation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

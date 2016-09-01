@@ -10,7 +10,7 @@ namespace ChatMe.BussinessLogic.Services.Abstract
 {
     public interface IDialogService
     {
-        IEnumerable<DialogPreviewDTO> GetChunk(AppUserManager userManager, string userId, int startIndex, int chunkSize);
+        IEnumerable<DialogPreviewDTO> GetChunk(string userId, int startIndex, int chunkSize);
         Task<int> Create(NewDialogDTO data);
         Task<bool> Delete(int dialogId);
         int GetIdByMembers(IEnumerable<string> userIds);

@@ -12,8 +12,8 @@ namespace ChatMe.BussinessLogic.Services.Abstract
 {
     public interface IAccountService
     {
-        Task<IdentityResult> CreateUser(RegistrationInfoDTO data, AppUserManager userManager);
-        Task<bool> Login(LoginDTO data, AppUserManager userManager, IAuthenticationManager authManager);
-        bool Logout(IAuthenticationManager authManager);
+        Task<IdentityResult> CreateUser(RegistrationInfoDTO data);
+        Task<bool> Login(LoginDTO data);
+        bool Logout();
     }
 }

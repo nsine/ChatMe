@@ -31,7 +31,7 @@ namespace ChatMe.Web.Hubs
         public override Task OnConnected() {
             // Retrieve user.
             var user = unitOfWork.Users
-                .Find(u => u.UserName == Context.User.Identity.Name)
+                .Users.Where(u => u.UserName == Context.User.Identity.Name)
                 .FirstOrDefault();
             
             if (user == null) {

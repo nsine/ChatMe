@@ -8,12 +8,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ChatMe.BussinessLogic.Services.Abstract;
+using ChatMe.DataAccess.Interfaces;
 
 namespace ChatMe.BussinessLogic.Services
 {
     public class AccountService : IAccountService
     {
-        public async Task<IdentityResult> CreateUser(RegistrationInfoDTO data, AppUserManager userManager) {
+        private IUnitOfWork db;
+        private IAuthenticationManager authManager;
+
+        public AccountService(IUnitOfWork db, IAuthenticationManager authManager) {
+            this.db = db;
+            this.authManager = authManager;
+        }
+
+        public async Task<IdentityResult> CreateUser(RegistrationInfoDTO data) {
             var user = new User {
                 UserName = data.UserName,
                 Email = data.Email,
@@ -23,21 +32,20 @@ namespace ChatMe.BussinessLogic.Services
                 }
             };
 
-            return await userManager.CreateAsync(user, data.Password);
+            return await db.Users.CreateAsync(user, data.Password);
         }
 
-        public async Task<bool> Login
-            (LoginDTO data, AppUserManager userManager, IAuthenticationManager authManager) {
+        public async Task<bool> Login(LoginDTO data) {
 
-            var user = await userManager.FindAsync(data.Login, data.Password);
+            var user = await db.Users.FindAsync(data.Login, data.Password);
 
             if (user == null) {
                 return false;
             } else {
-                var claim = await userManager
+                var claim = await db.Users
                     .CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
 
-                Logout(authManager);
+                Logout();
                 authManager.SignIn(new AuthenticationProperties {
                     IsPersistent = !data.RememberMe.GetValueOrDefault()
                 }, claim);
@@ -46,7 +54,7 @@ namespace ChatMe.BussinessLogic.Services
             }
         }
 
-        public bool Logout(IAuthenticationManager authManager) {
+        public bool Logout() {
             authManager.SignOut();
             return true;
         }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ChatMe.BussinessLogic.DTO;
 using ChatMe.DataAccess.Interfaces;
 using ChatMe.DataAccess.Entities;
+using Microsoft.AspNet.Identity;
 
 namespace ChatMe.BussinessLogic.Services
 {
@@ -28,27 +29,24 @@ namespace ChatMe.BussinessLogic.Services
 
         public bool IsFollowing(FollowerLinkDTO followData) {
             return unitOfWork.Users
-                .Get(followData.UserId)
+                .FindById(followData.UserId)
                 .FollowingUsers
                 .Any(u => u.Id == followData.FollowingUserId);
         }
 
         public async Task Follow(FollowerLinkDTO followData) {
-            var followerLink = new FollowerLink {
-                UserId = followData.UserId,
-                FollowingUserId = followData.FollowingUserId
-            };
+            var follower = unitOfWork.Users.FindById(followData.UserId);
+            var followingUser = unitOfWork.Users.FindById(followData.FollowingUserId);
 
-            unitOfWork.FollowerLinks.Create(followerLink);
+            followingUser.Followers.Add(follower);
             await unitOfWork.SaveAsync();
         }
 
         public async Task Unfollow(FollowerLinkDTO followData) {
-            var followerLink = unitOfWork.FollowerLinks.Find(f => {
-                return f.UserId == followData.UserId && f.FollowingUserId == followData.FollowingUserId;
-            }).FirstOrDefault();
+            var follower = unitOfWork.Users.FindById(followData.UserId);
+            var followingUser = unitOfWork.Users.FindById(followData.FollowingUserId);
 
-            unitOfWork.FollowerLinks.Delete(new string[] { followerLink?.UserId, followerLink?.FollowingUserId });
+            followingUser.Followers.Remove(follower);
             await unitOfWork.SaveAsync();
         }
 

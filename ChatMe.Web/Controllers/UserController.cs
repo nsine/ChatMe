@@ -109,7 +109,7 @@ namespace ChatMe.Web.Controllers
                 var userSettingsData = Mapper.Map<UserSettingsDTO>(viewModel);
                 userSettingsData.Avatar = avatar;
 
-                var result = await userService.ChangeUserSettings(userSettingsData, UserManager, Server.MapPath);
+                var result = await userService.ChangeUserSettings(userSettingsData, Server.MapPath);
                 if (!result.Succeeded) {
                     foreach (var error in result.Errors) {
                         ModelState.AddModelError("", error);
@@ -129,7 +129,7 @@ namespace ChatMe.Web.Controllers
 
         [Route("avatar/{id}")]
         public ActionResult GetAvatar(string id) {
-            var user = unitOfWork.Users.Get(id);
+            var user = unitOfWork.Users.FindById(id);
             var avatarInfo = avatarService.GetPath(user, Server.MapPath);
 
             return File(avatarInfo.Path, avatarInfo.Type);

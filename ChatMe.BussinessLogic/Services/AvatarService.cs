@@ -2,6 +2,7 @@
 using ChatMe.BussinessLogic.Services.Abstract;
 using ChatMe.DataAccess.Entities;
 using ChatMe.DataAccess.Interfaces;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -43,7 +44,7 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public AvatarInfo GetPath(string userId) {
-            var user = unitOfWork.Users.Get(userId);
+            var user = unitOfWork.Users.FindById(userId);
             Func<string, string> resolver = s => {
                 return Path.Combine(HostingEnvironment.ApplicationPhysicalPath, s);
             };

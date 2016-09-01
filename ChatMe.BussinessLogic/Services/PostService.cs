@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ChatMe.BussinessLogic.DTO;
 using ChatMe.DataAccess.Entities;
 using ChatMe.DataAccess.Interfaces;
+using Microsoft.AspNet.Identity;
 
 namespace ChatMe.BussinessLogic.Services
 {
@@ -41,7 +42,7 @@ namespace ChatMe.BussinessLogic.Services
 
         public PostDTO Get(string userId, string currentUserId, int postId) {
             var rawPost = unitOfWork.Users
-                .Get(userId).Posts
+                .FindById(userId).Posts
                 .Where(p => p.Id == postId)
                 .FirstOrDefault();
             return new PostDTO {
@@ -59,7 +60,7 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public IEnumerable<PostDTO> GetChunk(string userId, string currentUserId, int startIndex, int chunkSize) {
-            var user = unitOfWork.Users.Get(userId);
+            var user = unitOfWork.Users.FindById(userId);
             var posts = user.Posts
                 .OrderByDescending(p => p.Time)
                 .Skip(startIndex)

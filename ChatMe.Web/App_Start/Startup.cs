@@ -7,6 +7,10 @@ using ChatMe.DataAccess.EF;
 using Microsoft.AspNet.SignalR.Hubs;
 using System.Web.Mvc;
 using Microsoft.AspNet.SignalR;
+using Ninject.Web.Common.OwinHost;
+using Ninject;
+using System;
+using ChatMe.App_Start;
 
 [assembly: OwinStartup(typeof(ChatMe.Startup))]
 
@@ -14,12 +18,8 @@ namespace ChatMe
 {
     public class Startup
     {
-        public object ApplicationUserManager { get; private set; }
-
         public void Configuration(IAppBuilder app)
         {
-            app.CreatePerOwinContext(ChatMeContext.Create);
-            app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
