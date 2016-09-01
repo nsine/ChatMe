@@ -91,5 +91,21 @@ namespace ChatMe.BussinessLogic.Services
             await unitOfWork.SaveAsync();
             return true;
         }
+
+        public async Task<IEnumerable<PostDTO>> GetNews(string userId) {
+            var user = await unitOfWork.Users.FindByIdAsync(userId);
+            IEnumerable<PostDTO> news = user.Followers.Join(unitOfWork.Posts.GetAll(), u => u.Id, p => p.UserId,
+                (u, p) => new PostDTO {
+                    Id = p.Id,
+                    Author = p.User.DisplayName,
+                    AuthorId = p.UserId,
+                    Body = p.Body,
+                    IsLikedByMe = p.Likes.Any(like => like.UserId == userId),
+                    Likes = p.Likes.Count,
+                    Time = p.Time
+                });
+
+            return news;
+        }
     }
 }

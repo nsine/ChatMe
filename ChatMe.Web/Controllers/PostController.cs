@@ -26,6 +26,23 @@ namespace ChatMe.Web.Controllers
         }
 
         [HttpGet]
+        [Route("news/{userId}")]
+        public async Task<ActionResult> GetNews(string userId) {
+            var newsData = await postService.GetNews(userId);
+
+            Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, PostViewModel>()
+                .ForMember("AvatarUrl", opt => opt.MapFrom(p =>
+                    Url.Action("GetAvatar", "User", new { id = p.AuthorId }))
+                )
+                .ForMember("AuthorLink", opt => opt.MapFrom(p =>
+                    Url.RouteUrl("UserProfile", new { id = p.AuthorId }))
+                )
+            );
+
+            return Json(Mapper.Map<PostViewModel>(newsData), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         [Route("{userId}")]
         public ActionResult GetAll(string userId, int startIndex = 0, int count = 0) {
             var postsData = postService.GetChunk(userId, User.Identity.GetUserId(), startIndex, count);

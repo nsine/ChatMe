@@ -47,7 +47,7 @@ namespace ChatMe.BussinessLogic.Services
 
                 Logout();
                 authManager.SignIn(new AuthenticationProperties {
-                    IsPersistent = !data.RememberMe.GetValueOrDefault()
+                    IsPersistent = !data.RememberMe
                 }, claim);
 
                 return true;

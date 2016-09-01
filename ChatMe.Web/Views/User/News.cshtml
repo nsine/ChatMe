@@ -1,0 +1,32 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/User/_Layout.cshtml";
+}
+
+@section Scripts {
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/posts-app/app.module.js"></script>
+    <script>
+        angular.module("postsApp")
+            .constant('apiPath', '/api/posts/news/')
+            .value('userInfo', {
+                id: '@Model',
+                isOwner: false
+            });
+    </script>
+    <script src="~/Scripts/posts-app/app.directive.js"></script>
+    <script src="~/Scripts/posts-app/posts-service/posts.service.js"></script>
+    <script src="~/Scripts/posts-app/posts-service/posts-api.service.js"></script>
+    <script src="~/Scripts/posts-app/posts-list/posts-list.controller.js"></script>
+    <script src="~/Scripts/posts-app/new-post/new-post.controller.js"></script>
+}   
+
+<h2>News</h2>
+
+<div class="col-sm-8 col-sm-offset-2">
+    <div ng-app="postsApp" id="postsApp">
+        <app></app>
+    </div>
+</div>

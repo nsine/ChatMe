@@ -15,5 +15,6 @@ namespace ChatMe.BussinessLogic.Services.Abstract
         Task<bool> Create(NewPostDTO data);
         Task<bool> Delete(int dialogId);
         Task<bool> Update(NewPostDTO data, int postId);
+        Task<IEnumerable<PostDTO>> GetNews(string userId);
     }
 }

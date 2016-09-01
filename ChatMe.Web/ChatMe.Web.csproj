@@ -298,6 +298,7 @@
     <Content Include="Views\User\Settings.cshtml" />
     <Content Include="Views\User\UserProfile.cshtml" />
     <Content Include="Views\Activity\FollowAction.cshtml" />
+    <Content Include="Views\User\News.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

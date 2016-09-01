@@ -39,6 +39,11 @@ namespace ChatMe.Web.Controllers
             });
         }
 
+        public ActionResult News() {
+            var userId = User.Identity.GetUserId();
+            return View((object)userId);
+        }
+
         public ActionResult UserProfile(string userName) {
             var userProfileData = userService.GetUserProfile(userName, User.Identity.GetUserId());
 

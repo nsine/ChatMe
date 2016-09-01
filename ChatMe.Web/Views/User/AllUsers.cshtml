@@ -15,7 +15,9 @@
                 <div class="row vertical-center">
                     <img src="@Url.Action("GetAvatar", "User", new { id = user.Id })" alt="" class="col-xs-4 img-responsive">
                     <div class="col-xs-6">
-                        <span>@user.DisplayName</span>
+                        <a href="@Url.RouteUrl("UserProfile", new { userName = user.UserName })">
+                            <span>@user.DisplayName</span>
+                        </a>
                     </div>
                     <div class="col-xs-2">
                         <a href="@Url.Action("NewDialog", "Dialog", new { userId = user.Id })" class="btn btn-primary">

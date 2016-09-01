@@ -10,6 +10,7 @@
     <script src="~/Scripts/posts-app/app.module.js"></script>
     <script>
         angular.module("postsApp")
+            .constant('apiPath', '/api/posts/')
             .value('userInfo', {
                 id: '@Model.Id',
                 isOwner: @Model.IsOwner.ToString().ToLower(),
@@ -20,7 +21,6 @@
     <script src="~/Scripts/posts-app/posts-service/posts-api.service.js"></script>
     <script src="~/Scripts/posts-app/posts-list/posts-list.controller.js"></script>
     <script src="~/Scripts/posts-app/new-post/new-post.controller.js"></script>
-    <script src="~/Scripts/User/userprofile.js"></script>
 }
 
 <div class="row">

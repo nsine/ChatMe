@@ -3,6 +3,7 @@ using ChatMe.BussinessLogic.Services.Abstract;
 using ChatMe.DataAccess.Entities;
 using ChatMe.DataAccess.Interfaces;
 using ChatMe.DataAccess.Repositories;
+using Microsoft.Owin.Security;
 using Moq;
 using Ninject;
 using System;
@@ -40,6 +41,8 @@ namespace ChatMe.Util
             kernel.Bind<IPostService>().To<PostService>();
             kernel.Bind<IActivityService>().To<ActivityService>();
             kernel.Bind<IAvatarService>().To<AvatarService>();
+            kernel.Bind<IAuthenticationManager>().ToMethod(c =>
+                HttpContext.Current.GetOwinContext().Authentication);
         }
     }
 }
