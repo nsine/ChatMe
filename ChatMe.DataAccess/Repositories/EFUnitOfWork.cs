@@ -1,5 +1,4 @@
-﻿using System;
-using ChatMe.DataAccess.EF;
+﻿using ChatMe.DataAccess.EF;
 using ChatMe.DataAccess.Entities;
 using ChatMe.DataAccess.Interfaces;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ChatMe.DataAccess.Repositories
 {
-    public class EFUnitOfWork : IUnitOfWork
+    public sealed class EFUnitOfWork : IUnitOfWork
     {
         private ChatMeContext db;
 
@@ -85,6 +84,7 @@ namespace ChatMe.DataAccess.Repositories
         }
 
         public void Dispose() {
+            userRepo.Dispose();
             db.Dispose();
         }
 

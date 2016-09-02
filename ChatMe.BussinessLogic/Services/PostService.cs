@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ChatMe.BussinessLogic.DTO;
 using ChatMe.DataAccess.Entities;
@@ -14,12 +13,12 @@ namespace ChatMe.BussinessLogic.Services
     public class PostService : IPostService
     {
 
-        private IUnitOfWork unitOfWork;
+        private IUnitOfWork db;
         private IUserService userService;
         private IActivityService activityService;
 
         public PostService(IUnitOfWork unitOfWork, IUserService userService, IActivityService activityService) {
-            this.unitOfWork = unitOfWork;
+            this.db = unitOfWork;
             this.userService = userService;
             this.activityService = activityService;
         }
@@ -31,8 +30,8 @@ namespace ChatMe.BussinessLogic.Services
                 Time = DateTime.Now
             };
 
-            unitOfWork.Posts.Add(newPost);
-            await unitOfWork.SaveAsync();
+            db.Posts.Add(newPost);
+            await db.SaveAsync();
             return true;
         }
 
@@ -41,7 +40,7 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public PostDTO Get(string userId, string currentUserId, int postId) {
-            var rawPost = unitOfWork.Posts
+            var rawPost = db.Posts
                 .Where(p => p.Id == postId)
                 .FirstOrDefault();
             return new PostDTO {
@@ -60,7 +59,7 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public IEnumerable<PostDTO> GetChunk(string userId, string currentUserId, int startIndex, int chunkSize) {
-            var user = unitOfWork.Users.FindById(userId);
+            var user = db.Users.FindById(userId);
             var posts = user.Posts
                 .OrderByDescending(p => p.Time)
                 .Skip(startIndex)
@@ -86,16 +85,16 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public async Task<bool> Update(NewPostDTO data, int postId) {
-            var post = unitOfWork.Posts.FindById(postId);
+            var post = db.Posts.FindById(postId);
             post.Body = data.Body;
-            unitOfWork.Posts.Update(post);
-            await unitOfWork.SaveAsync();
+            db.Posts.Update(post);
+            await db.SaveAsync();
             return true;
         }
 
         public async Task<IEnumerable<PostDTO>> GetNews(string userId) {
-            var user = await unitOfWork.Users.FindByIdAsync(userId);
-            IEnumerable<PostDTO> news = user.FollowingUsers.Join(unitOfWork.Posts.GetAll(), u => u.Id, p => p.UserId,
+            var user = await db.Users.FindByIdAsync(userId);
+            IEnumerable<PostDTO> news = user.FollowingUsers.Join(db.Posts.GetAll(), u => u.Id, p => p.UserId,
                 (u, p) => new PostDTO {
                     Id = p.Id,
                     Author = p.User.DisplayName,

@@ -1,15 +1,8 @@
 ﻿using ChatMe.BussinessLogic.Services;
 using ChatMe.BussinessLogic.Services.Abstract;
-using ChatMe.DataAccess.Entities;
-using ChatMe.DataAccess.Interfaces;
-using ChatMe.DataAccess.Repositories;
-using Microsoft.Owin.Security;
-using Moq;
 using Ninject;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ChatMe.Util

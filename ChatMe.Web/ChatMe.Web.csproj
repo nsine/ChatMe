@@ -265,7 +265,6 @@
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\DialogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Abstract\IdentityController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Hubs\ChatHub.cs" />

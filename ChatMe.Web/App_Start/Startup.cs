@@ -1,16 +1,10 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using ChatMe.DataAccess.Entities;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
-using ChatMe.DataAccess.EF;
 using Microsoft.AspNet.SignalR.Hubs;
 using System.Web.Mvc;
 using Microsoft.AspNet.SignalR;
-using Ninject.Web.Common.OwinHost;
-using Ninject;
-using System;
-using ChatMe.App_Start;
 
 [assembly: OwinStartup(typeof(ChatMe.Startup))]
 

@@ -4,22 +4,18 @@ using ChatMe.DataAccess.Entities;
 using ChatMe.DataAccess.Interfaces;
 using Microsoft.AspNet.Identity;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Hosting;
 
 namespace ChatMe.BussinessLogic.Services
 {
     public class AvatarService : IAvatarService
     {
-        private IUnitOfWork unitOfWork;
+        private IUnitOfWork db;
 
         public AvatarService(IUnitOfWork unitOfWork) {
-            this.unitOfWork = unitOfWork;
+            db = unitOfWork;
         }
 
         public AvatarInfo GetPath(User user, Func<string, string> pathResolver) {
@@ -44,7 +40,7 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public AvatarInfo GetPath(string userId) {
-            var user = unitOfWork.Users.FindById(userId);
+            var user = db.Users.FindById(userId);
             Func<string, string> resolver = s => {
                 return Path.Combine(HostingEnvironment.ApplicationPhysicalPath, s);
             };

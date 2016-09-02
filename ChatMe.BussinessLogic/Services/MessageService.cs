@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ChatMe.BussinessLogic.DTO;
 using ChatMe.DataAccess.Entities;
@@ -13,10 +12,10 @@ namespace ChatMe.BussinessLogic.Services
 {
     public class MessageService : IMessageService
     {
-        private IUnitOfWork unitOfWork;
+        private IUnitOfWork db;
 
         public MessageService(IUnitOfWork unitOfWork) {
-            this.unitOfWork = unitOfWork;
+            this.db = unitOfWork;
         }
 
         public async Task<MessageDTO> Create(NewMessageDTO newMessageData) {
@@ -25,13 +24,13 @@ namespace ChatMe.BussinessLogic.Services
                 UserId = newMessageData.UserId,
                 Time = DateTime.Now,
                 DialogId = newMessageData.DialogId,
-                User = unitOfWork.Users.FindById(newMessageData.UserId)
+                User = db.Users.FindById(newMessageData.UserId)
             };
 
-            unitOfWork.Messages.Add(newMessage);
-            await unitOfWork.SaveAsync();
+            db.Messages.Add(newMessage);
+            await db.SaveAsync();
 
-            newMessage = unitOfWork.Messages.FindById(newMessage.Id);
+            newMessage = db.Messages.FindById(newMessage.Id);
             return new MessageDTO {
                 Id = newMessage.Id,
                 Body = newMessage.Body,
@@ -42,7 +41,7 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public IEnumerable<MessageDTO> GetChunk(string userId, int dialogId, int startIndex, int chunkSize) {
-            var dialog = unitOfWork.Dialogs.FindById(dialogId);
+            var dialog = db.Dialogs.FindById(dialogId);
             var messages = dialog.Messages
                 .OrderByDescending(m => m.Time)
                 .Skip(startIndex)

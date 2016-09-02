@@ -1,18 +1,11 @@
 ﻿using AutoMapper;
-using ChatMe.BussinessLogic;
 using ChatMe.BussinessLogic.DTO;
 using ChatMe.BussinessLogic.Services.Abstract;
-using ChatMe.DataAccess.Entities;
-using ChatMe.DataAccess.Interfaces;
-using ChatMe.Web.Controllers.Abstract;
 using ChatMe.Web.Models;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ChatMe.Web.Controllers

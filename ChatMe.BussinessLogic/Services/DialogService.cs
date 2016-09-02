@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ChatMe.BussinessLogic.DTO;
 using ChatMe.DataAccess.Entities;
@@ -13,17 +12,17 @@ namespace ChatMe.BussinessLogic.Services
 {
     public class DialogService : IDialogService
     {
-        private IUnitOfWork unitOfWork;
+        private IUnitOfWork db;
         private IUserService userService;
 
         public DialogService(IUnitOfWork unitOfWork, IUserService userService) {
-            this.unitOfWork = unitOfWork;
+            this.db = unitOfWork;
             this.userService = userService;
         }
 
         public async Task<int> Create(NewDialogDTO data) {
             var users = data.UserIds
-                .Select(id => unitOfWork.Users.FindById(id))
+                .Select(id => db.Users.FindById(id))
                 .ToList();
 
             var newDialog = new Dialog {
@@ -31,19 +30,19 @@ namespace ChatMe.BussinessLogic.Services
                 CreateTime = DateTime.Now
             };
 
-            unitOfWork.Dialogs.Add(newDialog);
-            await unitOfWork.SaveAsync();
+            db.Dialogs.Add(newDialog);
+            await db.SaveAsync();
             return newDialog.Id;
         }
 
         public async Task<bool> Delete(int dialogId) {
-            unitOfWork.Dialogs.Remove(dialogId);
-            await unitOfWork.SaveAsync();
+            db.Dialogs.Remove(dialogId);
+            await db.SaveAsync();
             return true;
         }
 
         public IEnumerable<DialogPreviewDTO> GetChunk(string userId, int startIndex, int chunkSize) {
-            var me = unitOfWork.Users.FindById(userId);
+            var me = db.Users.FindById(userId);
             var dialogs = me.Dialogs
                 .OrderByDescending(d => (d.LastMessageTime.HasValue ? d.LastMessageTime : d.CreateTime))
                 .Skip(startIndex)
@@ -76,7 +75,7 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public int GetIdByMembers(IEnumerable<string> userIds) {
-            var matchedDialogs = unitOfWork.Dialogs.Where(d => d.Users
+            var matchedDialogs = db.Dialogs.Where(d => d.Users
                 .Select(u => u.Id)
                 .SequenceEqual(userIds));
             if (matchedDialogs.Count() == 0) {

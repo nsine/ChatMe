@@ -1,8 +1,5 @@
 ﻿using ChatMe.BussinessLogic.Services.Abstract;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ChatMe.BussinessLogic.DTO;
 using ChatMe.DataAccess.Interfaces;
@@ -13,10 +10,10 @@ namespace ChatMe.BussinessLogic.Services
 {
     public class ActivityService : IActivityService
     {
-        private IUnitOfWork unitOfWork;
+        private IUnitOfWork db;
 
         public ActivityService(IUnitOfWork unitOfWork) {
-            this.unitOfWork = unitOfWork;
+            db = unitOfWork;
         }
 
         public async Task ChangeFollow(FollowerLinkDTO followData) {
@@ -28,26 +25,26 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public bool IsFollowing(FollowerLinkDTO followData) {
-            return unitOfWork.Users
+            return db.Users
                 .FindById(followData.UserId)
                 .FollowingUsers
                 .Any(u => u.Id == followData.FollowingUserId);
         }
 
         public async Task Follow(FollowerLinkDTO followData) {
-            var follower = unitOfWork.Users.FindById(followData.UserId);
-            var followingUser = unitOfWork.Users.FindById(followData.FollowingUserId);
+            var follower = db.Users.FindById(followData.UserId);
+            var followingUser = db.Users.FindById(followData.FollowingUserId);
 
             followingUser.Followers.Add(follower);
-            await unitOfWork.SaveAsync();
+            await db.SaveAsync();
         }
 
         public async Task Unfollow(FollowerLinkDTO followData) {
-            var follower = unitOfWork.Users.FindById(followData.UserId);
-            var followingUser = unitOfWork.Users.FindById(followData.FollowingUserId);
+            var follower = db.Users.FindById(followData.UserId);
+            var followingUser = db.Users.FindById(followData.FollowingUserId);
 
             followingUser.Followers.Remove(follower);
-            await unitOfWork.SaveAsync();
+            await db.SaveAsync();
         }
 
         public async Task ChangeLike(LikedPostDTO likeData) {
@@ -59,7 +56,7 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public bool IsLiked(LikedPostDTO likeData) {
-            return unitOfWork.Posts
+            return db.Posts
                 .FindById(likeData.PostId)
                 .Likes
                 .Where(like => like.UserId == likeData.UserId)
@@ -72,19 +69,19 @@ namespace ChatMe.BussinessLogic.Services
                 UserId = likeData.UserId
             };
 
-            unitOfWork.Likes.Add(like);
-            await unitOfWork.SaveAsync();
+            db.Likes.Add(like);
+            await db.SaveAsync();
         }
 
         public async Task UndoLike(LikedPostDTO likeData) {
-            var like = unitOfWork.Posts
+            var like = db.Posts
                 .FindById(likeData.PostId)
                 .Likes
                 .Where(x => x.UserId == likeData.UserId)
                 .FirstOrDefault();
 
-            unitOfWork.Likes.Remove(like.Id);
-            await unitOfWork.SaveAsync();
+            db.Likes.Remove(like.Id);
+            await db.SaveAsync();
         }
     }
 }

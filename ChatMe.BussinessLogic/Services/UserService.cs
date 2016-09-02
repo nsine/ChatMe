@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ChatMe.DataAccess.Entities;
 using ChatMe.BussinessLogic.DTO;
@@ -15,14 +14,14 @@ namespace ChatMe.BussinessLogic.Services
 {
     public class UserService : IUserService
     {
-        private IUnitOfWork unitOfWork;
+        private IUnitOfWork db;
 
         public UserService(IUnitOfWork unitOfWork) {
-            this.unitOfWork = unitOfWork;
+            this.db = unitOfWork;
         }
 
         public IEnumerable<UserInfoDTO> GetAll() {
-            var usersData = unitOfWork.Users.Users
+            var usersData = db.Users.Users
                 .Select(u => new UserInfoDTO {
                     Id = u.Id,
                     AvatarFilename = u.UserInfo.AvatarFilename,
@@ -46,8 +45,8 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public UserProfileDTO GetUserProfile(string userName, string currectUserId) {
-            var user = unitOfWork.Users.Users.Where(u => u.UserName == userName).FirstOrDefault();
-            var me = unitOfWork.Users.FindById(currectUserId);
+            var user = db.Users.Users.Where(u => u.UserName == userName).FirstOrDefault();
+            var me = db.Users.FindById(currectUserId);
 
             if (user == null) {
                 return null;
@@ -72,7 +71,7 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public UserSettingsDTO GetUserSettings(string userId) {
-            var me = unitOfWork.Users.FindById(userId);
+            var me = db.Users.FindById(userId);
             var data = new UserSettingsDTO {
                 Id = me.Id,
                 Email = me.Email,
@@ -88,11 +87,11 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public async Task<ChangingSettingsResult> ChangeUserSettings(UserSettingsDTO settingsData, Func<string, string> pathResolver) {
-            var me = unitOfWork.Users.FindById(settingsData.Id);
+            var me = db.Users.FindById(settingsData.Id);
             var result = new ChangingSettingsResult();
             result.Settings = settingsData;
 
-            var isPassValid = unitOfWork.Users.CheckPassword(me, settingsData.Password);
+            var isPassValid = db.Users.CheckPassword(me, settingsData.Password);
             if (!isPassValid) {
                 result.Errors.Add("Invalid password");
                 result.Succeeded = false;
@@ -111,7 +110,7 @@ namespace ChatMe.BussinessLogic.Services
                     return result;
                 }
 
-                await unitOfWork.Users.ChangePasswordAsync(me.Id, settingsData.Password, settingsData.NewPassword);
+                await db.Users.ChangePasswordAsync(me.Id, settingsData.Password, settingsData.NewPassword);
             }
 
             me.UserInfo.FirstName = settingsData.FirstName;
@@ -132,8 +131,8 @@ namespace ChatMe.BussinessLogic.Services
                 me.UserInfo.AvatarMimeType = settingsData.Avatar.ContentType;
             }
 
-            await unitOfWork.Users.UpdateAsync(me);
-            await unitOfWork.SaveAsync();
+            await db.Users.UpdateAsync(me);
+            await db.SaveAsync();
 
             result.Succeeded = true;
             return result;

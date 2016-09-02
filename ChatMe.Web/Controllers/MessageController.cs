@@ -1,16 +1,8 @@
-﻿using ChatMe.DataAccess.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNet.Identity.Owin;
-using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using ChatMe.DataAccess.Interfaces;
 using ChatMe.Web.Models;
-using ChatMe.DataAccess.EF;
-using ChatMe.DataAccess.Repositories;
-using ChatMe.Web.Controllers.Abstract;
 using ChatMe.BussinessLogic.DTO;
 using ChatMe.BussinessLogic.Services.Abstract;
 using System.Threading.Tasks;

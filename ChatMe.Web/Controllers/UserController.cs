@@ -1,7 +1,4 @@
-﻿using ChatMe.DataAccess.Entities;
-using Microsoft.AspNet.Identity.Owin;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,14 +6,9 @@ using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
 using ChatMe.Web.Models;
 using ChatMe.DataAccess.Interfaces;
-using System.IO;
-using System.Configuration;
-using ChatMe.BussinessLogic;
 using ChatMe.BussinessLogic.Services.Abstract;
-using ChatMe.Web.Controllers.Abstract;
 using AutoMapper;
 using ChatMe.BussinessLogic.DTO;
-using ChatMe.BussinessLogic.Services;
 
 namespace ChatMe.Web.Controllers
 {

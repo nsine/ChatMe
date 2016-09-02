@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Microsoft.AspNet.SignalR;
 using ChatMe.Web.Models;
 using System.Threading.Tasks;
@@ -10,11 +8,6 @@ using ChatMe.BussinessLogic.Services.Abstract;
 using ChatMe.BussinessLogic.DTO;
 using Microsoft.AspNet.Identity;
 using AutoMapper;
-using System.Web.Mvc;
-using System.IO;
-using System.Web.Routing;
-using ChatMe.BussinessLogic.Services;
-using System.Web.Helpers;
 using System.Diagnostics;
 
 namespace ChatMe.Web.Hubs

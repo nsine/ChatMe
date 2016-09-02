@@ -1,6 +1,4 @@
-﻿using ChatMe.BussinessLogic.Services;
-using ChatMe.BussinessLogic.Services.Abstract;
-using ChatMe.DataAccess.Interfaces;
+﻿using ChatMe.DataAccess.Interfaces;
 using ChatMe.DataAccess.Repositories;
 using Microsoft.Owin.Security;
 using Ninject.Modules;
