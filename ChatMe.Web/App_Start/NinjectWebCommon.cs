@@ -11,6 +11,8 @@ namespace ChatMe.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using System.Web.Mvc;
+    using BussinessLogic.Util;
+
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -41,7 +43,7 @@ namespace ChatMe.App_Start
         public static IKernel CreateKernel()
         {
             if (kernel == null) {
-                kernel = new StandardKernel();
+                kernel = new StandardKernel(new ServiceModule());
                 try {
                     kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                     kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();

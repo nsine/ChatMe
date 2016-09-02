@@ -15,6 +15,7 @@ using System.IO;
 using System.Web.Routing;
 using ChatMe.BussinessLogic.Services;
 using System.Web.Helpers;
+using System.Diagnostics;
 
 namespace ChatMe.Web.Hubs
 {
@@ -29,6 +30,7 @@ namespace ChatMe.Web.Hubs
         }
 
         public override Task OnConnected() {
+            Debug.Print($"User connected {Context.User.Identity.Name}");
             // Retrieve user.
             var user = unitOfWork.Users
                 .Users.Where(u => u.UserName == Context.User.Identity.Name)
@@ -62,36 +64,9 @@ namespace ChatMe.Web.Hubs
             Clients.Group(dialogId.ToString()).addMessage(createdMessage);
         }
 
-        //public void AddToRoom(string roomName) {
-        //    using (var db = new UserContext()) {
-        //        // Retrieve room.
-        //        var room = db.Rooms.Find(roomName);
-
-        //        if (room != null) {
-        //            var user = new User() { UserName = Context.User.Identity.Name };
-        //            db.Users.Attach(user);
-
-        //            room.Users.Add(user);
-        //            db.SaveChanges();
-        //            Groups.Add(Context.ConnectionId, roomName);
-        //        }
-        //    }
-        //}
-
-        //public void RemoveFromRoom(string roomName) {
-        //    using (var db = new UserContext()) {
-        //        // Retrieve room.
-        //        var room = db.Rooms.Find(roomName);
-        //        if (room != null) {
-        //            var user = new User() { UserName = Context.User.Identity.Name };
-        //            db.Users.Attach(user);
-
-        //            room.Users.Remove(user);
-        //            db.SaveChanges();
-
-        //            Groups.Remove(Context.ConnectionId, roomName);
-        //        }
-        //    }
-        //}
+        public override Task OnDisconnected(bool stopCalled) {
+            Debug.Print($"User disconnected {Context.User.Identity.Name}");
+            return base.OnDisconnected(stopCalled);
+        }
     }
 }

@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace ChatMe.Web.Controllers
 {
-    public class ActivityController : IdentityController
+    public class ActivityController : Controller
     {
         private IActivityService activityService;
 

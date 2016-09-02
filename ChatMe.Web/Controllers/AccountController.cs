@@ -17,7 +17,7 @@ using ChatMe.BussinessLogic.Services.Abstract;
 
 namespace ChatMe.Web.Controllers
 {
-    public class AccountController : IdentityController
+    public class AccountController : Controller
     {
         private IAccountService accountService;
 

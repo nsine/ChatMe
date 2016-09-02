@@ -32,17 +32,13 @@ namespace ChatMe.Util
 
         private void AddBindings()
         {
-            //kernel.Bind<IUnitOfWork>().ToConstant(mock.Object);
-            kernel.Bind<IUnitOfWork>().To<EFUnitOfWork>();
             kernel.Bind<IDialogService>().To<DialogService>();
-            kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<IAccountService>().To<AccountService>();
             kernel.Bind<IMessageService>().To<MessageService>();
             kernel.Bind<IPostService>().To<PostService>();
             kernel.Bind<IActivityService>().To<ActivityService>();
             kernel.Bind<IAvatarService>().To<AvatarService>();
-            kernel.Bind<IAuthenticationManager>().ToMethod(c =>
-                HttpContext.Current.GetOwinContext().Authentication);
+            kernel.Bind<IUserService>().To<UserService>();
         }
     }
 }

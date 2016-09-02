@@ -19,7 +19,7 @@ using AutoMapper;
 namespace ChatMe.Web.Controllers
 {
     [RoutePrefix("api/messages")]
-    public class MessageController : IdentityController
+    public class MessageController : Controller
     {
         private IMessageService messageService;
 

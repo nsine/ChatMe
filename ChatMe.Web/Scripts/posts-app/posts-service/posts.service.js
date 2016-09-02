@@ -23,7 +23,7 @@
                 .getPosts(self.loadedPosts, loadSize)
                 .then(function (data) {
                     self.posts = self.posts.concat(data);
-                    loadedPosts += data.length
+                    loadedPosts += data.length;
                 });
         }
 
@@ -43,7 +43,7 @@
                     postsApi.getPost(post.id)
                         .then(function (data) {
                             post.likes = data.likes;
-                            post.isLikedByMe = data.isLikedByMe
+                            post.isLikedByMe = data.isLikedByMe;
                         });
                 });
         }

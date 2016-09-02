@@ -21,7 +21,7 @@ using ChatMe.BussinessLogic.Services;
 namespace ChatMe.Web.Controllers
 {
     [Authorize]
-    public class UserController : IdentityController
+    public class UserController : Controller
     {
         private IUnitOfWork unitOfWork;
         private IUserService userService;
@@ -108,7 +108,7 @@ namespace ChatMe.Web.Controllers
         public async Task<ActionResult> Settings(UserSettingsViewModel viewModel, HttpPostedFileBase avatar = null) {
 
             if (ModelState.IsValid) {
-                var me = UserManager.FindById(User.Identity.GetUserId());
+                var me = unitOfWork.Users.FindById(User.Identity.GetUserId());
 
                 Mapper.Initialize(cfg => cfg.CreateMap<UserSettingsViewModel, UserSettingsDTO>());
                 var userSettingsData = Mapper.Map<UserSettingsDTO>(viewModel);

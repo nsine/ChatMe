@@ -18,7 +18,7 @@ using System.Web.Mvc;
 namespace ChatMe.Web.Controllers
 {
     [RoutePrefix("api/dialogs")]
-    public class DialogController : IdentityController
+    public class DialogController : Controller
     {
         private IDialogService dialogService;
 
