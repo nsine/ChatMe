@@ -60,7 +60,7 @@ namespace ChatMe.BussinessLogic.Services
 
         public bool IsLiked(LikedPostDTO likeData) {
             return unitOfWork.Posts
-                .Get(likeData.PostId)
+                .FindById(likeData.PostId)
                 .Likes
                 .Where(like => like.UserId == likeData.UserId)
                 .Count() != 0;
@@ -72,18 +72,18 @@ namespace ChatMe.BussinessLogic.Services
                 UserId = likeData.UserId
             };
 
-            unitOfWork.Likes.Create(like);
+            unitOfWork.Likes.Add(like);
             await unitOfWork.SaveAsync();
         }
 
         public async Task UndoLike(LikedPostDTO likeData) {
             var like = unitOfWork.Posts
-                .Get(likeData.PostId)
+                .FindById(likeData.PostId)
                 .Likes
                 .Where(x => x.UserId == likeData.UserId)
                 .FirstOrDefault();
 
-            unitOfWork.Likes.Delete(like.Id);
+            unitOfWork.Likes.Remove(like.Id);
             await unitOfWork.SaveAsync();
         }
     }

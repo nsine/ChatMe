@@ -18,19 +18,19 @@ namespace ChatMe.DataAccess.Repositories
             this.db = db;
         }
 
-        public void Create(T item) {
+        public void Add(T item) {
             db.Set<T>().Add(item);
         }
 
-        public void Delete(object id) {
-            db.Set<T>().Remove(Get(id));
+        public void Remove(object id) {
+            db.Set<T>().Remove(FindById(id));
         }
 
-        public IQueryable<T> Find(Func<T, bool> predicate) {
+        public IQueryable<T> Where(Func<T, bool> predicate) {
             return db.Set<T>().Where(predicate).AsQueryable();
         }
 
-        public T Get(object id) {
+        public T FindById(object id) {
             return db.Set<T>().Find(id);
         }
 

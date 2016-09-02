@@ -19,28 +19,13 @@ namespace ChatMe.Web.Controllers
     [RoutePrefix("api/posts")]
     public class PostController : Controller
     {
-        private IPostService postService;
+            private IPostService postService;
 
-        public PostController(IPostService postService) {
-            this.postService = postService;
-        }
+            public PostController(IPostService postService) {
+                this.postService = postService;
+            }
 
-        [HttpGet]
-        [Route("news/{userId}")]
-        public async Task<ActionResult> GetNews(string userId) {
-            var newsData = await postService.GetNews(userId);
-
-            Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, PostViewModel>()
-                .ForMember("AvatarUrl", opt => opt.MapFrom(p =>
-                    Url.Action("GetAvatar", "User", new { id = p.AuthorId }))
-                )
-                .ForMember("AuthorLink", opt => opt.MapFrom(p =>
-                    Url.RouteUrl("UserProfile", new { id = p.AuthorId }))
-                )
-            );
-
-            return Json(Mapper.Map<PostViewModel>(newsData), JsonRequestBehavior.AllowGet);
-        }
+        
 
         [HttpGet]
         [Route("{userId}")]
@@ -51,7 +36,7 @@ namespace ChatMe.Web.Controllers
                     Url.Action("GetAvatar", "User", new { id = p.AuthorId }))
                 )
                 .ForMember("AuthorLink", opt => opt.MapFrom(p =>
-                    Url.RouteUrl("UserProfile", new { id = p.AuthorId }))
+                    Url.RouteUrl("UserProfile", new { userName = p.AuthorUserName }))
                 )
             );
 
@@ -70,7 +55,7 @@ namespace ChatMe.Web.Controllers
                     Url.Action("GetAvatar", "User", new { id = p.AuthorId }))
                 )
                 .ForMember("AuthorLink", opt => opt.MapFrom(p =>
-                    Url.RouteUrl("UserProfile", new { id = p.AuthorId }))
+                    Url.RouteUrl("UserProfile", new { userName = p.AuthorUserName }))
                 )
             );
 

@@ -14,6 +14,7 @@ namespace ChatMe.BussinessLogic.DTO
         public int Likes { get; set; }
         public string Author { get; set; }
         public string AuthorId { get; set; }
+        public string AuthorUserName { get; set; }
         public bool IsLikedByMe { get; set; }
     }
 }

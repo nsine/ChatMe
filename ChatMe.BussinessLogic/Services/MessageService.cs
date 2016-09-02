@@ -28,10 +28,10 @@ namespace ChatMe.BussinessLogic.Services
                 User = unitOfWork.Users.FindById(newMessageData.UserId)
             };
 
-            unitOfWork.Messages.Create(newMessage);
+            unitOfWork.Messages.Add(newMessage);
             await unitOfWork.SaveAsync();
 
-            newMessage = unitOfWork.Messages.Get(newMessage.Id);
+            newMessage = unitOfWork.Messages.FindById(newMessage.Id);
             return new MessageDTO {
                 Id = newMessage.Id,
                 Body = newMessage.Body,
@@ -42,7 +42,7 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public IEnumerable<MessageDTO> GetChunk(string userId, int dialogId, int startIndex, int chunkSize) {
-            var dialog = unitOfWork.Dialogs.Get(dialogId);
+            var dialog = unitOfWork.Dialogs.FindById(dialogId);
             var messages = dialog.Messages
                 .OrderByDescending(m => m.Time)
                 .Skip(startIndex)

@@ -31,7 +31,7 @@ namespace ChatMe.BussinessLogic.Services
                 Time = DateTime.Now
             };
 
-            unitOfWork.Posts.Create(newPost);
+            unitOfWork.Posts.Add(newPost);
             await unitOfWork.SaveAsync();
             return true;
         }
@@ -41,13 +41,13 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public PostDTO Get(string userId, string currentUserId, int postId) {
-            var rawPost = unitOfWork.Users
-                .FindById(userId).Posts
+            var rawPost = unitOfWork.Posts
                 .Where(p => p.Id == postId)
                 .FirstOrDefault();
             return new PostDTO {
                 Author = userService.GetUserDisplayName(rawPost.User),
                 AuthorId = rawPost.UserId,
+                AuthorUserName = rawPost.User.UserName,
                 Body = rawPost.Body,
                 Id = rawPost.Id,
                 Likes = rawPost.Likes.Count,
@@ -71,6 +71,7 @@ namespace ChatMe.BussinessLogic.Services
                     Likes = p.Likes.Count,
                     Author = userService.GetUserDisplayName(p.User),
                     AuthorId = p.UserId,
+                    AuthorUserName = p.User.UserName,
                     IsLikedByMe = activityService.IsLiked(new LikedPostDTO {
                         PostId = p.Id,
                         UserId = currentUserId
@@ -85,7 +86,7 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public async Task<bool> Update(NewPostDTO data, int postId) {
-            var post = unitOfWork.Posts.Get(postId);
+            var post = unitOfWork.Posts.FindById(postId);
             post.Body = data.Body;
             unitOfWork.Posts.Update(post);
             await unitOfWork.SaveAsync();
@@ -94,13 +95,17 @@ namespace ChatMe.BussinessLogic.Services
 
         public async Task<IEnumerable<PostDTO>> GetNews(string userId) {
             var user = await unitOfWork.Users.FindByIdAsync(userId);
-            IEnumerable<PostDTO> news = user.Followers.Join(unitOfWork.Posts.GetAll(), u => u.Id, p => p.UserId,
+            IEnumerable<PostDTO> news = user.FollowingUsers.Join(unitOfWork.Posts.GetAll(), u => u.Id, p => p.UserId,
                 (u, p) => new PostDTO {
                     Id = p.Id,
                     Author = p.User.DisplayName,
                     AuthorId = p.UserId,
+                    AuthorUserName = p.User.UserName,
                     Body = p.Body,
-                    IsLikedByMe = p.Likes.Any(like => like.UserId == userId),
+                    IsLikedByMe = activityService.IsLiked(new LikedPostDTO {
+                        PostId = p.Id,
+                        UserId = userId
+                    }),
                     Likes = p.Likes.Count,
                     Time = p.Time
                 });

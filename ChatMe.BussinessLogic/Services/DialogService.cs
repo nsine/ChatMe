@@ -31,13 +31,13 @@ namespace ChatMe.BussinessLogic.Services
                 CreateTime = DateTime.Now
             };
 
-            unitOfWork.Dialogs.Create(newDialog);
+            unitOfWork.Dialogs.Add(newDialog);
             await unitOfWork.SaveAsync();
             return newDialog.Id;
         }
 
         public async Task<bool> Delete(int dialogId) {
-            unitOfWork.Dialogs.Delete(dialogId);
+            unitOfWork.Dialogs.Remove(dialogId);
             await unitOfWork.SaveAsync();
             return true;
         }
@@ -76,7 +76,7 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public int GetIdByMembers(IEnumerable<string> userIds) {
-            var matchedDialogs = unitOfWork.Dialogs.Find(d => d.Users
+            var matchedDialogs = unitOfWork.Dialogs.Where(d => d.Users
                 .Select(u => u.Id)
                 .SequenceEqual(userIds));
             if (matchedDialogs.Count() == 0) {

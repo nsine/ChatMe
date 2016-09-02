@@ -253,6 +253,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Abstract\IdentityController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Models\ChatUser.cs" />
     <Compile Include="Models\DialogInitViewModel.cs" />
@@ -311,6 +312,7 @@
     <Folder Include="Views\Dialog\" />
     <Folder Include="Views\Identity\" />
     <Folder Include="Views\Message\" />
+    <Folder Include="Views\News\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChatMe.BussinessLogic\ChatMe.BussinessLogic.csproj">
