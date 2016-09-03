@@ -1,0 +1,19 @@
+﻿ body {
+    overflow-x: hidden;
+    
+ }
+
+ html {
+     background: #f9f9f9;
+ }
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+}
+
+.col-with-margin {
+    margin: 10px 10px;
+}
+
+@import 'sidebar';

@@ -24,7 +24,7 @@ namespace ChatMe.Web.Controllers
 
             Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, PostViewModel>()
                 .ForMember("AvatarUrl", opt => opt.MapFrom(p =>
-                    Url.Action("GetAvatar", "User", new { id = p.AuthorId }))
+                    Url.Action("GetAvatar", "Users", new { id = p.AuthorId }))
                 )
                 .ForMember("AuthorLink", opt => opt.MapFrom(p =>
                     Url.RouteUrl("UserProfile", new { userName = p.AuthorUserName }))
@@ -39,7 +39,7 @@ namespace ChatMe.Web.Controllers
         [HttpGet]
         [Route("{userId}/{postId}")]
         public ActionResult Get(string userId) {
-            return RedirectToAction("Get", "Post");
+            return RedirectToAction("Get", "Posts");
         }
     }
 }

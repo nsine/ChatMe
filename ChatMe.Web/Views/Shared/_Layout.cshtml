@@ -4,15 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Client/css/bundle")
+    <link href="~/Client/lib/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     @RenderSection("Styles", false)
 </head>
 <body>
     @RenderBody();
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Client/lib/js/jquery-3.1.0.js"></script>
+    <script src="~/Client/lib/js/bootstrap.min.js"></script>
     @RenderSection("Scripts", false)
 </body>
 </html>

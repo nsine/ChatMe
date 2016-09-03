@@ -190,70 +190,76 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\messages.css" />
-    <Content Include="Content\Site.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Client\css\main.css">
+      <DependentUpon>main.scss</DependentUpon>
+    </Content>
+    <Content Include="Client\css\messages.css">
+      <DependentUpon>messages.scss</DependentUpon>
+    </Content>
+    <Content Include="Client\lib\css\bootstrap.css" />
+    <Content Include="Client\lib\css\bootstrap.min.css" />
+    <None Include="Client\css\messages.scss">
+      <Compile>True</Compile>
+      <Minify>True</Minify>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </None>
+    <None Include="Client\css\main.scss">
+      <Compile>True</Compile>
+      <Minify>True</Minify>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </None>
+    <Content Include="Client\lib\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Scripts\angular-mocks.js" />
-    <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Client\lib\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Client\lib\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Client\lib\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Client\lib\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Client\lib\js\angular.js" />
+    <Content Include="Client\lib\js\angular.min.js" />
+    <Content Include="Client\lib\js\bootstrap.js" />
+    <Content Include="Client\lib\js\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Client\css\_sidebar.scss" />
     <None Include="Properties\PublishProfiles\ChatMe.pubxml" />
-    <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
-    <Content Include="Scripts\dialogs-app\app.directive.js" />
-    <Content Include="Scripts\dialogs-app\app.module.js" />
-    <Content Include="Scripts\dialogs-app\app.html" />
-    <Content Include="Scripts\dialogs-app\dialogs-list\dialogs-list.controller.js" />
-    <Content Include="Scripts\dialogs-app\dialogs-service\dialogs-api.service.js" />
-    <Content Include="Scripts\dialogs-app\dialogs-service\dialogs.service.js" />
-    <Content Include="Scripts\dialogs-app\dialogs-service\opened-dialog.service.js" />
-    <Content Include="Scripts\dialogs-app\messages\messages-api.service.js" />
-    <Content Include="Scripts\dialogs-app\messages\messages-list.controller.js" />
-    <Content Include="Scripts\dialogs-app\messages\messages.service.js" />
-    <Content Include="Scripts\dialogs-app\messages\new-message.controller.js" />
-    <Content Include="Scripts\dialogs-app\messages\reverse.filter.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <None Include="Scripts\jquery-3.1.0.intellisense.js" />
-    <Content Include="Scripts\jquery-3.1.0.js" />
-    <Content Include="Scripts\jquery-3.1.0.min.js" />
-    <Content Include="Scripts\jquery-3.1.0.slim.js" />
-    <Content Include="Scripts\jquery-3.1.0.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.1.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\posts-app\app.directive.js" />
-    <Content Include="Scripts\posts-app\app.html" />
-    <Content Include="Scripts\posts-app\app.module.js" />
-    <Content Include="Scripts\posts-app\new-post\new-post.controller.js" />
-    <Content Include="Scripts\posts-app\posts-list\posts-list.controller.js" />
-    <Content Include="Scripts\posts-app\posts-service\posts-api.service.js" />
-    <Content Include="Scripts\posts-app\posts-service\posts.service.js" />
-    <Content Include="Scripts\scrollglue.js" />
-    <Content Include="Scripts\signalr-hub.js" />
-    <Content Include="Scripts\User\settings.js" />
+    <Content Include="Client\js\dialogs-app\app.directive.js" />
+    <Content Include="Client\js\dialogs-app\app.module.js" />
+    <Content Include="Client\js\dialogs-app\app.html" />
+    <Content Include="Client\js\dialogs-app\dialogs-list\dialogs-list.controller.js" />
+    <Content Include="Client\js\dialogs-app\dialogs-service\dialogs-api.service.js" />
+    <Content Include="Client\js\dialogs-app\dialogs-service\dialogs.service.js" />
+    <Content Include="Client\js\dialogs-app\dialogs-service\opened-dialog.service.js" />
+    <Content Include="Client\js\dialogs-app\messages\messages-api.service.js" />
+    <Content Include="Client\js\dialogs-app\messages\messages-list.controller.js" />
+    <Content Include="Client\js\dialogs-app\messages\messages.service.js" />
+    <Content Include="Client\js\dialogs-app\messages\new-message.controller.js" />
+    <Content Include="Client\js\dialogs-app\messages\reverse.filter.js" />
+    <Content Include="Client\lib\js\jquery-3.1.0.js" />
+    <Content Include="Client\lib\js\jquery-3.1.0.min.js" />
+    <None Include="Client\lib\js\jquery.validate-vsdoc.js" />
+    <Content Include="Client\lib\js\jquery.signalR-2.2.1.js" />
+    <Content Include="Client\lib\js\jquery.signalR-2.2.1.min.js" />
+    <Content Include="Client\lib\js\jquery.unobtrusive-ajax.js" />
+    <Content Include="Client\lib\js\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Client\lib\js\jquery.validate.js" />
+    <Content Include="Client\lib\js\jquery.validate.min.js" />
+    <Content Include="Client\lib\js\jquery.validate.unobtrusive.js" />
+    <Content Include="Client\lib\js\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Client\js\posts-app\app.directive.js" />
+    <Content Include="Client\js\posts-app\app.html" />
+    <Content Include="Client\js\posts-app\app.module.js" />
+    <Content Include="Client\js\posts-app\new-post\new-post.controller.js" />
+    <Content Include="Client\js\posts-app\posts-list\posts-list.controller.js" />
+    <Content Include="Client\js\posts-app\posts-service\posts-api.service.js" />
+    <Content Include="Client\js\posts-app\posts-service\posts.service.js" />
+    <Content Include="Client\lib\js\scrollglue.js" />
+    <Content Include="Client\lib\js\signalr-hub.js" />
+    <Content Include="Client\js\user\settings.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -261,11 +267,12 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ActivityController.cs" />
-    <Compile Include="Controllers\DialogController.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\DialogsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Models\ChatUser.cs" />
@@ -277,8 +284,8 @@
     <Compile Include="Models\NewMessageViewModel.cs" />
     <Compile Include="Models\NewPostViewModel.cs" />
     <Compile Include="Models\PostViewModel.cs" />
-    <Compile Include="Controllers\PostController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -297,22 +304,19 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
-    <Content Include="Scripts\jquery-3.1.0.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\_Layout.cshtml" />
-    <Content Include="Views\Account\_Layout.cshtml" />
-    <Content Include="Views\User\Messages.cshtml" />
-    <Content Include="Views\User\AllUsers.cshtml" />
-    <Content Include="Views\User\Settings.cshtml" />
-    <Content Include="Views\User\UserProfile.cshtml" />
-    <Content Include="Views\Activity\FollowAction.cshtml" />
-    <Content Include="Views\User\News.cshtml" />
+    <Content Include="Views\Accounts\Register.cshtml" />
+    <Content Include="Views\Accounts\Login.cshtml" />
+    <Content Include="Views\Users\_Layout.cshtml" />
+    <Content Include="Views\Accounts\_Layout.cshtml" />
+    <Content Include="Views\Users\Messages.cshtml" />
+    <Content Include="Views\Users\AllUsers.cshtml" />
+    <Content Include="Views\Users\Settings.cshtml" />
+    <Content Include="Views\Users\UserProfile.cshtml" />
+    <Content Include="Views\Activities\FollowAction.cshtml" />
+    <Content Include="Views\Users\News.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -322,6 +326,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Avatars\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Client\images\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChatMe.BussinessLogic\ChatMe.BussinessLogic.csproj">

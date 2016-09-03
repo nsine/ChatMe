@@ -1,0 +1,37 @@
+﻿@model ChatMe.Web.Models.AllUsersViewModel
+@using ChatMe.Web.Helpers
+
+@{
+    ViewBag.Title = "AllUsers";
+    Layout = "~/Views/Users/_Layout.cshtml";
+}
+
+<h2>Find friends here</h2>
+
+<div class="users-list container">
+    <div class="row">
+    @foreach (var user in Model.Users) {
+            <div class="panel panel-default col-sm-4 col-with-margin">
+                <div class="row vertical-center">
+                    <img src="@Url.Action("GetAvatar", "User", new { id = user.Id })" alt="" class="col-xs-4 img-responsive">
+                    <div class="col-xs-6">
+                        <a href="@Url.RouteUrl("UserProfile", new { userName = user.UserName })">
+                            <span>@user.DisplayName</span>
+                        </a>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="@Url.Action("NewDialog", "Dialog", new { userId = user.Id })" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-comment"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    }
+    </div>
+</div>
+
+<div class="text-center">
+    @if (Model.PageInfo.TotalPages > 1) {
+        @Html.PageLinks(Model.PageInfo, x => Url.Action("AllUsers", new { page = x }))
+    }
+</div>

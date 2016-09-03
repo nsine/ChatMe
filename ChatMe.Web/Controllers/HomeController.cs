@@ -6,7 +6,7 @@ namespace ChatMe.Web.Controllers
     {
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "User");
+            return RedirectToAction("Index", "Users");
         }
     }
 }

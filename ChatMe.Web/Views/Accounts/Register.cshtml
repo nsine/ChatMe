@@ -1,0 +1,36 @@
+﻿@model ChatMe.Web.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Accounts/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <h2>Register</h2>
+
+        @using (Html.BeginForm()) {
+            @Html.ValidationSummary()
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label for="email">Login:</label>
+                <input type="text" class="form-control" name="UserName" id="login">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="Email" id="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" name="Password" id="password">
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm password:</label>
+                <input type="password" class="form-control" name="PasswordConfirm" id="confirm-password">
+            </div>
+
+            <button type="submit" class="btn btn-default">Submit</button>
+        }
+    </div>
+</div>

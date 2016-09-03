@@ -12,9 +12,15 @@ namespace ChatMe
             routes.MapMvcAttributeRoutes();
 
             routes.MapRoute(
+                name: "MainApp",
+                url: "{action}",
+                defaults: new { controller = "Users", action = "Index" }
+            );
+
+            routes.MapRoute(
                 name: "UserProfile",
                 url: "users/{userName}",
-                defaults: new { controller = "User", action = "UserProfile" }
+                defaults: new { controller = "Users", action = "UserProfile" }
             );
 
             routes.MapRoute(

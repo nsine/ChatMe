@@ -1,0 +1,83 @@
+﻿@model ChatMe.Web.Models.UserProfileViewModel
+
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Users/_Layout.cshtml";
+}
+
+@section Scripts {
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Client/js/posts-app/app.module.js"></script>
+    <script>
+        angular.module("postsApp")
+            .constant('apiPath', '/api/posts/')
+            .value('userInfo', {
+                id: '@Model.Id',
+                isOwner: @Model.IsOwner.ToString().ToLower(),
+            });
+    </script>
+    <script src="~/Client/js/posts-app/app.directive.js"></script>
+    <script src="~/Client/js/posts-app/posts-service/posts.service.js"></script>
+    <script src="~/Client/js/posts-app/posts-service/posts-api.service.js"></script>
+    <script src="~/Client/js/posts-app/posts-list/posts-list.controller.js"></script>
+    <script src="~/Client/js/posts-app/new-post/new-post.controller.js"></script>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="@Url.Action("GetAvatar", "Users", new { id = Model.Id })" class="col-xs-12 img-responsive">
+
+        @if (Model.DisplayName != Model.UserName) {
+            <h2>@Model.DisplayName</h2>
+            <div>@Model.UserName</div>
+        } else {
+            <h2>@Model.UserName</h2>
+        }
+
+
+        @if (!Model.IsOwner) {
+            <div class="row">
+                <div class="col-xs-6">
+                    <a href="@Url.Action("NewDialog", "Dialogs", new { userId = Model.Id })" class="btn btn-primary">
+                        Send message <span class="glyphicon glyphicon-comment"></span>
+                    </a>
+                </div>
+                <div class="col-xs-6">
+                    <span id="follow-button-form">
+                        @Html.Partial("~/Views/Activity/FollowAction.cshtml", new ChatMe.Web.Models.FollowingLinkViewModel {
+                            UserId = Model.Id,
+                            IsFollowing = Model.IsFollowing
+                        })
+                    </span>
+                </div>
+
+            </div>
+
+        }
+
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            @if (Model.Phone != null) {
+                <dt>@Html.DisplayNameFor(model => model.Phone)</dt>
+                <dd>@Html.DisplayFor(model => model.Phone)</dd>
+            }
+            @if (Model.Skype != null) {
+                <dt>@Html.DisplayNameFor(model => model.Skype)</dt>
+                <dd>@Html.DisplayFor(model => model.Skype)</dd>
+            }
+            @if (Model.AboutMe != null) {
+                <dt>@Html.DisplayNameFor(model => model.AboutMe)</dt>
+                <dd>@Html.DisplayFor(model => model.AboutMe)</dd>
+            }
+        </dl>
+    </div>
+    <div class="col-md-8">
+        <div ng-app="postsApp" id="postsApp">
+            <app></app>
+        </div>
+    </div>
+</div>

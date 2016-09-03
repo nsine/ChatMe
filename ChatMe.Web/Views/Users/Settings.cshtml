@@ -1,0 +1,68 @@
+﻿@model ChatMe.Web.Models.UserSettingsViewModel
+
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Users/_Layout.cshtml";
+}
+
+@section Scripts {
+    <script src="~/Client/js/user/settings.js"></script>
+}
+
+<h2>Settings</h2>
+
+@using (Html.BeginForm("Settings", "User", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @Html.HiddenFor(u => u.Id);
+    <div class="form-group">
+        <img class="img-thumbnail" id="avatar-preview" width="150" height="150" src="@Url.Action("GetAvatar", "Users", new { id = Model.Id })" />
+
+        <label class="btn btn-default btn-file">
+            Browse <input id="avatar-input" type="file" style="display: none;">
+        </label>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName)
+        @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Phone)
+        @Html.EditorFor(m => m.Phone, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Skype)
+        @Html.EditorFor(m => m.Skype, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.AboutMe)
+        @Html.TextAreaFor(m => m.AboutMe, new { @class = "form-control", rows = "10" })
+    </div>
+    <div class="form-inline form-group">
+        <div class="form-group">
+            @Html.LabelFor(m => m.NewPassword)
+            @Html.EditorFor(m => m.NewPassword, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.NewPasswordConfirmation)
+            @Html.EditorFor(m => m.NewPasswordConfirmation, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            <label>(optional)</label>
+        </div>
+    </div>
+
+
+    <div class="form-group form-inline">
+        @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control", placeholder="Password" } })
+        <button type="submit" class="btn btn-primary">Change Settings</button>
+        <a class="btn btn-danger">Back</a>
+    </div>
+}

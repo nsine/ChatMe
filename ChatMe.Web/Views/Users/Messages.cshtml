@@ -1,0 +1,43 @@
+﻿@* Dialog id that must be opened *@
+@model ChatMe.Web.Models.DialogInitViewModel
+
+@{
+    ViewBag.Title = "Messages";
+    Layout = "~/Views/Users/_Layout.cshtml";
+}
+
+@section Styles {
+    @Styles.Render("~/Client/css/messages")
+}
+
+@section Scripts {
+    <script src="~/Client/lib/js/jquery.signalR-2.2.1.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Client/lib/js/angular.js"></script>
+    <script src="~/Client/js/dialogs-app/app.module.js"></script>
+    <script>
+        angular.module("dialogsApp")
+            .value("initInfo", {
+                dialogId: '@Model.DialogId',
+                userId: '@Model.UserId'
+            });
+    </script>   
+    <script src="~/Client/lib/js/scrollglue.js"></script>
+    <script src="~/Client/lib/js/signalr-hub.js"></script>
+    <script src="~/Client/js/dialogs-app/dialogs-service/opened-dialog.service.js"></script>
+    <script src="~/Client/js/dialogs-app/dialogs-service/dialogs.service.js"></script>
+    <script src="~/Client/js/dialogs-app/dialogs-service/dialogs-api.service.js"></script>
+    <script src="~/Client/js/dialogs-app/dialogs-list/dialogs-list.controller.js"></script>
+
+    <script src="~/Client/js/dialogs-app/messages/messages-api.service.js"></script>
+    <script src="~/Client/js/dialogs-app/messages/messages.service.js"></script>
+    <script src="~/Client/js/dialogs-app/messages/reverse.filter.js"></script>
+    <script src="~/Client/js/dialogs-app/app.directive.js"></script>
+    <script src="~/Client/js/dialogs-app/messages/messages-list.controller.js"></script>
+    <script src="~/Client/js/dialogs-app/messages/new-message.controller.js"></script>
+    @*<script src="~/Client/js/dialogs-app/new-post/new-dialogs.controller.js"></script>*@
+}
+
+<div ng-app="dialogsApp">
+    <app></app>
+</div>
