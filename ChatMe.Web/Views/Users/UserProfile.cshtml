@@ -6,7 +6,7 @@
 }
 
 @section Scripts {
-    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Client/lib/js/angular.js"></script>
     <script src="~/Client/js/posts-app/app.module.js"></script>
     <script>
         angular.module("postsApp")
@@ -25,7 +25,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <img src="@Url.Action("GetAvatar", "Users", new { id = Model.Id })" class="col-xs-12 img-responsive">
+        <img src="@Url.RouteUrl("Avatar", new { userId = Model.Id })" class="col-xs-12 img-responsive">
 
         @if (Model.DisplayName != Model.UserName) {
             <h2>@Model.DisplayName</h2>

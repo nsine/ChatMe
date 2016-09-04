@@ -49,7 +49,7 @@ namespace ChatMe.Web.Hubs
 
             var createdMessageData = await messageService.Create(newMessageData);
             Mapper.Initialize(cfg => cfg.CreateMap<MessageDTO, MessageViewModel>()
-                .ForMember("AuthorAvatarUrl", opt => opt.MapFrom(m => $"/avatar/{m.AuthorId}"))
+                .ForMember("AuthorAvatarUrl", opt => opt.MapFrom(m => $"/avatars/{m.AuthorId}"))
             );
 
             var createdMessage = Mapper.Map<MessageViewModel>(createdMessageData);

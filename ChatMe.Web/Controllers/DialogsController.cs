@@ -22,11 +22,15 @@ namespace ChatMe.Web.Controllers
         [HttpGet]
         [Route("")]
         public ActionResult GetAll(int startIndex = 0, int count = 0) {
-            var userId = User.Identity.GetUserId();
-            var dialogsData = dialogService.GetChunk(userId, startIndex, count);
+            var myId = User.Identity.GetUserId();
+            var dialogsData = dialogService.GetChunk(myId, startIndex, count);
             var dialogs = dialogsData
                 .Select(d => new DialogViewModel(d) {
-                    AvatarUrl = Url.Action("GetAvatar", "Users", new { id = "todo" })
+                    AvatarUrl = Url.RouteUrl("Avatar", new {
+                        userId = d.Users
+                            .Where(u => u.Id != myId)
+                            .FirstOrDefault().Id
+                    })
                 });
 
             return Json(dialogs.ToList(), JsonRequestBehavior.AllowGet);

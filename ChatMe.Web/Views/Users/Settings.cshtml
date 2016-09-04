@@ -14,7 +14,7 @@
 @using (Html.BeginForm("Settings", "User", FormMethod.Post, new { enctype = "multipart/form-data" })) {
     @Html.HiddenFor(u => u.Id);
     <div class="form-group">
-        <img class="img-thumbnail" id="avatar-preview" width="150" height="150" src="@Url.Action("GetAvatar", "Users", new { id = Model.Id })" />
+        <img class="img-thumbnail" id="avatar-preview" width="150" height="150" src="@Url.RouteUrl("Avatar", new { userId = Model.Id })" />
 
         <label class="btn btn-default btn-file">
             Browse <input id="avatar-input" type="file" style="display: none;">

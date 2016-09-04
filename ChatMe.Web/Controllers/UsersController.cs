@@ -17,12 +17,10 @@ namespace ChatMe.Web.Controllers
     {
         private IUnitOfWork unitOfWork;
         private IUserService userService;
-        private IAvatarService avatarService;
 
-        public UsersController(IUnitOfWork uow, IUserService userService, IAvatarService avatarService) {
+        public UsersController(IUnitOfWork uow, IUserService userService) {
             unitOfWork = uow;
             this.userService = userService;
-            this.avatarService = avatarService;
         }
 
         public ActionResult Index() {
@@ -127,14 +125,6 @@ namespace ChatMe.Web.Controllers
             } else {
                 return View(viewModel);
             }
-        }
-
-        [Route("avatar/{id}")]
-        public ActionResult GetAvatar(string id) {
-            var user = unitOfWork.Users.FindById(id);
-            var avatarInfo = avatarService.GetPath(user, Server.MapPath);
-
-            return File(avatarInfo.Path, avatarInfo.Type);
         }
     }
 }

@@ -13,7 +13,7 @@
     @foreach (var user in Model.Users) {
             <div class="panel panel-default col-sm-4 col-with-margin">
                 <div class="row vertical-center">
-                    <img src="@Url.Action("GetAvatar", "User", new { id = user.Id })" alt="" class="col-xs-4 img-responsive">
+                    <img src="@Url.RouteUrl("Avatar", new { userId = user.Id })" alt="" class="col-xs-4 img-responsive">
                     <div class="col-xs-6">
                         <a href="@Url.RouteUrl("UserProfile", new { userName = user.UserName })">
                             <span>@user.DisplayName</span>

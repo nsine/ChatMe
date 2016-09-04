@@ -27,7 +27,7 @@ namespace ChatMe.Web.Controllers
             var postsData = postService.GetChunk(userId, User.Identity.GetUserId(), startIndex, count);
             Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, PostViewModel>()
                 .ForMember("AvatarUrl", opt => opt.MapFrom(p =>
-                    Url.Action("GetAvatar", "Users", new { id = p.AuthorId }))
+                   Url.RouteUrl("Avatar", new { userId = p.AuthorId }))
                 )
                 .ForMember("AuthorLink", opt => opt.MapFrom(p =>
                     Url.RouteUrl("UserProfile", new { userName = p.AuthorUserName }))
@@ -46,7 +46,7 @@ namespace ChatMe.Web.Controllers
 
             Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, PostViewModel>()
                 .ForMember("AvatarUrl", opt => opt.MapFrom(p =>
-                    Url.Action("GetAvatar", "Users", new { id = p.AuthorId }))
+                    Url.RouteUrl("Avatar", new { userId = p.AuthorId }))
                 )
                 .ForMember("AuthorLink", opt => opt.MapFrom(p =>
                     Url.RouteUrl("UserProfile", new { userName = p.AuthorUserName }))

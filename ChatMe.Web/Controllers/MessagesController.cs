@@ -27,7 +27,7 @@ namespace ChatMe.Web.Controllers
 
             Mapper.Initialize(cfg => cfg.CreateMap<MessageDTO, MessageViewModel>()
                 .ForMember("AuthorAvatarUrl", opt => opt.MapFrom(m =>
-                    Url.Action("GetAvatar", "Users", new { id = m.AuthorId }))
+                   Url.RouteUrl("Avatar", new { userId = m.AuthorId }))
                 )
             );
 

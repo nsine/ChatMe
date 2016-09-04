@@ -277,8 +277,10 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\AvatarsController.cs" />
     <Compile Include="Controllers\DialogsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
@@ -335,9 +337,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Avatars\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Custom\" />
     <Folder Include="Client\images\" />
+    <Folder Include="Views\Avatar\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChatMe.BussinessLogic\ChatMe.BussinessLogic.csproj">
