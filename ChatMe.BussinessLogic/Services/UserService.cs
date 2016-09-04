@@ -121,7 +121,7 @@ namespace ChatMe.BussinessLogic.Services
             me.UserInfo.AboutMe = settingsData.AboutMe;
 
             if (settingsData.Avatar != null) {
-                var extension = settingsData.Avatar.ContentType.Split('/')[1];
+                var extension = settingsData.Avatar.FileName.Split('.').Last();
                 var filename = $"{me.Id}.{extension}";
                 var savePath = Path.Combine(ConfigurationManager.AppSettings["avatarPath"].ToString(),
                     filename);

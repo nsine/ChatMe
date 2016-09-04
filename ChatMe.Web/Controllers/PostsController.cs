@@ -13,11 +13,11 @@ namespace ChatMe.Web.Controllers
     [RoutePrefix("api/posts")]
     public class PostsController : Controller
     {
-            private IPostService postService;
+        private IPostService postService;
 
-            public PostsController(IPostService postService) {
-                this.postService = postService;
-            }
+        public PostsController(IPostService postService) {
+            this.postService = postService;
+        }
 
         
 
