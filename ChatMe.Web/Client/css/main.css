@@ -4,6 +4,11 @@ body {
 html {
   background: #f9f9f9; }
 
+input,
+select,
+textarea {
+  max-width: 280px; }
+
 .vertical-center {
   display: flex;
   align-items: center; }

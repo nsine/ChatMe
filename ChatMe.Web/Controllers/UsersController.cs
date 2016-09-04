@@ -43,7 +43,7 @@ namespace ChatMe.Web.Controllers
             var userProfileData = userService.GetUserProfile(userName, User.Identity.GetUserId());
 
             if (userProfileData == null) {
-                throw new HttpException(404, "User not found");
+                return HttpNotFound("User not found");
             }
 
             Mapper.Initialize(cfg => {

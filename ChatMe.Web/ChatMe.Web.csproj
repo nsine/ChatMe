@@ -190,6 +190,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\css\admin\users.css">
+      <DependentUpon>users.scss</DependentUpon>
+    </Content>
     <Content Include="Client\css\main.css">
       <DependentUpon>main.scss</DependentUpon>
     </Content>
@@ -206,6 +209,7 @@
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Client\css\admin\users.scss" />
     <None Include="Client\css\messages.scss">
       <Compile>True</Compile>
       <Minify>True</Minify>
@@ -223,7 +227,6 @@
       <DebugInfo>False</DebugInfo>
     </None>
     <Content Include="Client\lib\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Client\lib\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Client\lib\fonts\glyphicons-halflings-regular.woff" />
@@ -277,6 +280,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\Models\NewUserViewModel.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />

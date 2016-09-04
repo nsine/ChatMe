@@ -1,4 +1,4 @@
-﻿@model ChatMe.DataAccess.Entities.User
+﻿@model ChatMe.Web.Areas.Admin.Models.UserViewModel
 
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -8,98 +8,69 @@
 <h2>Details</h2>
 
 <div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
+    <h4>User @Model.UserName</h4>
+    <div class="row">
+        <div class="col-sm-3">
+            <img src="@Model.AvatarPath" class="img-responsive user-avatar-preview" />
+            <hr />
+        </div>
+        <div class="col-sm-9">
+            <dl class="dl-horizontal">
+                <dt>Id</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Id)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
+                <dt>User name</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.UserName)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+                <dt>First name</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                <dt>Last name</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EmailConfirmed)
-        </dt>
+                <dt>Email</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.EmailConfirmed)
-        </dd>
+                <dt>Registration date</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.RegistrationDate)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PasswordHash)
-        </dt>
+                <dt>Phone</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Phone)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PasswordHash)
-        </dd>
+                <dt>Skype</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Skype)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SecurityStamp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SecurityStamp)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumberConfirmed)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TwoFactorEnabled)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LockoutEndDateUtc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LockoutEnabled)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LockoutEnabled)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AccessFailedCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AccessFailedCount)
-        </dd>
-
-    </dl>
+                <dt>About me</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.AboutMe)
+                </dd>
+                <dt>Roles</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.RolesString)
+                </dd>
+                <dt>First name</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+            </dl>
+        </div>
+    </div>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

@@ -11,6 +11,11 @@ namespace ChatMe.Web.App_Start
             bundles.Add(new StyleBundle("~/Client/css/messages").Include(
                         "~/Client/css/messages.css"));
 
+            bundles.Add(new StyleBundle("~/Clients/css/admin").Include(
+                        "~/Client/css/admin/users.css"));
+
+            
+
             //bundles.Add(new ScriptBundle("~/bundles/base").Include(
             //            "~/Scripts/jquery-{version}.js",
             //             "~/Scripts/bootstrap.js"));
