@@ -16,7 +16,7 @@ namespace ChatMe.DataAccess.Interfaces
 
         DbContext GetDb();
 
-        void Save();
-        Task SaveAsync();
+        void SaveChanges();
+        Task SaveChangesAsync();
     }
 }

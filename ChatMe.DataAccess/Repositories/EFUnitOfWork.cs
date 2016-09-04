@@ -73,18 +73,18 @@ namespace ChatMe.DataAccess.Repositories
             }
         }
 
-        public void Save()
+        public void SaveChanges()
         {
             var a = db.SaveChanges();
             a = 5;
         }
 
-        public async Task SaveAsync() {
+        public async Task SaveChangesAsync() {
             await db.SaveChangesAsync();
         }
 
         public void Dispose() {
-            userRepo.Dispose();
+            userRepo?.Dispose();
             db.Dispose();
         }
 

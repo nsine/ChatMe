@@ -198,6 +198,14 @@
     </Content>
     <Content Include="Client\lib\css\bootstrap.css" />
     <Content Include="Client\lib\css\bootstrap.min.css" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <None Include="Client\css\messages.scss">
       <Compile>True</Compile>
       <Minify>True</Minify>
@@ -215,6 +223,7 @@
       <DebugInfo>False</DebugInfo>
     </None>
     <Content Include="Client\lib\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Client\lib\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Client\lib\fonts\glyphicons-halflings-regular.woff" />
@@ -224,7 +233,6 @@
     <Content Include="Client\lib\js\angular.min.js" />
     <Content Include="Client\lib\js\bootstrap.js" />
     <Content Include="Client\lib\js\bootstrap.min.js" />
-    <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Client\css\_sidebar.scss" />
     <None Include="Properties\PublishProfiles\ChatMe.pubxml" />
     <Content Include="Client\js\dialogs-app\app.directive.js" />
@@ -268,6 +276,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\DialogsController.cs" />
@@ -326,9 +335,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Avatars\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Admin\Views\Custom\" />
     <Folder Include="Client\images\" />
   </ItemGroup>
   <ItemGroup>

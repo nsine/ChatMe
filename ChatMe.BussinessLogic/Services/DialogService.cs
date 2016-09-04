@@ -31,13 +31,13 @@ namespace ChatMe.BussinessLogic.Services
             };
 
             db.Dialogs.Add(newDialog);
-            await db.SaveAsync();
+            await db.SaveChangesAsync();
             return newDialog.Id;
         }
 
         public async Task<bool> Delete(int dialogId) {
             db.Dialogs.Remove(dialogId);
-            await db.SaveAsync();
+            await db.SaveChangesAsync();
             return true;
         }
 

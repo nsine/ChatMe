@@ -9,24 +9,28 @@ namespace ChatMe
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
             routes.MapMvcAttributeRoutes();
 
             routes.MapRoute(
                 name: "MainApp",
                 url: "{action}",
-                defaults: new { controller = "Users", action = "Index" }
+                defaults: new { controller = "Users", action = "Index" },
+                namespaces: new[] { "ChatMe.Web.Controllers" }
             );
 
             routes.MapRoute(
                 name: "UserProfile",
                 url: "users/{userName}",
-                defaults: new { controller = "Users", action = "UserProfile" }
+                defaults: new { controller = "Users", action = "UserProfile" },
+                namespaces: new[] { "ChatMe.Web.Controllers" }
             );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "ChatMe.Web.Controllers" }
             );
         }
     }

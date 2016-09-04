@@ -132,7 +132,7 @@ namespace ChatMe.BussinessLogic.Services
             }
 
             await db.Users.UpdateAsync(me);
-            await db.SaveAsync();
+            await db.SaveChangesAsync();
 
             result.Succeeded = true;
             return result;

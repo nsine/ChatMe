@@ -28,9 +28,9 @@ namespace ChatMe.BussinessLogic.Services
             };
 
             db.Messages.Add(newMessage);
-            await db.SaveAsync();
+            await db.SaveChangesAsync();
 
-            newMessage = db.Messages.FindById(newMessage.Id);
+            newMessage = db.Messages.Find(newMessage.Id);
             return new MessageDTO {
                 Id = newMessage.Id,
                 Body = newMessage.Body,
@@ -41,7 +41,7 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public IEnumerable<MessageDTO> GetChunk(string userId, int dialogId, int startIndex, int chunkSize) {
-            var dialog = db.Dialogs.FindById(dialogId);
+            var dialog = db.Dialogs.Find(dialogId);
             var messages = dialog.Messages
                 .OrderByDescending(m => m.Time)
                 .Skip(startIndex)

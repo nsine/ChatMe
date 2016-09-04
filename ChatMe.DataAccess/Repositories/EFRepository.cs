@@ -20,14 +20,14 @@ namespace ChatMe.DataAccess.Repositories
         }
 
         public void Remove(object id) {
-            db.Set<T>().Remove(FindById(id));
+            db.Set<T>().Remove(Find(id));
         }
 
         public IQueryable<T> Where(Func<T, bool> predicate) {
             return db.Set<T>().Where(predicate).AsQueryable();
         }
 
-        public T FindById(object id) {
+        public T Find(object id) {
             return db.Set<T>().Find(id);
         }
 

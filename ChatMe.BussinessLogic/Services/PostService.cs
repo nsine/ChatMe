@@ -31,7 +31,7 @@ namespace ChatMe.BussinessLogic.Services
             };
 
             db.Posts.Add(newPost);
-            await db.SaveAsync();
+            await db.SaveChangesAsync();
             return true;
         }
 
@@ -85,10 +85,10 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public async Task<bool> Update(NewPostDTO data, int postId) {
-            var post = db.Posts.FindById(postId);
+            var post = db.Posts.Find(postId);
             post.Body = data.Body;
             db.Posts.Update(post);
-            await db.SaveAsync();
+            await db.SaveChangesAsync();
             return true;
         }
 
