@@ -3,6 +3,7 @@
 
 # ASP.NET MVC Data
 App_Data/
+/ChatMe.Web/Client/dist
 
 # User-specific files
 *.suo

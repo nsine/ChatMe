@@ -17,8 +17,6 @@ namespace ChatMe.DataAccess.EF
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Dialogs)
                 .WithMany(d => d.Users);
@@ -39,6 +37,8 @@ namespace ChatMe.DataAccess.EF
                     .MapLeftKey("UserId")
                     .MapRightKey("FollowerId");
                 });
+
+            base.OnModelCreating(modelBuilder);
         }
 
         public static ChatMeContext Create()

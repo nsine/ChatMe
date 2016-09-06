@@ -66,7 +66,7 @@ namespace ChatMe.Web.Controllers
                 dialogId = await Create(newDialogViewModel);
             }
 
-            return RedirectToAction("Messages", "User", new { dialogId = dialogId });
+            return RedirectToAction("Messages", "Users", new { dialogId = dialogId });
         }
     }
 }

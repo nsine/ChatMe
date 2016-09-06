@@ -6,21 +6,18 @@
 }
 
 @section Scripts {
-    <script src="~/Client/lib/js/angular.js"></script>
-    <script src="~/Client/js/posts-app/app.module.js"></script>
+    <script src="~/node_modules/angular/angular.js"></script>
+    <script src="~/Client/lib/js/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Client/dist/postsApp.js"></script>
+
     <script>
         angular.module("postsApp")
-            .constant('apiPath', '/api/posts/')
+            .value('apiPath', '/api/posts/')
             .value('userInfo', {
                 id: '@Model.Id',
                 isOwner: @Model.IsOwner.ToString().ToLower(),
             });
     </script>
-    <script src="~/Client/js/posts-app/app.directive.js"></script>
-    <script src="~/Client/js/posts-app/posts-service/posts.service.js"></script>
-    <script src="~/Client/js/posts-app/posts-service/posts-api.service.js"></script>
-    <script src="~/Client/js/posts-app/posts-list/posts-list.controller.js"></script>
-    <script src="~/Client/js/posts-app/new-post/new-post.controller.js"></script>
 }
 
 <div class="row">
@@ -44,7 +41,7 @@
                 </div>
                 <div class="col-xs-6">
                     <span id="follow-button-form">
-                        @Html.Partial("~/Views/Activity/FollowAction.cshtml", new ChatMe.Web.Models.FollowingLinkViewModel {
+                        @Html.Partial("~/Views/Activities/FollowAction.cshtml", new ChatMe.Web.Models.FollowingLinkViewModel {
                             UserId = Model.Id,
                             IsFollowing = Model.IsFollowing
                         })

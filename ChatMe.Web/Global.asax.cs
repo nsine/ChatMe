@@ -1,5 +1,4 @@
 ﻿using ChatMe.DataAccess.EF;
-using ChatMe.Web.App_Start;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -17,7 +16,6 @@ namespace ChatMe
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }

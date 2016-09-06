@@ -6,8 +6,8 @@
 }
 
 @section Scripts {
-    <script src="~/Client/lib/js/angular.js"></script>
-    <script src="~/Client/js/posts-app/app.module.js"></script>
+    <script src="~/node_modules/angular/angular.js"></script>
+    <script src="~/Client/dist/postsApp.js"></script>
     <script>
         angular.module("postsApp")
             .constant('apiPath', '/api/news/')
@@ -16,11 +16,6 @@
                 isOwner: false
             });
     </script>
-    <script src="~/Client/js/posts-app/app.directive.js"></script>
-    <script src="~/Client/js/posts-app/posts-service/posts.service.js"></script>
-    <script src="~/Client/js/posts-app/posts-service/posts-api.service.js"></script>
-    <script src="~/Client/js/posts-app/posts-list/posts-list.controller.js"></script>
-    <script src="~/Client/js/posts-app/new-post/new-post.controller.js"></script>
 }   
 
 <h2>News</h2>
