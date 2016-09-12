@@ -1,0 +1,11 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "View";
+}
+
+<ul>
+    <li>@Html.ActionLink("Users", "index", "users", new { Area = "admin" }, new { });</li>
+    <li>@Html.ActionLink("Posts", "index", "posts", new { Area = "admin" }, new { });</li>
+</ul>
+

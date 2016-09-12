@@ -1,4 +1,5 @@
-﻿"use strict";
+/// <binding BeforeBuild='Run - Development' />
+"use strict";
 
 module.exports = {
     entry: {
@@ -6,7 +7,7 @@ module.exports = {
         postsApp: "./Client/src/posts-app.js",
         dialogsApp: "./Client/src/dialogs-app.js",
         settings: "./Client/src/settings.js",
-        adminUsers: "./Client/src/admin.users.js"
+        admin: "./Client/src/admin.js"
     },
     output: {
         filename: "./Client/dist/[name].js"

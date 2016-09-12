@@ -70,7 +70,7 @@ namespace ChatMe.Web.Controllers
 
             var usersOnPageData = allUsersData
                 .Skip((page - 1) * pageSize)
-                .Take(pageSize);
+                .Take(pageSize).ToList();
 
             Mapper.Initialize(cfg => cfg.CreateMap<UserInfoDTO, UserPreviewViewModel>());
             var usersOnPage = Mapper.Map<IEnumerable<UserPreviewViewModel>>(usersOnPageData);
