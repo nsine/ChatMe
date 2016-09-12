@@ -9,60 +9,68 @@
     <script src="~/Client/dist/settings.js"></script>
 }
 
-<h2>Settings</h2>
+<div class="w3-col m3">&nbsp;</div>
+<div class="w3-col m6">
+    @using (Html.BeginForm("Settings", "Users", FormMethod.Post,
+    new { enctype = "multipart/form-data", @class = "w3-container" })) {
 
-@using (Html.BeginForm("Settings", "Users", FormMethod.Post, new { enctype = "multipart/form-data" })) {
-    @Html.HiddenFor(u => u.Id);
+    @Html.HiddenFor(u => u.Id)
+    <h2>Settings</h2>
     <div class="form-group">
-        <img class="img-thumbnail" id="avatar-preview" width="150" height="150" src="@Url.RouteUrl("Avatar", new { userId = Model.Id })" />
+        <img class="img-thumbnail" id="avatar-preview" width="150" height="150"
+            src="@Url.RouteUrl("Avatar", new { userId = Model.Id })" />
 
-        <label class="btn btn-default btn-file">
+        <label class="w3-btn w3-white w3-border">
             Browse <input id="avatar-input" type="file" name="avatar" style="display: none;">
         </label>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.FirstName)
-        @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "w3-input w3-border" } })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.LastName)
-        @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "w3-input w3-border" } })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Email)
-        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "w3-input w3-border" } })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Phone)
-        @Html.EditorFor(m => m.Phone, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(m => m.Phone, new { htmlAttributes = new { @class = "w3-input w3-border" } })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Skype)
-        @Html.EditorFor(m => m.Skype, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(m => m.Skype, new { htmlAttributes = new { @class = "w3-input w3-border" } })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.AboutMe)
-        @Html.TextAreaFor(m => m.AboutMe, new { @class = "form-control", rows = "10" })
+        @Html.TextAreaFor(m => m.AboutMe, new { @class = "w3-input w3-border", rows = "10" })
     </div>
     <div class="form-inline form-group">
         <div class="form-group">
             @Html.LabelFor(m => m.NewPassword)
-            @Html.EditorFor(m => m.NewPassword, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(m => m.NewPassword, new { htmlAttributes = new { @class = "w3-input w3-border", placeholder = "Optional" } })
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.NewPasswordConfirmation)
-            @Html.EditorFor(m => m.NewPasswordConfirmation, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="form-group">
-            <label>(optional)</label>
+            @Html.EditorFor(m => m.NewPasswordConfirmation, new { htmlAttributes = new { @class = "w3-input w3-border" } })
         </div>
     </div>
 
 
     <div class="form-group form-inline">
-        @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control", placeholder="Password" } })
-        <button type="submit" class="btn btn-primary">Change Settings</button>
-        <a class="btn btn-danger">Back</a>
+        <div class="form-group">
+            @Html.EditorFor(m => m.Password, new { htmlAttributes =
+                new { @class = "w3-input w3-border", placeholder="Password" } })
+        </div>
+            <div class="form-group">
+                <button type="submit" class="w3-btn w3-green">Change Settings</button>
+                <a href="@Url.Action("index")" class="w3-btn w3-red">Back</a>
+
+            </div>
     </div>
-}
+    }
+</div>

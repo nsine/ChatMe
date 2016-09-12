@@ -31,9 +31,8 @@
             } else {
                 <h4 class="w3-center">@Model.UserName</h4>
             }
-            <p class="w3-center">
-                <img src="@Url.RouteUrl("Avatar", new { userId = Model.Id })"
-                    class="w3-circle" style="height:106px;width:106px" alt="Avatar">
+            <p class="w3-center w3-row">
+                <img src="@Url.RouteUrl("Avatar", new { userId = Model.Id })" class="w3-col" alt="Avatar">
             </p>
             <hr>
             <p><i class="fa fa-envelope-o fa-fw w3-margin-right w3-text-theme"></i> @Html.DisplayFor(model => model.Email)</p>
