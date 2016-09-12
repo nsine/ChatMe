@@ -1,4 +1,4 @@
-/// <binding BeforeBuild='Run - Development' />
+/// <binding />
 "use strict";
 
 module.exports = {

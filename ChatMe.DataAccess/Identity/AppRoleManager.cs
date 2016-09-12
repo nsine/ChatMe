@@ -10,17 +10,6 @@ namespace ChatMe.DataAccess.Identity
 {
     public class AppRoleManager : RoleManager<Role>
     {
-        public AppRoleManager(IRoleStore<Role, string> store) : base(store) {
-            SeedRoles();           
-        }
-
-        private void SeedRoles() {
-            if (!this.RoleExists("admin")) {
-                this.Create(new Role { Name = "admin" });
-            }
-            if (!this.RoleExists("user")) {
-                this.Create(new Role { Name = "user" });
-            }
-        }
+        public AppRoleManager(IRoleStore<Role, string> store) : base(store) { }
     }
 }

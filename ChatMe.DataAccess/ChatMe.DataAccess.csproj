@@ -94,7 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF\ChatMeContext.cs" />
-    <Compile Include="EF\EFDbInitializer.cs" />
     <Compile Include="Entities\Dialog.cs" />
     <Compile Include="Entities\Like.cs" />
     <Compile Include="Entities\Post.cs" />

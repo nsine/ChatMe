@@ -1,5 +1,10 @@
 namespace ChatMe.DataAccess.Migrations
 {
+    using EF;
+    using Entities;
+    using Identity;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,18 +19,28 @@ namespace ChatMe.DataAccess.Migrations
 
         protected override void Seed(ChatMe.DataAccess.EF.ChatMeContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var roleManager = new AppRoleManager(new RoleStore<Role>(context));
+            var userManager = new AppUserManager(new UserStore<User>(context));
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            if (!roleManager.RoleExists("admin")) {
+                roleManager.Create(new Role { Name = "admin" });
+            }
+            if (!roleManager.RoleExists("user")) {
+                roleManager.Create(new Role { Name = "user" });
+            }
+
+            if (userManager.FindByName("admin") == null) {
+                var admin = new User {
+                    UserName = "admin",
+                    Email = "admin@adminemail.com",
+                    UserInfo = new UserInfo {
+                        RegistrationDate = DateTime.Now
+                    }
+                };
+                var adminPassword = "adminpass";
+                userManager.Create(admin, adminPassword);
+                userManager.AddToRole(admin.Id, "admin");
+            }
         }
     }
 }

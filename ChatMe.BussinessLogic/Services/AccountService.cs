@@ -6,6 +6,7 @@ using Microsoft.Owin.Security;
 using System.Threading.Tasks;
 using ChatMe.BussinessLogic.Services.Abstract;
 using ChatMe.DataAccess.Interfaces;
+using System.Linq;
 
 namespace ChatMe.BussinessLogic.Services
 {
@@ -29,7 +30,14 @@ namespace ChatMe.BussinessLogic.Services
                 }
             };
 
-            return await db.Users.CreateAsync(user, data.Password);
+
+            var result = await db.Users.CreateAsync(user, data.Password);
+
+            if (result.Succeeded) {
+                db.Users.AddToRole(user.Id, "user");
+            }
+
+            return result;
         }
 
         public async Task<bool> Login(LoginDTO data) {
