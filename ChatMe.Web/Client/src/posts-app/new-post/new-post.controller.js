@@ -21,7 +21,7 @@ export default function NewPostController(postsService, $timeout, userInfo) {
 
     self.activateForm = function ()  {
         self.isSendBtnVisible = true;
-        self.textRows = 10;
+        self.textRows = 5;
     }
 
     self.deactivateForm = function (event) {

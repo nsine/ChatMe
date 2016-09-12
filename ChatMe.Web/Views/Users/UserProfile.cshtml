@@ -20,61 +20,51 @@
     </script>
 }
 
-<div class="row">
-    <div class="col-md-4">
-        <img src="@Url.RouteUrl("Avatar", new { userId = Model.Id })" class="col-xs-12 img-responsive">
-
-        @if (Model.DisplayName != Model.UserName) {
-            <h2>@Model.DisplayName</h2>
-            <div>@Model.UserName</div>
-        } else {
-            <h2>@Model.UserName</h2>
-        }
-
-
-        @if (!Model.IsOwner) {
-            <div class="row">
-                <div class="col-xs-6">
-                    <a href="@Url.Action("NewDialog", "Dialogs", new { userId = Model.Id })" class="btn btn-primary">
-                        Send message <span class="glyphicon glyphicon-comment"></span>
-                    </a>
-                </div>
-                <div class="col-xs-6">
-                    <span id="follow-button-form">
-                        @Html.Partial("~/Views/Activities/FollowAction.cshtml", new ChatMe.Web.Models.FollowingLinkViewModel {
-                            UserId = Model.Id,
-                            IsFollowing = Model.IsFollowing
-                        })
-                    </span>
-                </div>
-
-            </div>
-
-        }
-
-        <dl class="dl-horizontal">
-            <dt>@Html.DisplayNameFor(model => model.Email)</dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
+<!-- Left Column -->
+<div class="w3-col m3">
+    <!-- Profile -->
+    <div class="w3-card-2 w3-round w3-white">
+        <div class="w3-container">
+            @if (Model.DisplayName != Model.UserName) {
+                <h4 class="w3-center">@Model.DisplayName</h4>
+                <h6 class="w3-center">@Model.UserName</h6>
+            } else {
+                <h4 class="w3-center">@Model.UserName</h4>
+            }
+            <p class="w3-center">
+                <img src="@Url.RouteUrl("Avatar", new { userId = Model.Id })"
+                    class="w3-circle" style="height:106px;width:106px" alt="Avatar">
+            </p>
+            <hr>
+            <p><i class="fa fa-envelope-o fa-fw w3-margin-right w3-text-theme"></i> @Html.DisplayFor(model => model.Email)</p>
             @if (Model.Phone != null) {
-                <dt>@Html.DisplayNameFor(model => model.Phone)</dt>
-                <dd>@Html.DisplayFor(model => model.Phone)</dd>
+                <p><i class="fa fa-phone fa-fw w3-margin-right w3-text-theme"></i> @Html.DisplayFor(model => model.Phone)</p>
             }
             @if (Model.Skype != null) {
-                <dt>@Html.DisplayNameFor(model => model.Skype)</dt>
-                <dd>@Html.DisplayFor(model => model.Skype)</dd>
+                <p><i class="fa fa-skype fa-fw w3-margin-right w3-text-theme"></i> @Html.DisplayFor(model => model.Skype)</p>
             }
-            @if (Model.AboutMe != null) {
-                <dt>@Html.DisplayNameFor(model => model.AboutMe)</dt>
-                <dd>@Html.DisplayFor(model => model.AboutMe)</dd>
-            }
-        </dl>
-    </div>
-    <div class="col-md-8">
-        <div ng-app="postsApp" id="postsApp">
-            <app></app>
         </div>
     </div>
+    <br>
+
+    @if (Model.AboutMe != null) {
+    <!-- Alert Box -->
+    <div class="w3-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
+        <p><strong>About Me</strong></p>
+        <p>@Html.DisplayFor(model => model.AboutMe)</p>
+    </div>
+    }
+
+    <!-- End Left Column -->
+</div>
+
+<!-- Middle Column -->
+<div class="w3-col m7">
+    <div ng-app="postsApp" id="postsApp">
+        <app></app>
+    </div>
+</div>
+
+<!-- Right Column -->
+<div class="w3-col m2">
 </div>

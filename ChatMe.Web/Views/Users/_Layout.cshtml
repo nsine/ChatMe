@@ -12,51 +12,69 @@
     @RenderSection("Styles", false)
 }
 
-<div id="wrapper">
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">
-                    <img src="@Url.RouteUrl("Avatar", new { userId = ViewBag.UserId })"
-                         class="my-avatar-preview">
-                    @ViewBag.DisplayName
-                </a>
-            </li>
-            <li>
-                @Html.ActionLink("My profile", "index")
-            </li>
-            <li>
-                @Html.ActionLink("Messages", "messages")
-            </li>
-            <li>
-                @Html.ActionLink("News", "news")
-            </li>
-            <li>
-                @Html.ActionLink("Find people", "allUsers")
-            </li>
-            <li>
+<div class="w3-top">
+    <ul class="w3-navbar w3-theme-d2 w3-left-align w3-large">
+        <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
+            <a class="w3-padding-large w3-hover-white w3-large w3-theme-d2 open-nav-button">
+                <i class="fa fa-bars"></i>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("index")" class="w3-padding-large w3-theme-d4">
+                <i class="fa fa-home w3-margin-right"></i>ChatMe
+            </a>
+        </li>
+        <li class="w3-hide-small">
+            <a href="@Url.Action("news")" class="w3-padding-large w3-hover-white" title="News">
+                <i class="fa fa-globe"></i>
+            </a>
+        </li>
+        <li class="w3-hide-small">
+            <a href="@Url.Action("messages")" class="w3-padding-large w3-hover-white" title="Messages">
+                <i class="fa fa-envelope"></i>
+            </a>
+        </li>
+        <li class="w3-hide-small">
+            <a href="@Url.Action("settings")" class="w3-padding-large w3-hover-white" title="Account Settings">
+                <i class="fa fa-user"></i>
+            </a>
+        </li>
+        <li class="w3-hide-small w3-right w3-dropdown-hover">
+            <a href="@Url.Action("index")" class="w3-padding-large w3-hover-white" title="My Account">
+                <img src="@Url.RouteUrl("avatar", new { userId = ViewBag.UserId })"
+                    class="w3-circle my-avatar-preview" alt="Avatar">
+            </a>
+            <div class="w3-dropdown-content w3-white w3-card-4 profile-menu">
                 @Html.ActionLink("Settings", "settings")
-            </li>
-            <li>
-                @Html.ActionLink("Logout", "logout", "accounts")
-            </li>
-
-            @if ((bool)ViewBag.IsAdmin == true) {
-            <li>
+                @if ((bool)ViewBag.IsAdmin == true) {
                 @Html.ActionLink("Admin panel", "index", "admin", new { Area = "Admin" }, new { })
-            </li>
-            }
-            
-        </ul>
-    </div>
-
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    @RenderBody()
-                </div>
+                }
+                @Html.ActionLink("Logout", "logout", "accounts")
             </div>
-        </div>
-    </div>
+        </li>
+    </ul>
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:51px">
+    <ul class="w3-navbar w3-left-align w3-large w3-theme">
+        <li><a class="w3-padding-large" href="@Url.Action("index")">My profile</a></li>
+        <li><a class="w3-padding-large" href="@Url.Action("news")">News</a></li>
+        <li><a class="w3-padding-large" href="@Url.Action("messages")">Messages</a></li>
+        <li><a class="w3-padding-large" href="@Url.Action("settings")">Settings</a></li>
+        @if ((bool)ViewBag.IsAdmin == true) {
+        <li>
+            @Html.ActionLink("Admin panel", "index", "admin", new { Area = "Admin" }, new { @class="w3-padding-large" })
+        </li>
+        }
+        <li><a class="w3-padding-large" href="@Url.Action("logout", "accounts")">Logout</a></li>
+    </ul>
+</div>
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+  <!-- The Grid -->
+  <div class="w3-row">
+      @RenderBody()
+  </div>
 </div>

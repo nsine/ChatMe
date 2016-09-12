@@ -1,16 +1,13 @@
-﻿ body {
+﻿body {
     overflow-x: hidden;
-    
- }
+}
 
- html {
-     background: #f9f9f9;
- }
+html {
+    background: #f9f9f9;
+}
 
-input,
-select,
-textarea {
-    max-width: 280px;
+html, body, h1, h2, h3, h4, h5 {
+    font-family: "Open Sans", sans-serif;
 }
 
 .vertical-center {
@@ -22,4 +19,20 @@ textarea {
     margin: 10px 10px;
 }
 
-@import 'sidebar';
+.my-avatar-preview {
+    width: 25px;
+    height: 25px;
+}
+
+.profile-menu {
+    right: 0;
+}
+
+.post-avatar-preview {
+    width: 40px;
+    height: 40px;
+}
+
+.new-post {
+    margin-bottom: 10px;
+}
