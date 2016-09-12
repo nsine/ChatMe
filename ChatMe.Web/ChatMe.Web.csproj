@@ -249,6 +249,7 @@
     <Content Include="Client\src\static\css\messages.scss" />
     <Content Include="Client\src\static\css\_sidebar.scss" />
     <Content Include="Client\src\admin.js" />
+    <Compile Include="Areas\Admin\Controllers\Abstract\AdminAuthorizeController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
     <Compile Include="Areas\Admin\Models\NewPostViewModel.cs" />
@@ -328,7 +329,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Avatars\" />
-    <Folder Include="Areas\Admin\Views\Custom\" />
     <Folder Include="Client\dist\" />
     <Folder Include="Client\src\static\images\" />
     <Folder Include="Views\Avatar\" />

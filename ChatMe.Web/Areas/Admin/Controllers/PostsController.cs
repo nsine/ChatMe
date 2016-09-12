@@ -11,10 +11,11 @@ using ChatMe.DataAccess.EF;
 using ChatMe.DataAccess.Entities;
 using ChatMe.Web.Areas.Admin.Models;
 using ChatMe.DataAccess.Interfaces;
+using ChatMe.Web.Areas.Admin.Controllers.Abstract;
 
 namespace ChatMe.Web.Areas.Admin.Controllers
 {
-    public class PostsController : Controller
+    public class PostsController : AdminAuthorizeController
     {
         private IUnitOfWork db;
 

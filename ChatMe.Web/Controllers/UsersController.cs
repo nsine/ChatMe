@@ -15,11 +15,11 @@ namespace ChatMe.Web.Controllers
     [Authorize]
     public class UsersController : Controller
     {
-        private IUnitOfWork unitOfWork;
+        private IUnitOfWork db;
         private IUserService userService;
 
         public UsersController(IUnitOfWork uow, IUserService userService) {
-            unitOfWork = uow;
+            db = uow;
             this.userService = userService;
         }
 
@@ -30,11 +30,13 @@ namespace ChatMe.Web.Controllers
         }
 
         public ActionResult News() {
+            UpdateSidebarContent();
             var userId = User.Identity.GetUserId();
             return View((object)userId);
         }
 
         public ActionResult UserProfile(string userName) {
+            UpdateSidebarContent();
             if (userName == null) {
                 var myName = User.Identity.GetUserName();
                 return RedirectToRoute("UserProfile", new { userName = myName });
@@ -56,6 +58,7 @@ namespace ChatMe.Web.Controllers
         }
 
         public ActionResult Messages(int? dialogId) {
+            UpdateSidebarContent();
             var viewModel = new DialogInitViewModel {
                 DialogId = dialogId,
                 UserId = User.Identity.GetUserId()
@@ -65,6 +68,7 @@ namespace ChatMe.Web.Controllers
         }
 
         public ActionResult AllUsers(int page = 1) {
+            UpdateSidebarContent();
             const int pageSize = 20;
             var allUsersData = userService.GetAllExceptMe(User.Identity.GetUserId());
 
@@ -91,6 +95,7 @@ namespace ChatMe.Web.Controllers
 
         [HttpGet]
         public ActionResult Settings() {
+            UpdateSidebarContent();
             var userSettingsData = userService.GetUserSettings(User.Identity.GetUserId());
 
             Mapper.Initialize(cfg => cfg.CreateMap<UserSettingsDTO, UserSettingsViewModel>());
@@ -101,9 +106,8 @@ namespace ChatMe.Web.Controllers
 
         [HttpPost]
         public async Task<ActionResult> Settings(UserSettingsViewModel viewModel, HttpPostedFileBase avatar = null) {
-
             if (ModelState.IsValid) {
-                var me = unitOfWork.Users.FindById(User.Identity.GetUserId());
+                var me = db.Users.FindById(User.Identity.GetUserId());
 
                 Mapper.Initialize(cfg => cfg.CreateMap<UserSettingsViewModel, UserSettingsDTO>());
                 var userSettingsData = Mapper.Map<UserSettingsDTO>(viewModel);
@@ -125,6 +129,13 @@ namespace ChatMe.Web.Controllers
             } else {
                 return View(viewModel);
             }
+        }
+
+        private void UpdateSidebarContent() {
+            var me = db.Users.FindById(User.Identity.GetUserId());
+            ViewBag.UserId = me.Id;
+            ViewBag.DisplayName = me.DisplayName;
+            ViewBag.IsAdmin = db.Users.IsInRole(me.Id, "admin");
         }
     }
 }

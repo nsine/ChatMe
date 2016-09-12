@@ -17,7 +17,9 @@
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
                 <a href="#">
-                    ChatMe
+                    <img src="@Url.RouteUrl("Avatar", new { userId = ViewBag.UserId })"
+                         class="my-avatar-preview">
+                    @ViewBag.DisplayName
                 </a>
             </li>
             <li>
@@ -38,9 +40,13 @@
             <li>
                 @Html.ActionLink("Logout", "logout", "accounts")
             </li>
+
+            @if ((bool)ViewBag.IsAdmin == true) {
             <li>
                 @Html.ActionLink("Admin panel", "index", "admin", new { Area = "Admin" }, new { })
             </li>
+            }
+            
         </ul>
     </div>
 

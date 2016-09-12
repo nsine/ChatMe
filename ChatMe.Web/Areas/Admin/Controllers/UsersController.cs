@@ -12,10 +12,12 @@ using ChatMe.DataAccess.Entities;
 using ChatMe.DataAccess.Interfaces;
 using AutoMapper;
 using ChatMe.Web.Areas.Admin.Models;
+using ChatMe.Web.Areas.Admin.Controllers.Abstract;
+using Microsoft.AspNet.Identity;
 
 namespace ChatMe.Web.Areas.Admin.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : AdminAuthorizeController
     {
         private IUnitOfWork db;
 
@@ -89,8 +91,14 @@ namespace ChatMe.Web.Areas.Admin.Controllers
             if (ModelState.IsValid) {
                 var user = await db.Users.FindByIdAsync(userViewModel.Id);
                 FromViewModel(userViewModel, user);
-
+                
                 await db.Users.UpdateAsync(user);
+
+                var roles = userViewModel.RolesString.Split(' ');
+                foreach (var role in roles) {
+                    await db.Users.AddToRoleAsync(user.Id, role);
+                }
+
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -128,7 +136,7 @@ namespace ChatMe.Web.Areas.Admin.Controllers
         }
 
         private UserViewModel ToViewModel(User user) {
-            return new UserViewModel {
+            var viewModel = new UserViewModel {
                 Id = user.Id,
                 UserName = user.UserName,
                 FirstName = user.UserInfo.FirstName,
@@ -139,8 +147,13 @@ namespace ChatMe.Web.Areas.Admin.Controllers
                 AboutMe = user.UserInfo.AboutMe,
                 RegistrationDate = user.UserInfo.RegistrationDate,
                 AvatarFilename = user.UserInfo.AvatarFilename,
-                AvatarPath = Url.RouteUrl("Avatar", new { userId = user.Id })
+                AvatarPath = Url.RouteUrl("Avatar", new { userId = user.Id }),
             };
+
+            var roles = db.Users.GetRoles(user.Id);
+            viewModel.RolesString = string.Join(" ", roles);
+
+            return viewModel;
         }
 
         private void FromViewModel(UserViewModel viewModel, User user) {
