@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ChatMe.DataAccess.Interfaces
 {
@@ -7,6 +8,7 @@ namespace ChatMe.DataAccess.Interfaces
     {
         IQueryable<T> GetAll();
         T Find(object id);
+        Task<T> FindAsync(object id);
         IQueryable<T> Where(Func<T, Boolean> predicate);
         void Add(T item);
         void Update(T item);

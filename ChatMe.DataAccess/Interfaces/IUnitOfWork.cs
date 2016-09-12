@@ -9,6 +9,7 @@ namespace ChatMe.DataAccess.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         UserManager<User> Users { get; }
+        RoleManager<Role> Roles { get; }
         IRepository<Message> Messages { get; }
         IRepository<Dialog> Dialogs { get; }
         IRepository<Post> Posts { get; }

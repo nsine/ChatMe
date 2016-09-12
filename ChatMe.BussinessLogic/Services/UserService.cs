@@ -45,7 +45,7 @@ namespace ChatMe.BussinessLogic.Services
         }
 
         public UserProfileDTO GetUserProfile(string userName, string currectUserId) {
-            var user = db.Users.Users.Where(u => u.UserName == userName).FirstOrDefault();
+            var user = db.Users.FindByName(userName);
             var me = db.Users.FindById(currectUserId);
 
             if (user == null) {

@@ -3,6 +3,7 @@ using ChatMe.DataAccess.Interfaces;
 using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ChatMe.DataAccess.Repositories
 {
@@ -37,6 +38,10 @@ namespace ChatMe.DataAccess.Repositories
 
         public void Update(T item) {
             db.Entry(item).State = EntityState.Modified;
+        }
+
+        public Task<T> FindAsync(object id) {
+            return db.Set<T>().FindAsync(id);
         }
     }
 }

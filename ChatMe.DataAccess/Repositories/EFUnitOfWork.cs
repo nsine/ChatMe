@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using ChatMe.DataAccess.Identity;
 
 namespace ChatMe.DataAccess.Repositories
 {
@@ -14,6 +16,7 @@ namespace ChatMe.DataAccess.Repositories
 
         private EFRepository<Message> messageRepo;
         private UserManager<User> userRepo;
+        private RoleManager<Role> roleRepo;
         private EFRepository<Dialog> dialogRepo;
         private EFRepository<Post> postRepo;
         private EFRepository<Like> likeRepo;
@@ -70,6 +73,16 @@ namespace ChatMe.DataAccess.Repositories
                     likeRepo = new EFRepository<Like>(db);
                 }
                 return likeRepo;
+            }
+        }
+
+        public RoleManager<Role> Roles {
+            get {
+                if (roleRepo == null) {
+                    roleRepo = new AppRoleManager(new RoleStore<Role>(db));
+                }
+
+                return roleRepo;
             }
         }
 
