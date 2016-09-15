@@ -16,6 +16,9 @@ namespace ChatMe.Web.Controllers
             this.accountService = accountService;
         }
 
+        [HttpPatch]
+        [HttpPut]
+
         [HttpGet]
         public ActionResult Register()
         {

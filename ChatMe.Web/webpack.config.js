@@ -4,10 +4,11 @@
 module.exports = {
     entry: {
         index: "./Client/src/index.js",
-        postsApp: "./Client/src/posts-app.js",
-        dialogsApp: "./Client/src/dialogs-app.js",
+        allUsers: "./Client/src/all-users.js",
+        dialogs: "./Client/src/dialogs.js",
+        news: "./Client/src/news.js",
         settings: "./Client/src/settings.js",
-        admin: "./Client/src/admin.js"
+        userProfile: "./Client/src/user-profile.js"
     },
     output: {
         filename: "./Client/dist/[name].js"

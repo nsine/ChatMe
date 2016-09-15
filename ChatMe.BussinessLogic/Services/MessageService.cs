@@ -36,7 +36,8 @@ namespace ChatMe.BussinessLogic.Services
                 Body = newMessage.Body,
                 Time = newMessage.Time,
                 AuthorId = newMessage.User.Id,
-                Author = newMessage.User.DisplayName
+                Author = newMessage.User.DisplayName,
+                DialogId = newMessage.DialogId
             };
         }
 

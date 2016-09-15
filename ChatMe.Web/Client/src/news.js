@@ -1,2 +1,2 @@
 require('./static/js/push-messages');
-require('./static/js/settings');
+require('./posts-app/app.module.js');

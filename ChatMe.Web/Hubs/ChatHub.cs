@@ -35,6 +35,8 @@ namespace ChatMe.Web.Hubs
 
             foreach (var dialog in user.Dialogs) {
                 Groups.Add(Context.ConnectionId, dialog.Id.ToString());
+
+                // Notify all   
             }
 
             return base.OnConnected();

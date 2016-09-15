@@ -1,1 +1,0 @@
-﻿require('./posts-app/app.module.js');
