@@ -21,14 +21,14 @@ namespace ChatMe.Web.Hubs
         private IUnitOfWork db;
         private IMessageService messageService;
 
-        private ICollection<User> onlineUsers;
+        private ICollection<OnlineState> onlineUsers;
         private ICollection<OfflineState> pendingOffline;
 
         public ChatHub(IUnitOfWork unitOfWork, IMessageService messageService) : base() {
             this.db = unitOfWork;
             this.messageService = messageService;
 
-            onlineUsers = new List<User>();
+            onlineUsers = new List<OnlineState>();
             pendingOffline = new List<OfflineState>();
         }
 
@@ -46,13 +46,16 @@ namespace ChatMe.Web.Hubs
             // Check if pending offline
             var offlineState = pendingOffline.Where(s => s.User.Id == user.Id).FirstOrDefault();
             if (offlineState == null) {
-                onlineUsers.Add(user);
+                onlineUsers.Add(new OnlineState {
+                    User = user,
+                    ConnectionId = Context.ConnectionId
+                });
 
                 foreach (var dialog in user.Dialogs) {
                     Groups.Add(Context.ConnectionId, dialog.Id.ToString());
                 }
 
-                Clients.All.notifyOnline(user.Id, true);
+                Clients.Clients(onlineUsers.Select(s => s.ConnectionId).ToList()).notifyOnline(user.Id, true);
             } else {
                 offlineState.CancelTokenSource.Cancel();
             }
@@ -104,9 +107,9 @@ namespace ChatMe.Web.Hubs
                 }
 
                 user.IsOnline = false;
-                onlineUsers.Remove(user);
+                onlineUsers.Remove(onlineUsers.Where(s => s.User.Id == user.Id).FirstOrDefault());
                 pendingOffline.Remove(state);
-                Clients.All.notifyOnline(state.User, false);
+                Clients.Clients(onlineUsers.Select(s => s.ConnectionId).ToList()).notifyOnline(user.Id, false);
                 await db.Users.UpdateAsync(state.User);
             }, state.CancelTokenSource.Token);
         }
@@ -116,5 +119,11 @@ namespace ChatMe.Web.Hubs
     {
         public User User { get; set; }
         public CancellationTokenSource CancelTokenSource { get; set; }
+    }
+
+    class OnlineState
+    {
+        public User User { get; set; }
+        public string ConnectionId { get; set; }
     }
 }

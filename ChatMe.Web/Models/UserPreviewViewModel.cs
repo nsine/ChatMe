@@ -12,6 +12,7 @@ namespace ChatMe.Web.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string AvatarFilename { get; set; }
+        public bool IsOnline { get; set; }
         public string DisplayName {
             get
             {
