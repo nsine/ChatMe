@@ -153,6 +153,10 @@
     <Compile Include="Migrations\201609121200009_AddRoleModel.Designer.cs">
       <DependentUpon>201609121200009_AddRoleModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609171544037_AddIsOnlineField.cs" />
+    <Compile Include="Migrations\201609171544037_AddIsOnlineField.Designer.cs">
+      <DependentUpon>201609171544037_AddIsOnlineField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EFRepository.cs" />
@@ -198,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609121200009_AddRoleModel.resx">
       <DependentUpon>201609121200009_AddRoleModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609171544037_AddIsOnlineField.resx">
+      <DependentUpon>201609171544037_AddIsOnlineField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

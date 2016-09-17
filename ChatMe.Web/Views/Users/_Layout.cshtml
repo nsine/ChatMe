@@ -42,6 +42,11 @@
                 <i class="fa fa-user"></i>
             </a>
         </li>
+        <li class="w3-hide-small">
+            <a href="@Url.Action("allusers")" class="w3-padding-large w3-hover-white" title="Find people">
+                <i class="fa fa-search"></i>
+            </a>
+        </li>
         <li class="w3-hide-small w3-right w3-dropdown-hover">
             <a href="@Url.Action("index")" class="w3-padding-large w3-hover-white" title="My Account">
                 <img src="@Url.RouteUrl("avatar", new { userId = ViewBag.UserId })"
