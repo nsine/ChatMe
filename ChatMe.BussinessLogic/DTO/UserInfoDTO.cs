@@ -13,5 +13,6 @@ namespace ChatMe.BussinessLogic.DTO
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string AvatarFilename { get; set; }
+        public bool IsOnline { get; set; }
     }
 }

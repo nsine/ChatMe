@@ -31,7 +31,8 @@ export default function messagesApi($http, messagesApiPath, initInfo) {
             avatarUrl: rawData.AuthorAvatarUrl,
             author: rawData.Author,
             authorId: rawData.AuthorId,
-            isMy: rawData.AuthorId == initInfo.userId
+            isMy: rawData.AuthorId == initInfo.userId,
+            dialogId: rawData.DialogId
         };
 
         if (isNaN(Date.parse(rawData.Time))) {

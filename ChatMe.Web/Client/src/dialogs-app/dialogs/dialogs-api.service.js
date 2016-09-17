@@ -17,6 +17,7 @@ export default function dialogsApi($http, dialogsApiPath) {
                         id: rawDialog.Id,
                         author: rawDialog.Author,
                         avatarUrl: rawDialog.AvatarUrl,
+                        isAuthorOnline: rawDialog.AuthorId,
                         lastMessageSnippet: rawDialog.LastMessageSnippet
                     };
 
@@ -25,8 +26,23 @@ export default function dialogsApi($http, dialogsApiPath) {
             });
     }
 
+    function getById(id) {
+        var path = dialogsApiPath + count;
+        return $http.get(path)
+            .then(function (response) {
+                var rawDialog = response.data;
+                return {
+                    id: rawDialog.Id,
+                    author: rawDialog.Author,
+                    avatarUrl: rawDialog.AvatarUrl,
+                    isAuthorOnline: rawDialog.AuthorId,
+                    lastMessageSnippet: rawDialog.LastMessageSnippet
+                };
+            });
+    }
+
     function newDialog(dialog) {
-        var path = dialogsApiPath + userInfo.id;
+        var path = dialogsApiPath + "/new/" + userInfo.id;
         var dialogDto = {
             UserIds: dialog.userIds
         }

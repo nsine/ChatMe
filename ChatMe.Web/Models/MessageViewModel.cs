@@ -12,7 +12,8 @@ namespace ChatMe.Web.Models
         public string Author { get; set; }
         public string AuthorAvatarUrl { get; set; }
         public string AuthorId { get; set; }
+        public bool IsAuthorOnline { get; set; }
         public DateTime Time { get; set; }
-        public int? DialogId { get; set; }
+        public int DialogId { get; set; }
     }
 }

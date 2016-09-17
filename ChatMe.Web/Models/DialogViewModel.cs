@@ -37,6 +37,12 @@ namespace ChatMe.Web.Models
             Author = authorString;
             LastMessageSnippet = msgSnippet.ToString();
             Id = dialogData.Id;
+            
+            if (authors.Count() == 1) {
+                var author = dialogData.Users.First();
+                IsAuthorOnline = author.IsOnline;
+                AuthorId = author.Id;
+            }
         }
 
         public int Id { get; set; }
@@ -44,5 +50,7 @@ namespace ChatMe.Web.Models
         public string Author { get; set; }
         public string LastMessageSnippet { get; set; }
         public string AvatarUrl { get; set; }
+        public bool? IsAuthorOnline { get; set; }
+        public string AuthorId { get; set; }
     }
 }

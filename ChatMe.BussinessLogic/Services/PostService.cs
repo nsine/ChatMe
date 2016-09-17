@@ -54,7 +54,8 @@ namespace ChatMe.BussinessLogic.Services
                 IsLikedByMe = activityService.IsLiked(new LikedPostDTO {
                     PostId = rawPost.Id,
                     UserId = currentUserId
-                })
+                }),
+                IsAuthorOnline = rawPost.User.IsOnline
             };
         }
 
@@ -74,7 +75,8 @@ namespace ChatMe.BussinessLogic.Services
                     IsLikedByMe = activityService.IsLiked(new LikedPostDTO {
                         PostId = p.Id,
                         UserId = currentUserId
-                    })
+                    }),
+                    IsAuthorOnline = p.User.IsOnline
                 });
 
             if (chunkSize != 0) {
@@ -106,7 +108,8 @@ namespace ChatMe.BussinessLogic.Services
                         UserId = userId
                     }),
                     Likes = p.Likes.Count,
-                    Time = p.Time
+                    Time = p.Time,
+                    IsAuthorOnline = p.User.IsOnline
                 });
 
             return news;

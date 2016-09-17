@@ -1,5 +1,5 @@
 /* @ngInject */
-export default function messagesService(messagesApi, dialogsService, openedDialogService, $rootScope, Hub) {
+export default function messagesService(messagesApi, openedDialogService, $rootScope) {
     var self = this;
 
     var loadedMessagesCount = 0;
@@ -9,25 +9,12 @@ export default function messagesService(messagesApi, dialogsService, openedDialo
 
     self.openDialog = openDialog;
     self.loadNextMessages = loadNextMessages;
-    self.sendMessage = sendMessage;
 
     $rootScope.$watch(function () {
         return openedDialogService.id;
     }, function () {
         openDialog();
     });
-
-    var hub = new Hub('chatHub', {
-        listeners: {
-            addMessage: function (messageData) {
-                var message = messagesApi.parseRawData(messageData);
-                self.messages.unshift(message);
-                $rootScope.$apply();
-            }
-        },
-
-        methods: ['send']
-    })
 
     ////////////////
 
@@ -38,15 +25,11 @@ export default function messagesService(messagesApi, dialogsService, openedDialo
     }
 
     function loadNextMessages() {
-            messagesApi.get(openedDialogService.id, loadedMessagesCount, chunkSize)
-            .then(function (data) {
-                console.log(data);
-                loadedMessagesCount += data.length;
-                self.messages = self.messages.concat(data);
-            });
-    }
-
-    function sendMessage(message) {
-        hub.send(openedDialogService.id, message);
+        messagesApi.get(openedDialogService.id, loadedMessagesCount, chunkSize)
+        .then(function (data) {
+            console.log(data);
+            loadedMessagesCount += data.length;
+            self.messages = self.messages.concat(data);
+        });
     }
 }

@@ -37,7 +37,8 @@ namespace ChatMe.BussinessLogic.Services
                 Time = newMessage.Time,
                 AuthorId = newMessage.User.Id,
                 Author = newMessage.User.DisplayName,
-                DialogId = newMessage.DialogId
+                DialogId = newMessage.DialogId,
+                IsAuthorOnline = newMessage.User.IsOnline
             };
         }
 
@@ -51,7 +52,8 @@ namespace ChatMe.BussinessLogic.Services
                     Body = m.Body,
                     Time = m.Time,
                     AuthorId = m.User.Id,
-                    Author = m.User.DisplayName
+                    Author = m.User.DisplayName,
+                    IsAuthorOnline = m.User.IsOnline
                 });
 
             if (chunkSize != 0) {

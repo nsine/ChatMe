@@ -1,5 +1,6 @@
 ﻿using ChatMe.BussinessLogic.Services;
 using ChatMe.BussinessLogic.Services.Abstract;
+using ChatMe.Web.Hubs;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ namespace ChatMe.Util
             kernel.Bind<IActivityService>().To<ActivityService>();
             kernel.Bind<IAvatarService>().To<AvatarService>();
             kernel.Bind<IUserService>().To<UserService>();
+            kernel.Bind<ChatHubData>().To<ChatHubData>().InSingletonScope();
         }
     }
 }

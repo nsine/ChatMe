@@ -19,6 +19,7 @@ namespace ChatMe.BussinessLogic.DTO
         public bool IsOwner { get; set; }
         public bool IsFollowing { get; set; }
         public string DisplayName { get; set; }
+        public bool IsOnline { get; set; }
 
         public IEnumerable<PostDTO> Posts;
 

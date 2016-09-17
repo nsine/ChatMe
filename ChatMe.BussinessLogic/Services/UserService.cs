@@ -27,7 +27,8 @@ namespace ChatMe.BussinessLogic.Services
                     AvatarFilename = u.UserInfo.AvatarFilename,
                     UserName = u.UserName,
                     FirstName = u.UserInfo.FirstName,
-                    LastName = u.UserInfo.LastName
+                    LastName = u.UserInfo.LastName,
+                    IsOnline = u.IsOnline
                 });
             return usersData;
         }
@@ -64,7 +65,8 @@ namespace ChatMe.BussinessLogic.Services
                 AboutMe = user.UserInfo.AboutMe,
                 AvatarFilename = user.UserInfo.AvatarFilename,
                 IsOwner = user.Id == me.Id,
-                IsFollowing = user.Followers.Any(u => u.Id == currectUserId)
+                IsFollowing = user.Followers.Any(u => u.Id == currectUserId),
+                IsOnline = user.IsOnline
             };
 
             return userProfile;

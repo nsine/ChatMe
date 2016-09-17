@@ -20,6 +20,28 @@ namespace ChatMe.Web.Controllers
         }
 
         [HttpGet]
+        [Route("{dialogId}")]
+        public ActionResult Get(int dialogId) {
+            var myId = User.Identity.GetUserId();
+            var dialogData = dialogService.GetById(dialogId);
+
+            // dialogData.Users contains current user but we don't need it
+            // FIX it but for now just delete
+            dialogData.Users = dialogData.Users.Except(dialogData.Users.Where(u => u.Id == myId));
+
+            var dialog = new DialogViewModel(dialogData) {
+                AvatarUrl = Url.RouteUrl("Avatar", new {
+                    userId = dialogData.Users
+                            .Where(u => u.Id != myId)
+                            .FirstOrDefault().Id
+                })
+            };
+
+
+            return Json(dialog, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         [Route("")]
         public ActionResult GetAll(int startIndex = 0, int count = 0) {
             var myId = User.Identity.GetUserId();
@@ -51,6 +73,7 @@ namespace ChatMe.Web.Controllers
             dialogService.Delete(dialogId);
         }
 
+        [Route("new/{userId}")]
         [HttpGet]
         public async Task<ActionResult> NewDialog(string userId) {
             var myId = User.Identity.GetUserId();

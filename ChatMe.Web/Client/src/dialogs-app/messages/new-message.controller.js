@@ -1,5 +1,5 @@
 /* @ngInject */
-export default function NewMessageController(messagesService) {
+export default function NewMessageController(dialogsService) {
     var self = this;
     self.body = "";
     self.isSendBtnActive = function () {
@@ -15,7 +15,7 @@ export default function NewMessageController(messagesService) {
             body: self.body
         };
 
-        messagesService.sendMessage(newMesage);
+        dialogsService.sendMessage(newMesage);
     }
 
     activate();

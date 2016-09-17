@@ -11,6 +11,7 @@ namespace ChatMe.BussinessLogic.Services.Abstract
     public interface IDialogService
     {
         IEnumerable<DialogPreviewDTO> GetChunk(string userId, int startIndex, int chunkSize);
+        DialogPreviewDTO GetById(int dialogId);
         Task<int> Create(NewDialogDTO data);
         Task<bool> Delete(int dialogId);
         int GetIdByMembers(IEnumerable<string> userIds);

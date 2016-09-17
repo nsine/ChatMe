@@ -41,6 +41,34 @@ namespace ChatMe.BussinessLogic.Services
             return true;
         }
 
+        public DialogPreviewDTO GetById(int dialogId) {
+            var dialog = db.Dialogs.Find(dialogId);
+            if (dialog == null) {
+                return null;
+            }
+
+            return new DialogPreviewDTO {
+                Id = dialog.Id,
+                LastMessage = dialog.Messages
+                        .OrderByDescending(m => m.Time)
+                        .FirstOrDefault()
+                        ?.Body,
+                LastMessageAuthor = userService.GetUserDisplayName(dialog.Messages
+                        .OrderByDescending(m => m.Time)
+                        .FirstOrDefault()
+                        ?.User),
+                Users = dialog.Users
+                        .Select(u => new UserInfoDTO {
+                            Id = u.Id,
+                            FirstName = u.UserInfo.FirstName,
+                            LastName = u.UserInfo.LastName,
+                            UserName = u.UserName,
+                            AvatarFilename = u.UserInfo.AvatarFilename,
+                            IsOnline = u.IsOnline
+                        })
+            };
+        }
+
         public IEnumerable<DialogPreviewDTO> GetChunk(string userId, int startIndex, int chunkSize) {
             var me = db.Users.FindById(userId);
             var dialogs = me.Dialogs
@@ -63,7 +91,8 @@ namespace ChatMe.BussinessLogic.Services
                             FirstName = u.UserInfo.FirstName,
                             LastName = u.UserInfo.LastName,
                             UserName = u.UserName,
-                            AvatarFilename = u.UserInfo.AvatarFilename
+                            AvatarFilename = u.UserInfo.AvatarFilename,
+                            IsOnline = u.IsOnline
                         })
                 });
 

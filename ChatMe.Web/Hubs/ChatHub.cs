@@ -13,6 +13,7 @@ using System.Collections;
 using ChatMe.DataAccess.Entities;
 using System.Collections.Generic;
 using System.Threading;
+using ChatMe.Web.Hubs.Data;
 
 namespace ChatMe.Web.Hubs
 {
@@ -24,15 +25,14 @@ namespace ChatMe.Web.Hubs
         private ICollection<OnlineState> onlineUsers;
         private ICollection<OfflineState> pendingOffline;
 
-        public ChatHub(IUnitOfWork unitOfWork, IMessageService messageService) : base() {
-            this.db = unitOfWork;
+        public ChatHub(IUnitOfWork unitOfWork, IMessageService messageService, ChatHubData hubData) : base() {
+            db = unitOfWork;
             this.messageService = messageService;
-
-            onlineUsers = new List<OnlineState>();
-            pendingOffline = new List<OfflineState>();
+            onlineUsers = hubData.OnlineUsers;
+            pendingOffline = hubData.PendingOffline;
         }
 
-        public override Task OnConnected() {
+        public override async Task OnConnected() {
             Debug.Print($"User connected {Context.User.Identity.Name}");
             // Retrieve user.
             var user = db.Users
@@ -46,13 +46,15 @@ namespace ChatMe.Web.Hubs
             // Check if pending offline
             var offlineState = pendingOffline.Where(s => s.User.Id == user.Id).FirstOrDefault();
             if (offlineState == null) {
+                user.IsOnline = true;
+                db.Users.Update(user);
                 onlineUsers.Add(new OnlineState {
                     User = user,
                     ConnectionId = Context.ConnectionId
                 });
 
                 foreach (var dialog in user.Dialogs) {
-                    Groups.Add(Context.ConnectionId, dialog.Id.ToString());
+                    await Groups.Add(Context.ConnectionId, dialog.Id.ToString());
                 }
 
                 Clients.Clients(onlineUsers.Select(s => s.ConnectionId).ToList()).notifyOnline(user.Id, true);
@@ -60,7 +62,7 @@ namespace ChatMe.Web.Hubs
                 offlineState.CancelTokenSource.Cancel();
             }
 
-            return base.OnConnected();
+            await base.OnConnected();
         }
 
         public async Task Send(int dialogId, NewMessageViewModel message) {
@@ -80,13 +82,15 @@ namespace ChatMe.Web.Hubs
             Clients.Group(dialogId.ToString()).addMessage(createdMessage);
         }
 
-        public override Task OnDisconnected(bool stopCalled) {
+        public override async Task OnDisconnected(bool stopCalled) {
             var user = db.Users
                 .Users.Where(u => u.UserName == Context.User.Identity.Name)
                 .FirstOrDefault();
 
+            await MakeOffline(user);
+
             Debug.Print($"User disconnected {Context.User.Identity.Name}");
-            return base.OnDisconnected(stopCalled);
+            await base.OnDisconnected(stopCalled);
         }
 
         private async Task MakeOffline(User user) {
@@ -98,7 +102,10 @@ namespace ChatMe.Web.Hubs
             pendingOffline.Add(state);
 
             await Task.Factory.StartNew(async () => {
-                for (int i = 0; i < 10; i++) {
+                // Time in seconds before user will be disconnected
+                const int waitTime = 3;
+
+                for (int i = 0; i < waitTime; i++) {
                     Thread.Sleep(1000);
                     if (state.CancelTokenSource.Token.IsCancellationRequested) {
                         pendingOffline.Remove(state);
@@ -113,17 +120,5 @@ namespace ChatMe.Web.Hubs
                 await db.Users.UpdateAsync(state.User);
             }, state.CancelTokenSource.Token);
         }
-    }
-
-    class OfflineState
-    {
-        public User User { get; set; }
-        public CancellationTokenSource CancelTokenSource { get; set; }
-    }
-
-    class OnlineState
-    {
-        public User User { get; set; }
-        public string ConnectionId { get; set; }
-    }
+    }   
 }
