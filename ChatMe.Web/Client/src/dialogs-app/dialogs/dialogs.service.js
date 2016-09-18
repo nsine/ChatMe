@@ -1,5 +1,5 @@
 /* @ngInject */
-export default function dialogsService(dialogsApi, messagesService, $rootScope, Hub) {
+export default function dialogsService(openedDialogService, dialogsApi, messagesService, messagesApi, $rootScope, Hub) {
     var self = this;
     var loadSize = 0;
     var loadedDialogs = 0;
@@ -8,8 +8,9 @@ export default function dialogsService(dialogsApi, messagesService, $rootScope, 
 
     self.loadDialogs = loadDialogs;
     self.newDialog = newDialog;
+    self.sendMessage = sendMessage;
 
-    var hub = new Hub('chatHub', {
+    self.hub = new Hub('chatHub', {
         listeners: {
             addMessage: function (messageData) {
                 var message = messagesApi.parseRawData(messageData);
@@ -40,11 +41,11 @@ export default function dialogsService(dialogsApi, messagesService, $rootScope, 
         methods: ['send']
     });
 
+    ////////////////
     function sendMessage(message) {
-        hub.send(openedDialogService.id, message);
+        self.hub.send(openedDialogService.id, message);
     }
 
-    ////////////////
     function loadDialogs() {
         dialogsApi
             .getDialogs(self.loadedDialogs, loadSize)

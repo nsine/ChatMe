@@ -33,7 +33,7 @@ namespace ChatMe.Util
             kernel.Bind<IActivityService>().To<ActivityService>();
             kernel.Bind<IAvatarService>().To<AvatarService>();
             kernel.Bind<IUserService>().To<UserService>();
-            kernel.Bind<ChatHubData>().To<ChatHubData>().InSingletonScope();
+            kernel.Bind<IChatHubService>().To<ChatHubService>().InSingletonScope();
         }
     }
 }

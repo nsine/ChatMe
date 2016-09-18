@@ -95,9 +95,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\OfflineState.cs" />
+    <Compile Include="Classes\OnlineState.cs" />
     <Compile Include="DTO\AvatarInfo.cs" />
     <Compile Include="DTO\FollowerLinkDTO.cs" />
     <Compile Include="DTO\LikedPostDTO.cs" />
+    <Compile Include="Services\ChatHubService.cs" />
+    <Compile Include="Services\Abstract\IChatHubService.cs" />
     <Compile Include="Services\Abstract\IActivityService.cs" />
     <Compile Include="Services\AvatarService.cs" />
     <Compile Include="DTO\DialogPreviewDTO.cs" />

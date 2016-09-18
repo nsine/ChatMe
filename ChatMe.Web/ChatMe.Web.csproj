@@ -291,9 +291,6 @@
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
-    <Compile Include="Hubs\Data\ChatHubData.cs" />
-    <Compile Include="Hubs\Data\OfflineState.cs" />
-    <Compile Include="Hubs\Data\OnlineState.cs" />
     <Compile Include="Models\ChatUser.cs" />
     <Compile Include="Models\DialogInitViewModel.cs" />
     <Compile Include="Models\FollowingLinkViewModel.cs" />

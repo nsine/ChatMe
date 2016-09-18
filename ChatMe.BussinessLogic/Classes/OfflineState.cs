@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 
-namespace ChatMe.Web.Hubs.Data
+namespace ChatMe.BussinessLogic.Classes
 {
-    public class OnlineState
+    public class OfflineState
     {
         public User User { get; set; }
-        public string ConnectionId { get; set; }
+        public CancellationTokenSource CancelTokenSource { get; set; }
     }
 }

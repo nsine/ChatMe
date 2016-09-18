@@ -19,9 +19,11 @@ export default function messagesService(messagesApi, openedDialogService, $rootS
     ////////////////
 
     function openDialog() {
-        self.messages = [];
-        loadedMessagesCount = 0;
-        loadNextMessages();
+        if (openedDialogService.id !== null) {
+            self.messages = [];
+            loadedMessagesCount = 0;
+            loadNextMessages();
+        }
     }
 
     function loadNextMessages() {
