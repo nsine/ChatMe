@@ -79,10 +79,10 @@ namespace ChatMe.BussinessLogic.Services
         public async Task Disconnect(string userId, Action clientCallback) {
             Debug.Print($"{userId} disconnected");
             var user = await db.Users.FindByIdAsync(userId);
-            await MakeOffline(user);
+            await MakeOffline(user, clientCallback);
         }
 
-        private Task MakeOffline(User user) {
+        private Task MakeOffline(User user, Action clientCallback) {
             var state = new OfflineState {
                 CancelTokenSource = new CancellationTokenSource(),
                 User = user
@@ -105,6 +105,7 @@ namespace ChatMe.BussinessLogic.Services
                 user.IsOnline = false;
                 onlineUsers.Remove(onlineUsers.Where(s => s.User.Id == user.Id).FirstOrDefault());
                 pendingOffline.Remove(state);
+                clientCallback();
                 Debug.Print("user disconnected");
                 await db.Users.UpdateAsync(state.User);
                 await db.SaveChangesAsync();

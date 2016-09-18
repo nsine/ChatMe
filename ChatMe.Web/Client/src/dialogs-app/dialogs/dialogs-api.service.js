@@ -16,8 +16,9 @@ export default function dialogsApi($http, dialogsApiPath) {
                     var dialog = {
                         id: rawDialog.Id,
                         author: rawDialog.Author,
+                        authorId: rawDialog.AuthorId,
                         avatarUrl: rawDialog.AvatarUrl,
-                        isAuthorOnline: rawDialog.AuthorId,
+                        isAuthorOnline: rawDialog.IsAuthorOnline,
                         lastMessageSnippet: rawDialog.LastMessageSnippet
                     };
 
@@ -34,8 +35,9 @@ export default function dialogsApi($http, dialogsApiPath) {
                 return {
                     id: rawDialog.Id,
                     author: rawDialog.Author,
+                    authorId: rawDialog.AuthorId,
                     avatarUrl: rawDialog.AvatarUrl,
-                    isAuthorOnline: rawDialog.AuthorId,
+                    isAuthorOnline: rawDialog.IsAuthorOnline,
                     lastMessageSnippet: rawDialog.LastMessageSnippet
                 };
             });

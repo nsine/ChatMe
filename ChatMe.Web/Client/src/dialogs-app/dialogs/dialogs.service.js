@@ -35,6 +35,7 @@ export default function dialogsService(openedDialogService, dialogsApi, messages
                         dialog.isAuthorOnline = status;
                     }
                 }, this);
+                $rootScope.$apply();
             }
         },
 

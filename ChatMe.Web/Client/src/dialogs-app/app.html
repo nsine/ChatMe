@@ -11,6 +11,7 @@
                 		<img src="{{dialog.avatarUrl}}" alt="" class="img-circle">
                 		<div class="friend-name">
                 			<strong>{{ dialog.author }}</strong>
+							<span ng-if="dialog.isAuthorOnline"><i class="fa fa-circle"></i></span>
                 		</div>
                 		<div class="last-message text-muted">{{ dialog.lastMessageSnippet }}</div>
                 		<!--<small class="time text-muted">Just now</small>
