@@ -26,22 +26,28 @@ namespace ChatMe.Web.Hubs
             hubService = chatHubService;
         }
 
-        public override async Task OnConnected() {
+        public override Task OnConnected() {
             Debug.Print($"User connected {Context.User.Identity.Name}");
-            // Retrieve user.
+
             var userId = Context.User.Identity.GetUserId();
+            var state = hubService.Connect(userId, Context.ConnectionId);
 
-            // Check if pending offline
-            var isNewUser = await hubService.Connect(userId, Context.ConnectionId);
-            if (isNewUser) {
-                foreach (var dialogId in hubService.GetUserDialogIds(userId)) {
-                    await Groups.Add(Context.ConnectionId, dialogId.ToString());
+            var dialogIdsTask = hubService.GetUserDialogIds(userId);
+            dialogIdsTask.Wait();
+            var dialogIds = dialogIdsTask.Result;
+            foreach (var dialogId in dialogIds) {
+                if (!state.IsNewUser) {
+                    Groups.Remove(state.OldConnectionId, dialogId.ToString());
                 }
+                Groups.Add(Context.ConnectionId, dialogId.ToString());
+            }
 
+            if (state.IsNewUser) {
+                Debug.Print("new user");
                 Clients.Clients(hubService.GetOnlineIds()).notifyOnline(userId, true);
             }
 
-            await base.OnConnected();
+            return base.OnConnected();
         }
 
         public async Task Send(int dialogId, NewMessageViewModel message) {
@@ -62,13 +68,14 @@ namespace ChatMe.Web.Hubs
         }
 
         public override Task OnDisconnected(bool stopCalled) {
+            Debug.Print($"User disconnected {Context.User.Identity.Name}");
+
             var userId = Context.User.Identity.GetUserId();
 
             hubService.Disconnect(userId, () => {
                 Clients.Clients(hubService.GetOnlineIds()).notifyOnline(userId, false);
             });
 
-            Debug.Print($"User disconnected {Context.User.Identity.Name}");
             return base.OnDisconnected(stopCalled);
         }
     }   

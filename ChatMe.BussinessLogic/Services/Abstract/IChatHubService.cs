@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChatMe.BussinessLogic.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,8 @@ namespace ChatMe.BussinessLogic.Services.Abstract
     public interface IChatHubService
     {
         IList<string> GetOnlineIds();
-        Task<bool> Connect(string userId, string connectionId);
+        ConnectionState Connect(string userId, string connectionId);
         Task Disconnect(string userId, Action clientCallback);
-        IEnumerable<int> GetUserDialogIds(string userId);
+        Task<IEnumerable<int>> GetUserDialogIds(string userId);
     }
 }

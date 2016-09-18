@@ -29,22 +29,10 @@ namespace ChatMe.BussinessLogic.Services
             return onlineUsers.Select(u => u.ConnectionId).ToList();
         }
 
-        public async Task MakeOnline(User user, string connectionId) {
+        private void MakeOnline(User user, string connectionId) {
             user.IsOnline = true;
-            try {
-                await db.Users.UpdateAsync(user);
-                await db.SaveChangesAsync();
-            } catch (DbEntityValidationException e) {
-                foreach (var eve in e.EntityValidationErrors) {
-                    Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors) {
-                        Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
-            }
+            db.Users.Update(user);
+            db.SaveChanges();
 
             onlineUsers.Add(new OnlineState {
                 User = user,
@@ -52,28 +40,40 @@ namespace ChatMe.BussinessLogic.Services
             });
         }
 
-        public IEnumerable<int> GetUserDialogIds(string userId) {
-            return db.Users
-                .FindById(userId)
+        public async Task<IEnumerable<int>> GetUserDialogIds(string userId) {
+            var dialogs = (await db.Users
+                .FindByIdAsync(userId))
                 .Dialogs
                 .Select(d => d.Id);
+            return dialogs.ToList();
         }
 
-        public async Task<bool> Connect(string userId, string connectionId) {
+        public ConnectionState Connect(string userId, string connectionId) {
             Debug.Print($"{userId} {connectionId} connected");
+            var result = new ConnectionState();
+
             var offlineState = pendingOffline
                 .Where(s => s.User.Id == userId)
                 .FirstOrDefault();
 
             // If it's new user
             if (offlineState == null) {
-                var user = await db.Users.FindByIdAsync(userId);
-                await MakeOnline(user, connectionId);
-                return true;
+                var user = db.Users.FindById(userId);
+                MakeOnline(user, connectionId);
+                result.IsNewUser = true;
             } else {
                 offlineState.CancelTokenSource.Cancel();
-                return false;
+
+                var currentOnlineState = onlineUsers
+                    .Where(s => s.User.Id == userId)
+                    .FirstOrDefault();
+                result.IsNewUser = false;
+                result.OldConnectionId = currentOnlineState?.ConnectionId;
+                // Update connection id
+                currentOnlineState.ConnectionId = connectionId;
             }
+
+            return result;
         }
 
         public async Task Disconnect(string userId, Action clientCallback) {
@@ -92,7 +92,7 @@ namespace ChatMe.BussinessLogic.Services
 
             return Task.Factory.StartNew(async () => {
                 // Time in seconds before user will be disconnected
-                const int waitTime = 3;
+                const int waitTime = 10;
 
                 for (int i = 0; i < waitTime; i++) {
                     Thread.Sleep(1000);
@@ -104,21 +104,11 @@ namespace ChatMe.BussinessLogic.Services
 
                 user.IsOnline = false;
                 onlineUsers.Remove(onlineUsers.Where(s => s.User.Id == user.Id).FirstOrDefault());
-                try {
-                    pendingOffline.Remove(state);
-                    await db.Users.UpdateAsync(state.User);
-                    await db.SaveChangesAsync();
-                } catch (DbEntityValidationException e) {
-                    foreach (var eve in e.EntityValidationErrors) {
-                        Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                        foreach (var ve in eve.ValidationErrors) {
-                            Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                ve.PropertyName, ve.ErrorMessage);
-                        }
-                    }
-                    throw;
-                }
+                pendingOffline.Remove(state);
+                Debug.Print("user disconnected");
+                await db.Users.UpdateAsync(state.User);
+                await db.SaveChangesAsync();
+                
             }, state.CancelTokenSource.Token);
         }
     }

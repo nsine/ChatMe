@@ -157,6 +157,10 @@
     <Compile Include="Migrations\201609171544037_AddIsOnlineField.Designer.cs">
       <DependentUpon>201609171544037_AddIsOnlineField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609181644166_RemoveReqiuredUserInfo.cs" />
+    <Compile Include="Migrations\201609181644166_RemoveReqiuredUserInfo.Designer.cs">
+      <DependentUpon>201609181644166_RemoveReqiuredUserInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EFRepository.cs" />
@@ -205,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609171544037_AddIsOnlineField.resx">
       <DependentUpon>201609171544037_AddIsOnlineField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609181644166_RemoveReqiuredUserInfo.resx">
+      <DependentUpon>201609181644166_RemoveReqiuredUserInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

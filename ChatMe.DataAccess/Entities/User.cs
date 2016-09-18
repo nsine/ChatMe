@@ -24,7 +24,6 @@ namespace ChatMe.DataAccess.Entities
 
         public bool IsOnline { get; set; }
 
-        [Required]
         public virtual UserInfo UserInfo { get; set; }
         public virtual ICollection<Dialog> Dialogs { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
