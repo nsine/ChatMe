@@ -4,6 +4,8 @@ export default function DialogsListController(dialogsService, openedDialogServic
 
     self.dialogsService = dialogsService;
 
+    self.isDialogsPanelOpened = true;
+
     self.openDialog = function (dialog) {
         openedDialogService.id = dialog.id;
 
@@ -16,6 +18,10 @@ export default function DialogsListController(dialogsService, openedDialogServic
 
     self.isDialogOpened = function () {
         return openedDialogService.id !== null;
+    }
+
+    self.toggleDialogPanel = function () {
+        self.isDialogsPanelOpened = !self.isDialogsPanelOpened;
     }
 
     activate();

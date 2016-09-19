@@ -45,6 +45,26 @@
             <p class="w3-center w3-row">
                 <img src="@Url.RouteUrl("Avatar", new { userId = Model.Id })" class="w3-col" alt="Avatar">
             </p>
+            @if (!Model.IsOwner)
+            {
+            <div class="w3-row-padding">
+                <div class="w3-col s6">
+                    <a href="@Url.Action("NewDialog", "Dialogs", new { userId = Model.Id })" class="w3-btn w3-blue">
+                        Send message <i class="fa fa-envelope"></i>
+                    </a>
+                </div>
+                <div class="w3-col s6">
+                    <span id="follow-button-form">
+                        @Html.Partial("~/Views/Activities/FollowAction.cshtml",
+                            new ChatMe.Web.Models.FollowingLinkViewModel {
+                                UserId = Model.Id,
+                                IsFollowing = Model.IsFollowing
+                            })
+                    </span>
+                </div>
+            </div>
+
+            }
             <hr>
             <p><i class="fa fa-envelope-o fa-fw w3-margin-right w3-text-theme"></i> @Html.DisplayFor(model => model.Email)</p>
             @if (Model.Phone != null) {

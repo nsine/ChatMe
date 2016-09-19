@@ -25,8 +25,8 @@ export default function NewPostController(postsService, $timeout, userInfo) {
     }
 
     self.deactivateForm = function (event) {
-        if (event.relatedTarget != null &&
-            event.relatedTarget.id == 'send-post-btn') {
+        if (event.relatedTarget !== null &&
+            event.relatedTarget.id === 'send-post-btn') {
 
             return;
         }

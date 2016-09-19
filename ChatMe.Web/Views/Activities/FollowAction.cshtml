@@ -4,12 +4,12 @@
     @Html.HiddenFor(m => m.UserId)
     @Html.HiddenFor(m => m.IsFollowing)
     if (!Model.IsFollowing) {
-        <button type="submit" class="btn btn-primary">
-            Follow <span class="glyphicon glyphicon-eye-open"></span>
+        <button type="submit" class="w3-btn w3-blue">
+            Follow <i class="fa fa-eye"></i>
         </button>
     } else {
-        <button type="submit" class="btn btn-danger">
-            Unfollow <span class="glyphicon glyphicon-eye-close"></span>
+        <button type="submit" class="w3-btn w3-red">
+            Unfollow <i class="fa fa-eye-slash"></i>
         </button>
     }
 }

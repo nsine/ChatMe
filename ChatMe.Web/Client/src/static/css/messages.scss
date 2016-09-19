@@ -154,10 +154,7 @@ img {
 }
 
 .chat-box {
-    position: fixed;
     bottom: 0;
-    right: 13%;
-    width: 39%;
     padding: 15px;
     border-top: 1px solid #eee;
     transition: all .5s ease;
@@ -179,7 +176,37 @@ a:hover, a:active, a:focus {
     position: relative;
 }
 
-[scroll-glue], [scroll-glue-bottom]{
-    height: 90vh;
-    overflow-y: scroll;
+.scrolled-div {
+    height: 70vh;
+    overflow-y: auto;
+}
+
+.text-center-container {
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.toggle-dialogs-btn {
+    display: none;
+    position: fixed;
+}
+
+@media only screen and (max-width: 600px) {
+    .toggle-dialogs-btn {
+        display: block;
+        position: fixed;
+        left:0;
+    }
+
+    .dialog-window {
+        display: none;
+    }
+
+    .dialog-window.visible {
+        display: block;
+        position: fixed;
+        width: 100%;
+        z-index: 100;
+    }
 }

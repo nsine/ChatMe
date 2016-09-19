@@ -212,7 +212,7 @@
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
-    <Content Include="Client\src\dialogs-app.js" />
+    <Content Include="Client\src\all-users.js" />
     <Content Include="Client\src\dialogs-app\app.directive.js" />
     <Content Include="Client\src\dialogs-app\app.html" />
     <Content Include="Client\src\dialogs-app\app.module.js" />
@@ -225,8 +225,9 @@
     <Content Include="Client\src\dialogs-app\messages\messages.service.js" />
     <Content Include="Client\src\dialogs-app\messages\new-message.controller.js" />
     <Content Include="Client\src\dialogs-app\messages\reverse.filter.js" />
+    <Content Include="Client\src\dialogs.js" />
     <Content Include="Client\src\index.js" />
-    <Content Include="Client\src\posts-app.js" />
+    <Content Include="Client\src\news.js" />
     <Content Include="Client\src\posts-app\app.directive.js" />
     <Content Include="Client\src\posts-app\app.html" />
     <Content Include="Client\src\posts-app\app.module.js" />
@@ -245,6 +246,7 @@
       <BrowseToURL>~/Admin/Admin/Index</BrowseToURL>
     </Content>
     <Content Include="Client\src\static\css\admin.scss" />
+    <Content Include="Client\src\user-profile.js" />
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="webpack.config.js" />
     <Content Include="Global.asax" />
@@ -260,6 +262,8 @@
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
     <Compile Include="Areas\Admin\Models\NewPostViewModel.cs" />
     <Compile Include="Areas\Admin\Models\PostViewModel.cs" />
+    <Content Include="Client\src\static\css\admin.css.map" />
+    <Content Include="Client\src\typings.json" />
     <None Include="Properties\PublishProfiles\ChatMe.pubxml" />
     <Content Include="Client\lib\js\jquery.unobtrusive-ajax.js" />
     <Content Include="Client\lib\js\jquery.unobtrusive-ajax.min.js" />

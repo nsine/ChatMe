@@ -1,12 +1,13 @@
-<div class="container bootstrap snippet">
-    <div ng-controller="DialogsListController as listCtrl" class="row">
-		<div class="col-md-4 bg-white dialog-window">
+<div class="w3-container">
+    <div ng-controller="DialogsListController as listCtrl" class="w3-row-padding">
+        <span class="toggle-dialogs-btn" ng-click="listCtrl.toggleDialogPanel()">&#9776;</span>
+		<div class="w3-col s4 scrolled-div dialog-window" ng-class="{ visible: listCtrl.isDialogsPanelOpened }">
             <!-- =============================================================== -->
             <!-- member list -->
             <ul class="friend-list">
                 <li ng-repeat="dialog in listCtrl.dialogsService.dialogs"
                     ng-click="listCtrl.openDialog(dialog)" ng-class="{ active: dialog.selected }"
-                    class=" bounceInDown">
+                    class="bounceInDown">
                 	<a href="#" class="clearfix">
                 		<img src="{{dialog.avatarUrl}}" alt="" class="img-circle">
                 		<div class="friend-name">
@@ -23,15 +24,17 @@
 
         <!--=========================================================-->
         <!-- selected chat -->
-    	<div  class="col-md-8">
+    	<div class="w3-col m7 s12">
             <div ng-if="!listCtrl.isDialogOpened()">
-                lalka
+                <div class="text-center-container">
+                    Select dialog
+                </div>
             </div>
             <div ng-if="listCtrl.isDialogOpened()">
-                <div scroll-glue ng-controller="MessagesListController as msgCtrl" class="chat-message">
+                <div scroll-glue ng-controller="MessagesListController as msgCtrl" class="chat-message scrolled-div">
                     <ul class="chat">
                         <li ng-repeat="msg in msgCtrl.messagesService.messages | reverse"
-                            ng-class="msgCtrl.getMessageClass(msg)" class="clearfix">
+                            ng-class="msgCtrl.getMessageClass(msg)">
                         	<span ng-class="msgCtrl.getAvatarClass(msg)" class="chat-img">
                         		<img src="{{msg.avatarUrl}}" alt="User Avatar">
                         	</span>
@@ -47,15 +50,12 @@
                         </li>
                     </ul>
                 </div>
-                <div ng-controller="NewMessageController as newCtrl" class="chat-box bg-white col-md-6">
-                	<div class="input-group">
-                		<input ng-model="newCtrl.body" class="form-control border no-shadow no-rounded"
-                            placeholder="Type your message here">
-                		<span class="input-group-btn">
-                			<button ng-click="newCtrl.send()" ng-disabled="!newCtrl.isSendBtnActive()"
-                                class="btn btn-success no-rounded" type="button">Send</button>
-                		</span>
-                	</div><!-- /input-group -->
+                <div ng-controller="NewMessageController as newCtrl" class="chat-box">
+                    <textarea rows="2" ng-model="newCtrl.body" class="w3-input w3-border"
+                        placeholder="Type your message here"></textarea>
+                	<button ng-click="newCtrl.send()" ng-disabled="!newCtrl.isSendBtnActive()"
+                        class="w3-btn w3-green">Send</button>
+                    <!-- /input-group -->
                 </div>
             </div>
 		</div>
