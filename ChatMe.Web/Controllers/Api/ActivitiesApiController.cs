@@ -3,20 +3,21 @@ using ChatMe.BussinessLogic.Services.Abstract;
 using ChatMe.Web.Models;
 using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
-using System.Web.Mvc;
+using System.Web.Http;
 
 namespace ChatMe.Web.Controllers
 {
-    public class ActivitiesController : Controller
+    [RoutePrefix("api/activity")]
+    public class ActivitiesApiController : ApiController
     {
         private IActivityService activityService;
 
-        public ActivitiesController(IActivityService activityService) {
+        public ActivitiesApiController(IActivityService activityService) {
             this.activityService = activityService;
         }
 
         [HttpPost]
-        [Route("api/activity/like")]
+        [Route("like")]
         public async Task LikeAction(int postId) {
             var likeData = new LikedPostDTO {
                 PostId = postId,
@@ -27,19 +28,17 @@ namespace ChatMe.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> FollowAction(FollowingLinkViewModel viewModel) {
-            var followerId = User.Identity.GetUserId();
+        [Route("follow")]
+        public async Task FollowAction([FromBody]FollowingLinkViewModel viewModel) {
+            var followerId = RequestContext.Principal.Identity.GetUserId();
+            var name = User.Identity.GetUserName();
 
             var followerData = new FollowerLinkDTO {
-                UserId = User.Identity.GetUserId(),
-                FollowingUserId = viewModel.UserId
+                UserId = viewModel.UserId,
+                FollowingUserId = viewModel.FollowingUserId
             };
 
             await activityService.ChangeFollow(followerData);
-
-            viewModel.IsFollowing = !viewModel.IsFollowing;
-
-            return PartialView(viewModel);
         }
     }
 }

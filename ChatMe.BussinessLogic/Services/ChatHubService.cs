@@ -70,7 +70,9 @@ namespace ChatMe.BussinessLogic.Services
                 result.IsNewUser = false;
                 result.OldConnectionId = currentOnlineState?.ConnectionId;
                 // Update connection id
-                currentOnlineState.ConnectionId = connectionId;
+                if (currentOnlineState != null) {
+                    currentOnlineState.ConnectionId = connectionId;
+                }
             }
 
             return result;

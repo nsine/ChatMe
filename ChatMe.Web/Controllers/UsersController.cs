@@ -54,6 +54,8 @@ namespace ChatMe.Web.Controllers
             });
 
             var userProfile = Mapper.Map<UserProfileViewModel>(userProfileData);
+            Response.SetCookie(new HttpCookie("userPageId", userProfile.Id));
+            Response.SetCookie(new HttpCookie("currentUserId", User.Identity.GetUserId()));
             return View(userProfile);
         }
 

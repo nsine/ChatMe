@@ -2,58 +2,54 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Identity;
-using System.Web.Mvc;
 using ChatMe.BussinessLogic.Services.Abstract;
 using AutoMapper;
 using ChatMe.BussinessLogic.DTO;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace ChatMe.Web.Controllers
 {
     [RoutePrefix("api/posts")]
-    public class PostsController : Controller
+    public class PostsController : ApiController
     {
         private IPostService postService;
 
         public PostsController(IPostService postService) {
             this.postService = postService;
+
+            Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, PostViewModel>()
+                .ForMember("AvatarUrl", opt => opt.MapFrom(p =>
+                    Url.Route("Avatar", new { userId = p.AuthorId }))
+                )
+                .ForMember("AuthorLink", opt => opt.MapFrom(p =>
+                    Url.Route("UserProfile", new { userName = p.AuthorUserName }))
+                )
+            );
         }
-
         
-
         [HttpGet]
         [Route("{userId}")]
-        public ActionResult GetAll(string userId, int startIndex = 0, int count = 0) {
+        public IEnumerable<PostViewModel> GetAll(string userId, int startIndex = 0, int count = 0) {
             var postsData = postService.GetChunk(userId, User.Identity.GetUserId(), startIndex, count);
             Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, PostViewModel>()
                 .ForMember("AvatarUrl", opt => opt.MapFrom(p =>
-                   Url.RouteUrl("Avatar", new { userId = p.AuthorId }))
+                   Url.Route("Avatar", new { userId = p.AuthorId }))
                 )
                 .ForMember("AuthorLink", opt => opt.MapFrom(p =>
-                    Url.RouteUrl("UserProfile", new { userName = p.AuthorUserName }))
+                    Url.Route("UserProfile", new { userName = p.AuthorUserName }))
                 )
             );
 
             var posts = Mapper.Map<IEnumerable<PostViewModel>>(postsData);
-
-            return Json(posts.ToList(), JsonRequestBehavior.AllowGet);
+            return posts;
         }
 
         [HttpGet]
         [Route("{userId}/{postId}")]
-        public ActionResult Get(string userId, int postId) {
+        public PostViewModel Get(string userId, int postId) {
             var postData = postService.Get(userId, User.Identity.GetUserId(), postId);
-
-            Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, PostViewModel>()
-                .ForMember("AvatarUrl", opt => opt.MapFrom(p =>
-                    Url.RouteUrl("Avatar", new { userId = p.AuthorId }))
-                )
-                .ForMember("AuthorLink", opt => opt.MapFrom(p =>
-                    Url.RouteUrl("UserProfile", new { userName = p.AuthorUserName }))
-                )
-            );
-
-            return Json(Mapper.Map<PostViewModel>(postData), JsonRequestBehavior.AllowGet);
+            return Mapper.Map<PostViewModel>(postData);
         }
 
         [HttpPost]

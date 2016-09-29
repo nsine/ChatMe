@@ -79,6 +79,6 @@ export default function postsApi($http, userInfo, apiPath, likePath) {
     }
 
     function likePost(postId) {
-        return $http.post(likePath, { postId: postId });
+        return $http.post(likePath + '?postId=' + postId);
     }
 }

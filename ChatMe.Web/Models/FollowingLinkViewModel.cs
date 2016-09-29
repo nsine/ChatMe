@@ -8,6 +8,6 @@ namespace ChatMe.Web.Models
     public class FollowingLinkViewModel
     {
         public string UserId { get; set; }
-        public bool IsFollowing { get; set; }
+        public string FollowingUserId { get; set; }
     }
 }
